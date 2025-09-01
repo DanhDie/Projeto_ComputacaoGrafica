@@ -13,13 +13,21 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     myframe.cpp \
-    objeto.cpp
+    objcirculo.cpp \
+    objeto.cpp \
+    objlinha.cpp \
+    objnathghostkiller.cpp \
+    objtriangulo.cpp
 
 HEADERS += \
     displayfile.h \
     mainwindow.h \
     myframe.h \
-    objeto.h
+    objcirculo.h \
+    objeto.h \
+    objlinha.h \
+    objnathghostkiller.h \
+    objtriangulo.h
 
 FORMS += \
     mainwindow.ui
