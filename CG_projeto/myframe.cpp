@@ -1,3 +1,7 @@
+/*
+ * Sim, aqui é a classe que tem o QPainter que vai desenhar as coisas
+*/
+
 #include "MyFrame.h"
 
 MyFrame::MyFrame(QWidget *parent) : QFrame(parent), displayFile(nullptr) {
@@ -27,21 +31,21 @@ void MyFrame::paintEvent(QPaintEvent *event) {
 
     for (const Objeto& obj : displayFile->getObjetos()) {
         if (obj.getTipo() == Linha) {
-            if (obj.getPontos().size() >= 2) {
+            //if (obj.getPontos().size() >= 2) {
                 painter.drawLine(obj.getPontos()[0], obj.getPontos()[1]);
-            }
+            //}
         }
         else if (obj.getTipo() == Poligono) {
-            if (obj.getPontos().size() >= 3) {
+            //if (obj.getPontos().size() >= 3) {
                 painter.drawPolygon(obj.getPontos());
-            }
+            //}
         }
         else if (obj.getTipo() == Circulo) {
-            if (obj.getPontos().size() >= 2) {
+            //if (obj.getPontos().size() >= 2) {
                 QPoint centro = obj.getPontos()[0];
                 int raio = obj.getPontos()[1].x();
                 painter.drawEllipse(centro, raio, raio);
-            }
+            //}
         }
     }
 }
