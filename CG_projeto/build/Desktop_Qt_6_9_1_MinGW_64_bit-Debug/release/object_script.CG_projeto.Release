@@ -1,0 +1,14 @@
+release/displayfile.o
+release/main.o
+release/mainwindow.o
+release/myframe.o
+release/objcasa.o
+release/objcirculo.o
+release/objeto.o
+release/objlinha.o
+release/objnathghostkiller.o
+release/objpoligono.o
+release/objtriangulo.o
+release/sol.o
+release/moc_mainwindow.o
+release/moc_myframe.o
