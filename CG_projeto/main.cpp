@@ -10,6 +10,7 @@
 #include "ObjTriangulo.h"
 #include "ObjNathGhostKiller.h"
 #include "objcasa.h"
+#include "Sol.h"
 /*
  * ---------------------------------------------
 */
@@ -42,6 +43,7 @@ int main(int argc, char *argv[])
 
     ObjCasa casa(&df);
 
+    Sol sol(&df);
 
 
     MainWindow w; //Pelo que eu entendi, MainWindow é a tela que vai aparecer no computador
