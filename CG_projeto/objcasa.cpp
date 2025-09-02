@@ -1,6 +1,6 @@
 #include "objcasa.h"
 
-ObjCasa::ObjCasa() {
+ObjCasa::ObjCasa(DisplayFile *df) {
 
     // Telhado - triângulo
     ObjTriangulo telhado("Telhado", 175, 400, 225, 400, 200, 360);

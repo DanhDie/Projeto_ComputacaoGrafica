@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
     */
     ObjNathGhostKiller nathGhostKiller(&df);
 
-    objcasa casa(&df);
+    ObjCasa casa(&df);
 
 
 
