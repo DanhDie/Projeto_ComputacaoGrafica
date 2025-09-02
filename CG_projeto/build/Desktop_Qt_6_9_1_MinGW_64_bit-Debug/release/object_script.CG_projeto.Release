@@ -9,5 +9,6 @@ release/objlinha.o
 release/objnathghostkiller.o
 release/objpoligono.o
 release/objtriangulo.o
+release/sol.o
 release/moc_mainwindow.o
 release/moc_myframe.o

@@ -9,5 +9,6 @@ debug/objlinha.o
 debug/objnathghostkiller.o
 debug/objpoligono.o
 debug/objtriangulo.o
+debug/sol.o
 debug/moc_mainwindow.o
 debug/moc_myframe.o

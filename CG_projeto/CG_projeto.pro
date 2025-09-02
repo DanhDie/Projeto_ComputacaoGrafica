@@ -19,7 +19,8 @@ SOURCES += \
     objlinha.cpp \
     objnathghostkiller.cpp \
     objpoligono.cpp \
-    objtriangulo.cpp
+    objtriangulo.cpp \
+    sol.cpp
 
 HEADERS += \
     displayfile.h \
@@ -31,7 +32,8 @@ HEADERS += \
     objlinha.h \
     objnathghostkiller.h \
     objpoligono.h \
-    objtriangulo.h
+    objtriangulo.h \
+    sol.h
 
 FORMS += \
     mainwindow.ui
