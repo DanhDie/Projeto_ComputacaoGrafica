@@ -39,12 +39,13 @@ int main(int argc, char *argv[])
      *
      * Aqui, na main.cpp, basta dar instanciar um objeto da classe do seu desenho, mantendo o código simples e limpo
     */
-    ObjNathGhostKiller nathGhostKiller(&df);
 
     ObjCasa casa(&df);
 
     Sol sol(&df);
 
+    ObjNathGhostKiller japanPrincess("natalia kikuti");
+    df.adicionarObjeto(japanPrincess);
 
     MainWindow w; //Pelo que eu entendi, MainWindow é a tela que vai aparecer no computador
     w.setDisplayFile(&df); //Chama setDisplayFile para fazer a arrumação das coisas na tela

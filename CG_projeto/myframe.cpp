@@ -47,5 +47,8 @@ void MyFrame::paintEvent(QPaintEvent *event) {
                 painter.drawEllipse(centro, raio, raio);
             //}
         }
+        else if (obj.getTipo() == Complexo){
+            obj.autoRetrato(&painter);
+        }
     }
 }
