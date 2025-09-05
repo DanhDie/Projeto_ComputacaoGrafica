@@ -1,24 +1,25 @@
 #ifndef OBJNATHGHOSTKILLER_H
 #define OBJNATHGHOSTKILLER_H
 
-#include <QVector>  //Vetor para os objetos pertecentes a este
+#include <QVector>
 #include <QPainter>
 
 #include "displayfile.h"
 #include "objlinha.h"
 #include "objcirculo.h"
 
-class ObjNathGhostKiller : public Objeto //Apesar de ser um objeto complexo, também é um objeto... né???????
+class ObjNathGhostKiller : public Objeto //herda Objeto para poder se encaixar no DisplayFile
 {
 public:
-    ObjNathGhostKiller(QString nome, int x, int y, TipoObjeto tipo = Complexo); //Sobrecarga de método como em POO, e construtor principal
-    ObjNathGhostKiller(QString nome);
+    ObjNathGhostKiller(QString nome, int x, int y, TipoObjeto tipo = Complexo); //Construtor principal
+    ObjNathGhostKiller(QString nome); //Sobrecarga de método, construtor sem parâmetro para (x,y) usa (0,0)
+    ~ObjNathGhostKiller();
 
-    const QVector<Objeto>& getObjetos() const;
-    void autoRetrato(QPainter* painter) const; //método de desenho
+    const QVector<Objeto*>& getObjetos() const; //método para pegar os objetos para desenhar
+    void autorretrato(QPainter* painter) const; //método de desenhar
 
 private:
-    QVector<Objeto> objPrimitivos; //Vetor dos objetos primitivos contidos dentro desse objeto
+    QVector<Objeto*> objPrimitivos; //Vetor dos objetos primitivos contidos dentro desse objeto
 };
 
 #endif // OBJNATHGHOSTKILLER_H

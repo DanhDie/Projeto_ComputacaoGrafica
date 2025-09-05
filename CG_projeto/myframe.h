@@ -10,7 +10,7 @@ class MyFrame : public QFrame {
 public:
     explicit MyFrame(QWidget *parent = nullptr);
 
-    void adicionarObjeto(const Objeto& obj);
+    void adicionarObjeto(Objeto* obj);
     void setDisplayFile(DisplayFile* df);
 
 protected:

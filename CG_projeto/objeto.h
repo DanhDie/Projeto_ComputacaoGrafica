@@ -17,11 +17,12 @@ class Objeto {
 public:
     Objeto(QString nome, TipoObjeto tipo);
 
+    virtual ~Objeto() = default;
     void adicionarPonto(const QPoint& p);
     QString getNome() const;
     TipoObjeto getTipo() const;
     QVector<QPoint> getPontos() const;
-    virtual void autoRetrato(QPainter *painter) const;
+    virtual void autorretrato(QPainter *painter) const;
     /*
      * Essa VIADAGEM de "const" no final serve para informar ao compilador BURRO que não sabe que a função não muda nada que
      * ADIVINHA? ELA NÃO MUDA NADA

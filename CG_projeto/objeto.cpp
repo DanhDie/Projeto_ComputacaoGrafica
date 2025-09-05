@@ -18,4 +18,4 @@ TipoObjeto Objeto::getTipo() const {
 QVector<QPoint> Objeto::getPontos() const {
     return pontos;
 }
-void Objeto :: autoRetrato(QPainter *painter) const{}
+void Objeto :: autorretrato(QPainter *painter) const{}

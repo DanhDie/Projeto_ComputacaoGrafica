@@ -1,3 +1,4 @@
+/*
 #include "sol.h"
 
 Sol::Sol(DisplayFile *df) {
@@ -40,3 +41,4 @@ Sol::Sol(DisplayFile *df) {
     ObjTriangulo raio12("ray12", 600, 437, 589, 397, 571, 407);
     df->adicionarObjeto(raio12);
 }
+*/

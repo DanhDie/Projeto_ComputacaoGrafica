@@ -6,12 +6,12 @@
 
 class DisplayFile {
 public:
-    void adicionarObjeto(const Objeto& obj);
-    const QVector<Objeto>& getObjetos() const;
+    void adicionarObjeto(Objeto* obj);
+    const QVector<Objeto*>& getObjetos() const;
     void limpar();
 
 private:
-    QVector<Objeto> objetos;
+    QVector<Objeto*> objetos;
 };
 
 #endif // DISPLAYFILE_H

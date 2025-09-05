@@ -1,3 +1,4 @@
+/*
 #include "objcasa.h"
 
 ObjCasa::ObjCasa(DisplayFile *df) {
@@ -39,3 +40,4 @@ ObjCasa::ObjCasa(DisplayFile *df) {
     df->adicionarObjeto(macaneta);
 
 }
+*/
