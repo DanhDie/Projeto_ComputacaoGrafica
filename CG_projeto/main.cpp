@@ -34,6 +34,10 @@ int main(int argc, char *argv[])
 
     df.adicionarObjeto(new ObjNathGhostKiller ("natalia kikuti"));
 
+    df.adicionarObjeto(new ObjCasa("casa"));
+
+    df.adicionarObjeto(new Sol("sol"));
+
     MainWindow w; //Pelo que eu entendi, MainWindow é a tela que vai aparecer no computador
     w.setDisplayFile(&df); //Chama setDisplayFile para fazer a arrumação das coisas na tela
     w.show(); //Isso aqui diz para mostrar as coisas para você
