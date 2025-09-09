@@ -12,6 +12,7 @@ SOURCES += \
     displayfile.cpp \
     main.cpp \
     mainwindow.cpp \
+    matriz.cpp \
     myframe.cpp \
     objcasa.cpp \
     objcirculo.cpp \
@@ -20,11 +21,13 @@ SOURCES += \
     objnathghostkiller.cpp \
     objpoligono.cpp \
     objtriangulo.cpp \
+    ponto.cpp \
     sol.cpp
 
 HEADERS += \
     displayfile.h \
     mainwindow.h \
+    matriz.h \
     myframe.h \
     objcasa.h \
     objcirculo.h \
@@ -33,6 +36,7 @@ HEADERS += \
     objnathghostkiller.h \
     objpoligono.h \
     objtriangulo.h \
+    ponto.h \
     sol.h
 
 FORMS += \
