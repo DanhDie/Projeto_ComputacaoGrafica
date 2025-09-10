@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>906</width>
+    <width>927</width>
     <height>600</height>
    </rect>
   </property>
@@ -35,12 +35,25 @@
      <rect>
       <x>720</x>
       <y>10</y>
-      <width>181</width>
+      <width>201</width>
       <height>28</height>
      </rect>
     </property>
     <property name="placeholderText">
      <string>Selecione um objeto</string>
+    </property>
+   </widget>
+   <widget class="MyComboBox" name="comboBoxTrans">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>130</y>
+      <width>201</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>Escolha a trasnformação</string>
     </property>
    </widget>
   </widget>
@@ -49,7 +62,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>906</width>
+     <width>927</width>
      <height>25</height>
     </rect>
    </property>
@@ -66,7 +79,7 @@
   <customwidget>
    <class>MyComboBox</class>
    <extends>QComboBox</extends>
-   <header>mycombobox.h</header>
+   <header location="global">mycombobox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -19,8 +19,12 @@ public:
     ~MainWindow();
 
     void setDisplayFile(DisplayFile *ui);
-
+    void aplicarTransformacao(int index, Objeto* obj);
+private slots:
+    void onComboBoxChanged(int index);
+    void onComboBoxTransChanged(int index);
 private:
     Ui::MainWindow *ui;
+    int indexTrans = -1;
 };
 #endif // MAINWINDOW_H
