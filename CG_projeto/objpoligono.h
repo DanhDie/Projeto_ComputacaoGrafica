@@ -3,10 +3,11 @@
 
 #include "objeto.h"
 #include <QPoint>
+#include "ponto.h"
 
 class ObjPoligono : public Objeto {
 public:
-    ObjPoligono(QString nome, const QPoint* pontos, int quantidade, TipoObjeto tipo);
+    ObjPoligono(QString nome, const Ponto* pontos, int quantidade, TipoObjeto tipo);
 };
 
 #endif // OBJPOLIGONO_H

@@ -1,9 +1,10 @@
 #include "Objeto.h"
+#include "ponto.h"
 
 Objeto::Objeto(QString nome, TipoObjeto tipo)
     : nome(nome), tipo(tipo) {}
 
-void Objeto::adicionarPonto(const QPoint& p) {
+void Objeto::adicionarPonto(const Ponto& p) {
     pontos.append(p);
 }
 
@@ -15,7 +16,8 @@ TipoObjeto Objeto::getTipo() const {
     return tipo;
 }
 
-QVector<QPoint> Objeto::getPontos() const {
+//Retorna QVector<Pontos>
+QVector<Ponto> Objeto::getPontos() const {
     return pontos;
 }
 void Objeto :: autorretrato(QPainter *painter) const{}

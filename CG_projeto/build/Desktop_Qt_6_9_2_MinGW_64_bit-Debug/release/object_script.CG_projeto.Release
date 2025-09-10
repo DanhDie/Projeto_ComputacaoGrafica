@@ -1,6 +1,7 @@
 release/displayfile.o
 release/main.o
 release/mainwindow.o
+release/matriz.o
 release/myframe.o
 release/objcasa.o
 release/objcirculo.o
@@ -9,6 +10,7 @@ release/objlinha.o
 release/objnathghostkiller.o
 release/objpoligono.o
 release/objtriangulo.o
+release/ponto.o
 release/sol.o
 release/moc_mainwindow.o
 release/moc_myframe.o
