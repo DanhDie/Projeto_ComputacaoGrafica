@@ -17,8 +17,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    //Declaração do método para ajeiar o DisplayFile
-    void setDisplayFile(DisplayFile *ui); //Única coisa nova adicionada foi essa aqui
+
+    void setDisplayFile(DisplayFile *ui);
 
 private:
     Ui::MainWindow *ui;

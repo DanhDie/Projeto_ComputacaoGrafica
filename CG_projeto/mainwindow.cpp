@@ -3,15 +3,14 @@
 #include "MyFrame.h"
 #include "DisplayFile.h"
 
+
 DisplayFile df;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
-
-    //Aqui costumava ficar toda a declaração dos objetos
+    ui->setupUi(this);    
 }
 
 MainWindow::~MainWindow()
@@ -33,4 +32,14 @@ void MainWindow :: setDisplayFile(DisplayFile *df){
         frame->setDisplayFile(df);
         frame->update();
     }
+
+    /*
+    * Talvez seja necessário consultar DisplayFile.h e MyComboBox.h para tirar a confusão, mas funciona assim:
+    * "ui->" porque o QComboBox comboBox que a gente tá usando foi criado no Qt Designer
+    * "comboBox->" é o nome da instância da classe QComboBox que foi criado ainda no Qt Designer
+    * "addObjeto()" é um método declarado na MyComboBox.h/.cpp que coloca os nossos objetos na lista
+    * "df" é o DisplayFile declarado ali em cima
+    * "getObjetos()" é um método do DisplayFile para retornar todos o vetor de objetos que a gente tem
+    */
+    ui->comboBox->addObjeto(df->getObjetos());
 }
