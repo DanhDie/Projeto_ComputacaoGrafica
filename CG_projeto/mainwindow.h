@@ -17,10 +17,15 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    //Declaração do método para ajeiar o DisplayFile
-    void setDisplayFile(DisplayFile *ui); //Única coisa nova adicionada foi essa aqui
 
+    void setDisplayFile(DisplayFile *displayFile);
+    void aplicarTransformacao(int index, Objeto* obj);
+private slots:
+    void onComboBoxChanged(int index);
+    void onComboBoxTransChanged(int index);
 private:
     Ui::MainWindow *ui;
+    DisplayFile* df=nullptr;
+    int indexTrans = -1;
 };
 #endif // MAINWINDOW_H

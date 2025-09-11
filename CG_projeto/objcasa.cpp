@@ -9,10 +9,10 @@ ObjCasa::ObjCasa(DisplayFile *df) {
 
     // Corpo - retângulo (polígono de 4 pontos)
 
-    QPoint pontosCorpo[] = {
-        QPoint(175, 400),
-        QPoint(175, 460),
-        QPoint(225, 460),
+    Ponto pontosCorpo[] = {
+        Ponto(175, 400),
+        Ponto(175, 460),
+        Ponto(225, 460),
         QPoint(225, 400)
     };
 
@@ -25,11 +25,11 @@ ObjCasa::ObjCasa(DisplayFile *df) {
 
     // Porta - retângulo (polígono de 4 pontos)
 
-    QPoint pontosPorta[] = {
-        QPoint(185, 425),
-        QPoint(185, 460),
-        QPoint(205, 460),
-        QPoint(205, 425)
+    Ponto pontosPorta[] = {
+        Ponto(185, 425),
+        Ponto(185, 460),
+        Ponto(205, 460),
+        Ponto(205, 425)
     };
 
     ObjPoligono porta("Porta", pontosPorta, 4, Poligono);
@@ -45,6 +45,7 @@ ObjCasa::ObjCasa(DisplayFile *df) {
 
 
 #include "objcasa.h"
+#include "ponto.h"
 
 ObjCasa::ObjCasa(QString nome, int x, int y, TipoObjeto tipo)
     : Objeto(nome, tipo){
@@ -56,11 +57,11 @@ ObjCasa::ObjCasa(QString nome, int x, int y, TipoObjeto tipo)
 
     //* Corpo - retângulo (polígono de 4 pontos) *//
 
-    QPoint pontosCorpo[] = {
-        QPoint(x+175, y+400),
-        QPoint(x+175, y+460),
-        QPoint(x+225, y+460),
-        QPoint(x+225, y+400)
+    Ponto pontosCorpo[] = {
+        Ponto(x+175, y+400),
+        Ponto(x+175, y+460),
+        Ponto(x+225, y+460),
+        Ponto(x+225, y+400)
     };
 
     objPrimitivos.append(new ObjPoligono ("Corpo", pontosCorpo, 4, Poligono));
@@ -70,11 +71,11 @@ ObjCasa::ObjCasa(QString nome, int x, int y, TipoObjeto tipo)
 
     //* Porta - retângulo (polígono de 4 pontos) *//
 
-    QPoint pontosPorta[] = {
-        QPoint(x+185, y+425),
-        QPoint(x+185, y+460),
-        QPoint(x+205, y+460),
-        QPoint(x+205, y+425)
+    Ponto pontosPorta[] = {
+        Ponto(x+185, y+425),
+        Ponto(x+185, y+460),
+        Ponto(x+205, y+460),
+        Ponto(x+205, y+425)
     };
 
     objPrimitivos.append(new ObjPoligono ("Porta", pontosPorta, 4, Poligono));
@@ -100,15 +101,26 @@ const QVector<Objeto*>& ObjCasa::getObjetos() const {
 void ObjCasa :: autorretrato(QPainter* painter) const{
     for (const Objeto* obj : getObjetos()) {
         if (obj->getTipo() == Linha) {
-            painter->drawLine(obj->getPontos()[0], obj->getPontos()[1]);
+            painter->drawLine(obj->getPontos()[0].toQPoint(), obj->getPontos()[1].toQPoint());
         }
         else if (obj->getTipo() == Poligono) {
-            painter->drawPolygon(obj->getPontos());
+            QVector<QPoint> qpts;
+            qpts.reserve(obj->getPontos().size());
+            for (const Ponto &p : obj->getPontos()){
+                qpts.append(p.toQPoint());
+            }
+            painter->drawPolygon(qpts);
         }
         else if (obj->getTipo() == Circulo) {
-            QPoint centro = obj->getPontos()[0];
-            int raio = obj->getPontos()[1].x();
+            QPoint centro = obj->getPontos()[0].toQPoint();
+            int raio = (int)std::round(obj->getPontos()[1].x());
             painter->drawEllipse(centro, raio, raio);
         }
+    }
+}
+
+void ObjCasa::transformar(const Matriz& transformacao) {
+    for (Objeto* obj : objPrimitivos) {
+        obj->transformar(transformacao);
     }
 }

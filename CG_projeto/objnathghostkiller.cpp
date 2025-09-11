@@ -1,4 +1,5 @@
 #include "objnathghostkiller.h"
+#include "ponto.h"
 
 // ----------------------------------------- Construtores e Destrutores -------------------------------------------
 ObjNathGhostKiller::ObjNathGhostKiller(QString nome, int x, int y, TipoObjeto tipo) // Contrutor principal
@@ -43,16 +44,26 @@ const QVector<Objeto*>& ObjNathGhostKiller::getObjetos() const { //É importante
 void ObjNathGhostKiller :: autorretrato(QPainter* painter) const{
     for (const Objeto* obj : getObjetos()) {
         if (obj->getTipo() == Linha) {
-            painter->drawLine(obj->getPontos()[0], obj->getPontos()[1]);
+            painter->drawLine(obj->getPontos()[0].toQPoint(), obj->getPontos()[1].toQPoint());
         }
         else if (obj->getTipo() == Poligono) {
-            painter->drawPolygon(obj->getPontos());
+            QVector<QPoint> qpts;
+            qpts.reserve(obj->getPontos().size());
+            for (const Ponto &p : obj->getPontos()){
+                qpts.append(p.toQPoint());
+            }
+            painter->drawPolygon(qpts);
         }
         else if (obj->getTipo() == Circulo) {
-            QPoint centro = obj->getPontos()[0];
-            int raio = obj->getPontos()[1].x();
+            QPoint centro = obj->getPontos()[0].toQPoint();
+            int raio = (int)std::round(obj->getPontos()[1].x());
             painter->drawEllipse(centro, raio, raio);
         }
     }
 }
 
+void ObjNathGhostKiller::transformar(const Matriz& transformacao) {
+    for (Objeto* obj : objPrimitivos) {
+        obj->transformar(transformacao);
+    }
+}

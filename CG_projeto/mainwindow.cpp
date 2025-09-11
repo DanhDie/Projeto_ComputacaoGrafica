@@ -2,29 +2,35 @@
 #include "ui_mainwindow.h"
 #include "MyFrame.h"
 #include "DisplayFile.h"
+#include "matriz.h"
 
-DisplayFile df;
-
+//----------------------------------- CONSTRUTORES ------------------------------------
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
-    //Aqui costumava ficar toda a declaração dos objetos
+    //Slot!!! Esse aqui conecta o currentIndexChanged do QComboBox, para quando o usuário trocar a transformação
+    QObject::connect(ui->comboBox, &MyComboBox::currentIndexChanged,this,&MainWindow::onComboBoxChanged);
+    QObject::connect(ui->comboBoxTrans, &MyComboBox::currentIndexChanged,this,&MainWindow::onComboBoxTransChanged);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+//----------------------------------------------------------------------------
 
+
+// --------------------------------------- MÉTODOS -----------------------------------------
 /*
 * Esse aqui é o método para atualizar os frames que o Danh criou
 * Ele costumava carregar junto (entre o setDisplayFile() e update()) a inicialização de todos os objetos
 * Agora essa parte é feita integralmente pela main.cpp
 */
-void MainWindow :: setDisplayFile(DisplayFile *df){
+void MainWindow :: setDisplayFile(DisplayFile *displayFile){
+    df=displayFile; //Isto é, ponteiro df da MainWindow recebe o endereço do df declarado na main
     MyFrame* frame = qobject_cast<MyFrame*>(ui->frame);
     if (frame) {
         //Pessoalmente me confundi nisso daqui, mas esse setDisplayFile embaixo é do MyFrame, e não do MainWindow
@@ -33,4 +39,55 @@ void MainWindow :: setDisplayFile(DisplayFile *df){
         frame->setDisplayFile(df);
         frame->update();
     }
+
+    /*
+    * Talvez seja necessário consultar DisplayFile.h e MyComboBox.h para tirar a confusão, mas funciona assim:
+    * "ui->" porque o QComboBox comboBox que a gente tá usando foi criado no Qt Designer
+    * "comboBox->" é o nome da instância da classe QComboBox que foi criado ainda no Qt Designer
+    * "addObjeto()" é um método declarado na MyComboBox.h/.cpp que coloca os nossos objetos na lista
+    * "df" é o DisplayFile declarado ali em cima
+    * "getObjetos()" é um método do DisplayFile para retornar todos o vetor de objetos que a gente tem
+    */
+    ui->comboBox->addObjeto(df->getObjetos());
+
+    ui->comboBoxTrans->addItems({"Transalação","Escala","Rotação"}); //Caixa de trasnformações para proof of concept
 }
+
+void MainWindow::aplicarTransformacao(int index, Objeto* obj){
+    if(!obj || index ==-1) return; //Nenhum objeto selecionado || nenhuma trasnformacao selecionada
+
+    switch(index){
+        case 0:{
+            Matriz T = Matriz::translacao(-200,0);
+            df->aplicarTransformacao(obj->getNome(), T);
+            break;
+        }
+        case 1:{
+            Matriz S = Matriz::escala(0.5,0.5);
+            df->aplicarTransformacao(obj->getNome(), S);
+            break;
+        }
+        case 2:{
+            Matriz R = Matriz::rotacaoPonto(180, 350, 100);
+            df->aplicarTransformacao(obj->getNome(), R);
+            break;
+        }
+    }
+
+        MyFrame* frame = qobject_cast<MyFrame*>(ui->frame);
+        if(frame) frame->update();
+}
+
+//---------------------------------------------------------------------
+
+
+// ------------------------ SLOTS ----------------------------
+void MainWindow::onComboBoxTransChanged(int index){
+    indexTrans = index; //Caso o usuário troque a trasnformacao antes do objeto
+    aplicarTransformacao(indexTrans, ui->comboBox->currentObjeto());
+}
+
+void MainWindow::onComboBoxChanged(int index){
+    aplicarTransformacao(indexTrans, ui->comboBox->currentObjeto());
+}
+//---------------------------------------------------------------------------

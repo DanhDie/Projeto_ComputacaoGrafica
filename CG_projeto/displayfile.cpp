@@ -14,3 +14,12 @@ void DisplayFile::limpar() {
     }
     objetos.clear();
 }
+
+void DisplayFile::aplicarTransformacao(const QString& nomeObjeto, const Matriz& transformacao) {
+    for (Objeto* obj : objetos) {
+        if (obj->getNome() == nomeObjeto) {
+            obj->transformar(transformacao);
+            break;
+        }
+    }
+}

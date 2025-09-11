@@ -1,6 +1,8 @@
 debug/displayfile.o
 debug/main.o
 debug/mainwindow.o
+debug/matriz.o
+debug/mycombobox.o
 debug/myframe.o
 debug/objcasa.o
 debug/objcirculo.o
@@ -9,6 +11,8 @@ debug/objlinha.o
 debug/objnathghostkiller.o
 debug/objpoligono.o
 debug/objtriangulo.o
+debug/ponto.o
 debug/sol.o
 debug/moc_mainwindow.o
+debug/moc_mycombobox.o
 debug/moc_myframe.o

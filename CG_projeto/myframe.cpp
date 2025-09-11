@@ -3,6 +3,7 @@
 */
 
 #include "MyFrame.h"
+#include "ponto.h"
 
 MyFrame::MyFrame(QWidget *parent) : QFrame(parent), displayFile(nullptr) {
     setStyleSheet("background-color: white;");
@@ -31,14 +32,19 @@ void MyFrame::paintEvent(QPaintEvent *event) {
 
     for (const Objeto* obj : displayFile->getObjetos()) {
         if (obj->getTipo() == Linha) {
-                painter.drawLine(obj->getPontos()[0], obj->getPontos()[1]);
+                painter.drawLine(obj->getPontos()[0].toQPoint(), obj->getPontos()[1].toQPoint());
         }
         else if (obj->getTipo() == Poligono) {
-                painter.drawPolygon(obj->getPontos());
+            QVector<QPoint> qpts;
+            qpts.reserve(obj->getPontos().size());
+            for(const Ponto &p : obj->getPontos()){
+                qpts.append(p.toQPoint());
+            }
+            painter.drawPolygon(qpts);
         }
         else if (obj->getTipo() == Circulo) {
-                QPoint centro = obj->getPontos()[0];
-                int raio = obj->getPontos()[1].x();
+                QPoint centro = obj->getPontos()[0].toQPoint();
+                int raio = (int)std::round(obj->getPontos()[1].x());
                 painter.drawEllipse(centro, raio, raio);
         }
         else if (obj->getTipo() == Complexo){
