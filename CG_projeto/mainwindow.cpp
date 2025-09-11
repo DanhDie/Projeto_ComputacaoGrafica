@@ -4,8 +4,6 @@
 #include "DisplayFile.h"
 #include "matriz.h"
 
-DisplayFile df;
-
 //----------------------------------- CONSTRUTORES ------------------------------------
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -31,7 +29,8 @@ MainWindow::~MainWindow()
 * Ele costumava carregar junto (entre o setDisplayFile() e update()) a inicialização de todos os objetos
 * Agora essa parte é feita integralmente pela main.cpp
 */
-void MainWindow :: setDisplayFile(DisplayFile *df){
+void MainWindow :: setDisplayFile(DisplayFile *displayFile){
+    df=displayFile; //Isto é, ponteiro df da MainWindow recebe o endereço do df declarado na main
     MyFrame* frame = qobject_cast<MyFrame*>(ui->frame);
     if (frame) {
         //Pessoalmente me confundi nisso daqui, mas esse setDisplayFile embaixo é do MyFrame, e não do MainWindow
@@ -59,24 +58,24 @@ void MainWindow::aplicarTransformacao(int index, Objeto* obj){
 
     switch(index){
         case 0:{
-            Matriz T = Matriz::translacao(10,20);
-            //Código
-            qDebug() << "Aplicando Translação";
+            Matriz T = Matriz::translacao(-200,0);
+            df->aplicarTransformacao(obj->getNome(), T);
             break;
         }
         case 1:{
-            Matriz S = Matriz::escala(2,2);
-            //Código
-            qDebug() << "Aplicando escala";
+            Matriz S = Matriz::escala(0.5,0.5);
+            df->aplicarTransformacao(obj->getNome(), S);
             break;
         }
         case 2:{
-            Matriz R = Matriz::rotacao(45);
-            //Código
-            qDebug() << "Aplicando Rotação";
+            Matriz R = Matriz::rotacaoPonto(180, 350, 100);
+            df->aplicarTransformacao(obj->getNome(), R);
             break;
         }
     }
+
+        MyFrame* frame = qobject_cast<MyFrame*>(ui->frame);
+        if(frame) frame->update();
 }
 
 //---------------------------------------------------------------------
@@ -85,7 +84,7 @@ void MainWindow::aplicarTransformacao(int index, Objeto* obj){
 // ------------------------ SLOTS ----------------------------
 void MainWindow::onComboBoxTransChanged(int index){
     indexTrans = index; //Caso o usuário troque a trasnformacao antes do objeto
-    aplicarTransformacao(index, ui->comboBox->currentObjeto());
+    aplicarTransformacao(indexTrans, ui->comboBox->currentObjeto());
 }
 
 void MainWindow::onComboBoxChanged(int index){

@@ -18,13 +18,14 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void setDisplayFile(DisplayFile *ui);
+    void setDisplayFile(DisplayFile *displayFile);
     void aplicarTransformacao(int index, Objeto* obj);
 private slots:
     void onComboBoxChanged(int index);
     void onComboBoxTransChanged(int index);
 private:
     Ui::MainWindow *ui;
+    DisplayFile* df=nullptr;
     int indexTrans = -1;
 };
 #endif // MAINWINDOW_H

@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 
     df.adicionarObjeto(new Sol("sol"));
 
-/* alguns testes q fiz de exemplo aplicando algumas transformações, pode descomentar e testar p ver como funciona
+/*alguns testes q fiz de exemplo aplicando algumas transformações, pode descomentar e testar p ver como funciona
     // Aplicar transformação de translação
     Matriz translacao = Matriz::translacao(100, 50); // valores + move p direita - p esquerda, + p baixo - p cima
     df.aplicarTransformacao("Triangulo", translacao);
