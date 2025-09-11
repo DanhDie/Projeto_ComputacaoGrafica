@@ -368,9 +368,11 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qpen.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint \
+		../../ponto.h \
+		../../matriz.h \
 		release/moc_predefs.h \
 		C:/Qt/6.9.1/mingw_64/bin/moc.exe
-	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Danh_/OneDrive/Documentos/BCC/2025_02/entrega2/Projeto_ComputacaoGrafica/CG_projeto/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -IC:/Users/Danh_/OneDrive/Documentos/BCC/2025_02/entrega2/Projeto_ComputacaoGrafica/CG_projeto -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\mainwindow.h -o release\moc_mainwindow.cpp
+	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h" -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -I"C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto" -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\mainwindow.h -o release\moc_mainwindow.cpp
 
 release/moc_myframe.cpp: ../../myframe.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QFrame \
@@ -581,9 +583,11 @@ release/moc_myframe.cpp: ../../myframe.h \
 		../../Objeto.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint \
+		../../ponto.h \
+		../../matriz.h \
 		release/moc_predefs.h \
 		C:/Qt/6.9.1/mingw_64/bin/moc.exe
-	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/Danh_/OneDrive/Documentos/BCC/2025_02/entrega2/Projeto_ComputacaoGrafica/CG_projeto/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -IC:/Users/Danh_/OneDrive/Documentos/BCC/2025_02/entrega2/Projeto_ComputacaoGrafica/CG_projeto -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\myframe.h -o release\moc_myframe.cpp
+	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h" -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -I"C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto" -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\myframe.h -o release\moc_myframe.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -802,7 +806,9 @@ ui_mainwindow.h: ../../mainwindow.ui \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qvector.h \
 		../../Objeto.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint \
+		../../ponto.h \
+		../../matriz.h
 	C:\Qt\6.9.1\mingw_64\bin\uic.exe ..\..\mainwindow.ui -o ui_mainwindow.h
 
 compiler_yacc_decl_make_all:
@@ -957,7 +963,9 @@ release/displayfile.o: ../../displayfile.cpp ../../DisplayFile.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qfontvariableaxis.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qfontmetrics.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint \
+		../../ponto.h \
+		../../matriz.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\displayfile.o ..\..\displayfile.cpp
 
 release/main.o: ../../main.cpp ../../mainwindow.h \
@@ -1170,6 +1178,8 @@ release/main.o: ../../main.cpp ../../mainwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qpen.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint \
+		../../ponto.h \
+		../../matriz.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QApplication \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qapplication.h \
 		../../ObjLinha.h \
@@ -1396,6 +1406,8 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qpen.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint \
+		../../ponto.h \
+		../../matriz.h \
 		ui_mainwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QVariant \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QApplication \
@@ -1623,7 +1635,9 @@ release/myframe.o: ../../myframe.cpp ../../MyFrame.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qvector.h \
 		../../Objeto.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint \
+		../../ponto.h \
+		../../matriz.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\myframe.o ..\..\myframe.cpp
 
 release/objcasa.o: ../../objcasa.cpp ../../objcasa.h \
@@ -1768,6 +1782,8 @@ release/objcasa.o: ../../objcasa.cpp ../../objcasa.h \
 		../../Objeto.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint \
+		../../ponto.h \
+		../../matriz.h \
 		../../objlinha.h \
 		../../objcirculo.h \
 		../../objtriangulo.h \
@@ -1915,7 +1931,9 @@ release/objcirculo.o: ../../objcirculo.cpp ../../objcirculo.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QVector \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qvector.h
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qvector.h \
+		../../ponto.h \
+		../../matriz.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\objcirculo.o ..\..\objcirculo.cpp
 
 release/objeto.o: ../../objeto.cpp ../../Objeto.h \
@@ -2057,7 +2075,9 @@ release/objeto.o: ../../objeto.cpp ../../Objeto.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QVector \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qvector.h
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qvector.h \
+		../../ponto.h \
+		../../matriz.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\objeto.o ..\..\objeto.cpp
 
 release/objlinha.o: ../../objlinha.cpp ../../ObjLinha.h \
@@ -2200,7 +2220,9 @@ release/objlinha.o: ../../objlinha.cpp ../../ObjLinha.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QVector \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qvector.h
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qvector.h \
+		../../ponto.h \
+		../../matriz.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\objlinha.o ..\..\objlinha.cpp
 
 release/objnathghostkiller.o: ../../objnathghostkiller.cpp ../../objnathghostkiller.h \
@@ -2345,6 +2367,8 @@ release/objnathghostkiller.o: ../../objnathghostkiller.cpp ../../objnathghostkil
 		../../Objeto.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint \
+		../../ponto.h \
+		../../matriz.h \
 		../../objlinha.h \
 		../../objcirculo.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\objnathghostkiller.o ..\..\objnathghostkiller.cpp
@@ -2489,7 +2513,9 @@ release/objpoligono.o: ../../objpoligono.cpp ../../objpoligono.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QVector \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qvector.h
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qvector.h \
+		../../ponto.h \
+		../../matriz.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\objpoligono.o ..\..\objpoligono.cpp
 
 release/objtriangulo.o: ../../objtriangulo.cpp ../../objtriangulo.h \
@@ -2632,7 +2658,9 @@ release/objtriangulo.o: ../../objtriangulo.cpp ../../objtriangulo.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QVector \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qvector.h
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qvector.h \
+		../../ponto.h \
+		../../matriz.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\objtriangulo.o ..\..\objtriangulo.cpp
 
 release/ponto.o: ../../ponto.cpp ../../ponto.h \
@@ -2837,6 +2865,8 @@ release/sol.o: ../../sol.cpp ../../sol.h \
 		../../Objeto.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint \
+		../../ponto.h \
+		../../matriz.h \
 		../../objtriangulo.h \
 		../../objcirculo.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\sol.o ..\..\sol.cpp

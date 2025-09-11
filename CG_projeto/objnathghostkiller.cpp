@@ -62,3 +62,8 @@ void ObjNathGhostKiller :: autorretrato(QPainter* painter) const{
     }
 }
 
+void ObjNathGhostKiller::transformar(const Matriz& transformacao) {
+    for (Objeto* obj : objPrimitivos) {
+        obj->transformar(transformacao);
+    }
+}

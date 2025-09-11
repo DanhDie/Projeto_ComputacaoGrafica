@@ -28,9 +28,14 @@ public:
      * Essa VIADAGEM de "const" no final serve para informar ao compilador BURRO que não sabe que a função não muda nada que
      * ADIVINHA? ELA NÃO MUDA NADA
      */
+
+    void aplicarTransformacao(const Matriz& transformacao);
+    virtual void transformar(const Matriz& transformacao);
+
 private:
     QString nome;
     TipoObjeto tipo;
+protected:
     QVector<Ponto> pontos;  // para círculos: pontos[0] = centro, pontos[1].x() = raio
 };
 

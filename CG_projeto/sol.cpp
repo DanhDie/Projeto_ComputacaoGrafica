@@ -103,3 +103,9 @@ void Sol :: autorretrato(QPainter* painter) const{
         }
     }
 }
+
+void Sol::transformar(const Matriz& transformacao) {
+    for (Objeto* obj : objPrimitivos) {
+        obj->transformar(transformacao);
+    }
+}

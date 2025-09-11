@@ -19,6 +19,8 @@ public:
     const QVector<Objeto*>& getObjetos() const;
     void autorretrato(QPainter* painter) const;
 
+    void transformar(const Matriz& transformacao) override;
+
 private:
     QVector<Objeto*> objPrimitivos;
 };

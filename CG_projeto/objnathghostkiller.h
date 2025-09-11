@@ -18,6 +18,8 @@ public:
     const QVector<Objeto*>& getObjetos() const; //método para pegar os objetos para desenhar
     void autorretrato(QPainter* painter) const; //método de desenhar
 
+    void transformar(const Matriz& transformacao) override;
+
 private:
     QVector<Objeto*> objPrimitivos; //Vetor dos objetos primitivos contidos dentro desse objeto
 };

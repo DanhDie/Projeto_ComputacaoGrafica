@@ -118,3 +118,9 @@ void ObjCasa :: autorretrato(QPainter* painter) const{
         }
     }
 }
+
+void ObjCasa::transformar(const Matriz& transformacao) {
+    for (Objeto* obj : objPrimitivos) {
+        obj->transformar(transformacao);
+    }
+}

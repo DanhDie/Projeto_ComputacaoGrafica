@@ -60,11 +60,11 @@ Matriz Matriz::rotacao(double anguloGraus) {
 }
 
 Matriz Matriz::escalaPonto(double sx, double sy, double px, double py) {
-    // Translada o ponto ao centro, escala, e volta
+    // Corrigindo a ordem das operações (multiplicação de matrizes)
     return translacao(px, py) * escala(sx, sy) * translacao(-px, -py);
 }
 
 Matriz Matriz::rotacaoPonto(double anguloGraus, double px, double py) {
-    // Translada o ponto ao centro, rotaciona, e volta
+    // Corrigindo a ordem das operações
     return translacao(px, py) * rotacao(anguloGraus) * translacao(-px, -py);
 }
