@@ -13,6 +13,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     matriz.cpp \
+    mycombobox.cpp \
     myframe.cpp \
     objcasa.cpp \
     objcirculo.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
     displayfile.h \
     mainwindow.h \
     matriz.h \
+    mycombobox.h \
     myframe.h \
     objcasa.h \
     objcirculo.h \
