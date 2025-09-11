@@ -30,6 +30,7 @@ public:
      */
 
     void aplicarTransformacao(const Matriz& transformacao);
+    virtual const QVector<Objeto*>& getObjetos() const;
     virtual void transformar(const Matriz& transformacao);
 
 private:

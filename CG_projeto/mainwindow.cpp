@@ -3,6 +3,8 @@
 #include "MyFrame.h"
 #include "DisplayFile.h"
 #include "matriz.h"
+#include "ponto.h"
+#include "QVector"
 
 //----------------------------------- CONSTRUTORES ------------------------------------
 MainWindow::MainWindow(QWidget *parent)
@@ -56,19 +58,33 @@ void MainWindow :: setDisplayFile(DisplayFile *displayFile){
 void MainWindow::aplicarTransformacao(int index, Objeto* obj){
     if(!obj || index ==-1) return; //Nenhum objeto selecionado || nenhuma trasnformacao selecionada
 
+    qDebug() << "Index:" << index << "Objeto:" << (obj ? obj->getNome() : "NULL");
+
+    QVector<Objeto*> v;
+    QVector<Ponto> vPontos;
+    if (obj->getTipo()==Complexo){
+        v=obj->getObjetos();
+        vPontos=v.first()->getPontos();
+    }
+    else{
+        vPontos=obj->getPontos();
+    }
+
+    Ponto p=vPontos.at(0);
+
     switch(index){
         case 0:{
-            Matriz T = Matriz::translacao(-200,0);
+            Matriz T = Matriz::translacao(-20,0);
             df->aplicarTransformacao(obj->getNome(), T);
             break;
         }
         case 1:{
-            Matriz S = Matriz::escala(0.5,0.5);
+            Matriz S = Matriz::escalaPonto(0.5,0.5,p[0][0],p[1][0]);
             df->aplicarTransformacao(obj->getNome(), S);
             break;
         }
         case 2:{
-            Matriz R = Matriz::rotacaoPonto(180, 350, 100);
+            Matriz R = Matriz::rotacaoPonto(30, p[0][0], p[1][0]);
             df->aplicarTransformacao(obj->getNome(), R);
             break;
         }

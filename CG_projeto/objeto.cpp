@@ -34,3 +34,7 @@ void Objeto::aplicarTransformacao(const Matriz& transformacao) {
 void Objeto::transformar(const Matriz& transformacao) {
     aplicarTransformacao(transformacao);
 }
+
+const QVector<Objeto*>& Objeto::getObjetos() const{
+    return {};
+}
