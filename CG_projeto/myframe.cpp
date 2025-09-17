@@ -3,7 +3,9 @@
 */
 
 #include "MyFrame.h"
-#include "ponto.h"
+#include "Objetos/ponto.h"
+#include "mainwindow.h"
+#include "QMouseEvent"
 
 MyFrame::MyFrame(QWidget *parent) : QFrame(parent), displayFile(nullptr) {
     setStyleSheet("background-color: white;");
@@ -51,4 +53,8 @@ void MyFrame::paintEvent(QPaintEvent *event) {
             obj->autorretrato(&painter);
         }
     }
+}
+
+void MyFrame::mousePressEvent(QMouseEvent *event){
+    emit BtEsquerdoPress(event->pos());
 }

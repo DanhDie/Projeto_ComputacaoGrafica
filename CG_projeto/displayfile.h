@@ -2,7 +2,7 @@
 #define DISPLAYFILE_H
 
 #include <QVector>
-#include "Objeto.h"
+#include "Objetos/Objeto.h"
 
 class DisplayFile {
 public:

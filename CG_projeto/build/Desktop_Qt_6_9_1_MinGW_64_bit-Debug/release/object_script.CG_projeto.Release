@@ -3,7 +3,9 @@ release/main.o
 release/mainwindow.o
 release/matriz.o
 release/mycombobox.o
+release/mydoublespinbox.o
 release/myframe.o
+release/mypushbutton.o
 release/objcasa.o
 release/objcirculo.o
 release/objeto.o
@@ -15,4 +17,6 @@ release/ponto.o
 release/sol.o
 release/moc_mainwindow.o
 release/moc_mycombobox.o
+release/moc_mydoublespinbox.o
 release/moc_myframe.o
+release/moc_mypushbutton.o

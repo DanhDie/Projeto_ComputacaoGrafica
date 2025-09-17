@@ -13,36 +13,43 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     matriz.cpp \
-    mycombobox.cpp \
+    Botoes/mycombobox.cpp \
+    Botoes/mydoublespinbox.cpp \
     myframe.cpp \
-    objcasa.cpp \
-    objcirculo.cpp \
-    objeto.cpp \
-    objlinha.cpp \
-    objnathghostkiller.cpp \
-    objpoligono.cpp \
-    objtriangulo.cpp \
-    ponto.cpp \
-    sol.cpp
+    Botoes/mypushbutton.cpp \
+    Objetos/objcasa.cpp \
+    Objetos/objcirculo.cpp \
+    Objetos/objeto.cpp \
+    Objetos/objlinha.cpp \
+    Objetos/objnathghostkiller.cpp \
+    Objetos/objpoligono.cpp \
+    Objetos/objtriangulo.cpp \
+    Objetos/ponto.cpp \
+    Objetos/sol.cpp
 
 HEADERS += \
     displayfile.h \
     mainwindow.h \
     matriz.h \
-    mycombobox.h \
+    Botoes/mycombobox.h \
+    Botoes/mydoublespinbox.h \
     myframe.h \
-    objcasa.h \
-    objcirculo.h \
-    objeto.h \
-    objlinha.h \
-    objnathghostkiller.h \
-    objpoligono.h \
-    objtriangulo.h \
-    ponto.h \
-    sol.h
+    Botoes/mypushbutton.h \
+    Objetos/objcasa.h \
+    Objetos/objcirculo.h \
+    Objetos/objeto.h \
+    Objetos/objlinha.h \
+    Objetos/objnathghostkiller.h \
+    Objetos/objpoligono.h \
+    Objetos/objtriangulo.h \
+    Objetos/ponto.h \
+    Objetos/sol.h
 
 FORMS += \
     mainwindow.ui
+
+INCLUDEPATH += $$PWD/Botoes
+INCLUDEPATH += $$PWD/Objetos
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

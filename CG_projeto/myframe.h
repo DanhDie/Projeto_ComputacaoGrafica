@@ -13,8 +13,12 @@ public:
     void adicionarObjeto(Objeto* obj);
     void setDisplayFile(DisplayFile* df);
 
+signals:
+    void BtEsquerdoPress(QPointF p);
+
 protected:
     void paintEvent(QPaintEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
 
 private:
     DisplayFile* displayFile;  // referência ao display file

@@ -3,7 +3,9 @@ debug/main.o
 debug/mainwindow.o
 debug/matriz.o
 debug/mycombobox.o
+debug/mydoublespinbox.o
 debug/myframe.o
+debug/mypushbutton.o
 debug/objcasa.o
 debug/objcirculo.o
 debug/objeto.o
@@ -15,4 +17,6 @@ debug/ponto.o
 debug/sol.o
 debug/moc_mainwindow.o
 debug/moc_mycombobox.o
+debug/moc_mydoublespinbox.o
 debug/moc_myframe.o
+debug/moc_mypushbutton.o
