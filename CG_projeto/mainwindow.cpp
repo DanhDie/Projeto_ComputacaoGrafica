@@ -58,23 +58,36 @@ void MainWindow :: setDisplayFile(DisplayFile *displayFile){
 }
 
 Ponto MainWindow::refPonto(Objeto *obj){
-    QVector<Objeto*> v;
-    QVector<Ponto> vPontos;
+    QVector<Ponto> pontos;
 
-    if (obj->getTipo()==Complexo){
-        v=obj->getObjetos();
-        vPontos=v.first()->getPontos();
-    }
-    else{
-        vPontos=obj->getPontos();
+    if (obj->getTipo() == Complexo) {
+        // Se for um objeto composto, pega o primeiro subobjeto (ajuste se precisar)
+        QVector<Objeto*> subs = obj->getObjetos();
+        for (Objeto* sub : subs) {
+            pontos += sub->getPontos(); // pega TODOS os pontos de TODOS os subobjetos
+        }
+    } else {
+        pontos = obj->getPontos();
     }
 
-    return vPontos.at(0);
+    double somaX = 0.0, somaY = 0.0;
+    for (const Ponto &p : pontos) {
+        somaX += p[0][0];
+        somaY += p[1][0];
+    }
+
+    double cx = somaX / pontos.size();
+    double cy = somaY / pontos.size();
+
+    return Ponto(cx, cy);
 }
 void MainWindow::defaultSpinBox(){
+    if(!ui->comboBox->currentObjeto()) return;
+    Ponto p=refPonto(ui->comboBox->currentObjeto());
+
     ui->doubleSpinBox_R->setValue(0);
-    ui->doubleSpinBox_Rx->setValue(0);
-    ui->doubleSpinBox_Ry->setValue(0);
+    ui->doubleSpinBox_Rx->setValue(p[0][0]);
+    ui->doubleSpinBox_Ry->setValue(p[1][0]);
 
     ui->doubleSpinBox_Tx->setValue(0);
     ui->doubleSpinBox_Ty->setValue(0);
