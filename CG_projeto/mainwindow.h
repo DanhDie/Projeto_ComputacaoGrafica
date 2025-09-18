@@ -19,14 +19,10 @@ public:
     ~MainWindow();
 
     void setDisplayFile(DisplayFile *displayFile);
-    Ponto refPonto(Objeto* obj);
-    void defaultSpinBox();
-
+    void aplicarTransformacao(int index, Objeto* obj);
 private slots:
-    void onComboBoxChanged();
-    void onBtEsquerdoPress(QPointF p);
-    void onAplicarTransformacao();
-
+    void onComboBoxChanged(int index);
+    void onComboBoxTransChanged(int index);
 private:
     Ui::MainWindow *ui;
     DisplayFile* df=nullptr;

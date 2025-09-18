@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>961</width>
-    <height>569</height>
+    <width>927</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -43,294 +43,17 @@
      <string>Selecione um objeto</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="MyComboBox" name="comboBoxTrans">
     <property name="geometry">
      <rect>
-      <x>780</x>
-      <y>60</y>
-      <width>121</width>
-      <height>20</height>
+      <x>720</x>
+      <y>130</y>
+      <width>201</width>
+      <height>28</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Translação</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>780</x>
-      <y>180</y>
-      <width>121</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Rotação</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>800</x>
-      <y>330</y>
-      <width>121</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Escala</string>
-    </property>
-   </widget>
-   <widget class="MyDoubleSpinBox" name="doubleSpinBox_R">
-    <property name="geometry">
-     <rect>
-      <x>770</x>
-      <y>200</y>
-      <width>81</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="decimals">
-     <number>2</number>
-    </property>
-    <property name="minimum">
-     <double>-999999999.000000000000000</double>
-    </property>
-    <property name="maximum">
-     <double>99999999.000000000000000</double>
-    </property>
-    <property name="singleStep">
-     <double>10.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="MyDoubleSpinBox" name="doubleSpinBox_El">
-    <property name="geometry">
-     <rect>
-      <x>740</x>
-      <y>370</y>
-      <width>81</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="decimals">
-     <number>2</number>
-    </property>
-    <property name="minimum">
-     <double>0.000000000000000</double>
-    </property>
-    <property name="maximum">
-     <double>99999999.000000000000000</double>
-    </property>
-    <property name="singleStep">
-     <double>0.200000000000000</double>
-    </property>
-   </widget>
-   <widget class="MyPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>740</x>
-      <y>440</y>
-      <width>171</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Aplicar Transformações</string>
-    </property>
-   </widget>
-   <widget class="MyDoubleSpinBox" name="doubleSpinBox_Rx">
-    <property name="geometry">
-     <rect>
-      <x>740</x>
-      <y>260</y>
-      <width>81</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="decimals">
-     <number>2</number>
-    </property>
-    <property name="minimum">
-     <double>-999999999.000000000000000</double>
-    </property>
-    <property name="maximum">
-     <double>99999999.000000000000000</double>
-    </property>
-    <property name="singleStep">
-     <double>10.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="MyDoubleSpinBox" name="doubleSpinBox_Ry">
-    <property name="geometry">
-     <rect>
-      <x>830</x>
-      <y>260</y>
-      <width>81</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="decimals">
-     <number>2</number>
-    </property>
-    <property name="minimum">
-     <double>-999999999.000000000000000</double>
-    </property>
-    <property name="maximum">
-     <double>99999999.000000000000000</double>
-    </property>
-    <property name="singleStep">
-     <double>10.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_6">
-    <property name="geometry">
-     <rect>
-      <x>760</x>
-      <y>240</y>
-      <width>63</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>X</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_7">
-    <property name="geometry">
-     <rect>
-      <x>850</x>
-      <y>240</y>
-      <width>63</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Y</string>
-    </property>
-    <property name="textFormat">
-     <enum>Qt::TextFormat::MarkdownText</enum>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_8">
-    <property name="geometry">
-     <rect>
-      <x>760</x>
-      <y>90</y>
-      <width>63</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>X</string>
-    </property>
-   </widget>
-   <widget class="MyDoubleSpinBox" name="doubleSpinBox_Ty">
-    <property name="geometry">
-     <rect>
-      <x>830</x>
-      <y>110</y>
-      <width>81</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="decimals">
-     <number>2</number>
-    </property>
-    <property name="minimum">
-     <double>-999999999.000000000000000</double>
-    </property>
-    <property name="maximum">
-     <double>99999999.000000000000000</double>
-    </property>
-    <property name="singleStep">
-     <double>10.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_9">
-    <property name="geometry">
-     <rect>
-      <x>850</x>
-      <y>90</y>
-      <width>63</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Y</string>
-    </property>
-    <property name="textFormat">
-     <enum>Qt::TextFormat::MarkdownText</enum>
-    </property>
-   </widget>
-   <widget class="MyDoubleSpinBox" name="doubleSpinBox_Tx">
-    <property name="geometry">
-     <rect>
-      <x>740</x>
-      <y>110</y>
-      <width>81</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="decimals">
-     <number>2</number>
-    </property>
-    <property name="minimum">
-     <double>-999999999.000000000000000</double>
-    </property>
-    <property name="maximum">
-     <double>99999999.000000000000000</double>
-    </property>
-    <property name="singleStep">
-     <double>10.000000000000000</double>
-    </property>
-   </widget>
-   <widget class="MyDoubleSpinBox" name="doubleSpinBox_Ea">
-    <property name="geometry">
-     <rect>
-      <x>830</x>
-      <y>370</y>
-      <width>81</width>
-      <height>29</height>
-     </rect>
-    </property>
-    <property name="decimals">
-     <number>2</number>
-    </property>
-    <property name="minimum">
-     <double>0.000000000000000</double>
-    </property>
-    <property name="maximum">
-     <double>99999999.000000000000000</double>
-    </property>
-    <property name="singleStep">
-     <double>0.200000000000000</double>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>750</x>
-      <y>350</y>
-      <width>63</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Largura</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_5">
-    <property name="geometry">
-     <rect>
-      <x>840</x>
-      <y>350</y>
-      <width>63</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Altura</string>
+    <property name="placeholderText">
+     <string>Escolha a trasnformação</string>
     </property>
    </widget>
   </widget>
@@ -339,7 +62,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>961</width>
+     <width>927</width>
      <height>25</height>
     </rect>
    </property>
@@ -357,16 +80,6 @@
    <class>MyComboBox</class>
    <extends>QComboBox</extends>
    <header location="global">mycombobox.h</header>
-  </customwidget>
-  <customwidget>
-   <class>MyDoubleSpinBox</class>
-   <extends>QDoubleSpinBox</extends>
-   <header>mydoublespinbox.h</header>
-  </customwidget>
-  <customwidget>
-   <class>MyPushButton</class>
-   <extends>QPushButton</extends>
-   <header>mypushbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
