@@ -1,3 +1,4 @@
+debug/objwindow.o
 debug/displayfile.o
 debug/main.o
 debug/mainwindow.o
@@ -15,6 +16,7 @@ debug/objpoligono.o
 debug/objtriangulo.o
 debug/ponto.o
 debug/sol.o
+debug/viewport.o
 debug/moc_mainwindow.o
 debug/moc_mycombobox.o
 debug/moc_mydoublespinbox.o

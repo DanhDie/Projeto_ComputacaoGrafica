@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Objetos/objwindow.cpp \
     displayfile.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -25,9 +26,11 @@ SOURCES += \
     Objetos/objpoligono.cpp \
     Objetos/objtriangulo.cpp \
     Objetos/ponto.cpp \
-    Objetos/sol.cpp
+    Objetos/sol.cpp \
+    viewport.cpp
 
 HEADERS += \
+    Objetos/objwindow.h \
     displayfile.h \
     mainwindow.h \
     matriz.h \
@@ -43,7 +46,8 @@ HEADERS += \
     Objetos/objpoligono.h \
     Objetos/objtriangulo.h \
     Objetos/ponto.h \
-    Objetos/sol.h
+    Objetos/sol.h \
+    viewport.h
 
 FORMS += \
     mainwindow.ui

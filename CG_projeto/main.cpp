@@ -11,6 +11,7 @@
 #include "Objetos/ObjNathGhostKiller.h"
 #include "Objetos/objcasa.h"
 #include "Objetos/Sol.h"
+#include "Objetos/objwindow.h"
 /*
  * ---------------------------------------------
 */
@@ -30,6 +31,9 @@ int main(int argc, char *argv[])
     * Tome nota do novo padrão de instanciamento de objetos . . .
     * Dava para fazer em duas linhas separadas, claro, mas deu preguiça
     */
+    ObjWindow* window = new ObjWindow("janela", 0, 0, 400, 300);
+    df.adicionarObjeto(window);
+
     df.adicionarObjeto(new ObjTriangulo ("Triangulo", 50, 50, 150, 50, 100, 150));
 
     df.adicionarObjeto(new ObjNathGhostKiller ("natalia kikuti"));
