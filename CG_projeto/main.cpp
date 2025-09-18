@@ -4,13 +4,13 @@
 /*
  * ------------- Lista de objetos --------------
 */
-#include "Objetos/Objeto.h"
-#include "Objetos/ObjLinha.h"
-#include "Objetos/ObjCirculo.h"
-#include "Objetos/ObjTriangulo.h"
-#include "Objetos/ObjNathGhostKiller.h"
-#include "Objetos/objcasa.h"
-#include "Objetos/Sol.h"
+#include "Objeto.h"
+#include "ObjLinha.h"
+#include "ObjCirculo.h"
+#include "ObjTriangulo.h"
+#include "ObjNathGhostKiller.h"
+#include "objcasa.h"
+#include "Sol.h"
 /*
  * ---------------------------------------------
 */
