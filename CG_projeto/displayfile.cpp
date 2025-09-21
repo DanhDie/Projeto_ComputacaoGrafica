@@ -23,3 +23,13 @@ void DisplayFile::aplicarTransformacao(const QString& nomeObjeto, const Matriz& 
         }
     }
 }
+
+
+Objeto* DisplayFile::getObjeto(const QString &nome) const{
+    for (Objeto* obj : objetos){
+        if(obj->getNome() == nome){
+            return obj;
+        }
+    }
+    return nullptr;
+}

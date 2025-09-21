@@ -5,6 +5,9 @@
 #include "matriz.h"
 #include "Objetos/ponto.h"
 #include "QVector"
+#include "objwindow.h"
+#include <QKeyEvent>
+#include <QWheelEvent>
 
 //----------------------------------- CONSTRUTORES ------------------------------------
 MainWindow::MainWindow(QWidget *parent)
@@ -22,6 +25,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     //Conecta o evento de clicar o botão de aplicar transformação no respectivo slot
     QObject::connect(ui->pushButton, &MyPushButton::clicked, this, &MainWindow::onAplicarTransformacao);
+
+    // Garante que a MainWindow capture os eventos do teclado
+    setFocusPolicy(Qt::StrongFocus);
+
+    // Também para o frame onde desenha (MyFrame)
+    ui->frame->setFocusPolicy(Qt::StrongFocus);
 }
 
 MainWindow::~MainWindow()
@@ -148,3 +157,59 @@ void MainWindow::onAplicarTransformacao(){
     defaultSpinBox();
 }
 //---------------------------------------------------------------------------
+
+
+//-------------IMPLEMENTANDO ZOOM E PAN NA WINDOW ----------------------------
+
+void MainWindow::keyPressEvent(QKeyEvent *event){
+    ObjWindow* window = dynamic_cast<ObjWindow*>(df->getObjeto("janela"));
+    if (!window) return;
+
+    switch (event->key()){
+        // com as setas do teclado
+    case Qt::Key_Left:
+        window->pan(-10, 0); //move para a esquerda 10 unidades
+        break;
+    case Qt::Key_Right:
+        window->pan(10, 0); //move para a direita 10 unidades
+        break;
+    case Qt::Key_Up:
+        window->pan(0, -10); //move para cima 10 unidades
+        break;
+    case Qt::Key_Down:
+        window->pan(0, 10); //move para baixo 10 unidades
+        break;
+
+    // zoom com + e -
+
+    case Qt::Key_Plus:
+    case Qt::Key_Equal: // "+", pode ser shift + "="
+        window->zoom(0.9); // aproxima
+        break;
+    case Qt::Key_Minus:
+        window->zoom(1.1); // afasta
+        break;
+
+    default:
+        QWidget::keyPressEvent(event);
+        return;
+
+    }
+
+    ui->frame->update(); // redesenha a window
+}
+
+
+void MainWindow::wheelEvent(QWheelEvent *event){
+    ObjWindow* window = dynamic_cast<ObjWindow*>(df->getObjeto("janela"));
+    if (!window) return;
+
+    int delta = event->angleDelta().y();
+
+    if (delta > 0)
+        window->zoom(0.9); // aproxima
+    else
+        window->zoom(1.1); // afasta
+
+    ui->frame->update();
+}

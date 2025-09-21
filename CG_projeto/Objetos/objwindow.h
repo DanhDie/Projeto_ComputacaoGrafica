@@ -15,6 +15,10 @@ public:
     double getYmin() const;
     double getXmax() const;
     double getYmax() const;
+
+
+    void pan(double dx, double dy);
+    void zoom(double fator);
 };
 
 #endif // OBJWINDOW_H

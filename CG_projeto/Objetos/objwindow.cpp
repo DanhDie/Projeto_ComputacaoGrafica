@@ -21,3 +21,31 @@ double ObjWindow::getXmin() const { return pontos[0].x(); }
 double ObjWindow::getYmin() const { return pontos[0].y(); }
 double ObjWindow::getXmax() const { return pontos[2].x(); }
 double ObjWindow::getYmax() const { return pontos[2].y(); }
+
+// pan - deslogar os pontos da window
+void ObjWindow::pan(double dx, double dy){
+    for(int i = 0; i < pontos.size(); i++){
+        pontos[i] = Ponto(pontos[i].x() + dx, pontos[i].y() + dy);
+    }
+}
+
+// zoom na window
+void ObjWindow::zoom(double fator){
+    // Descobrir o centro atual
+    double cx = (getXmin() + getXmax()) / 2.0;
+    double cy = (getYmin() + getYmax()) / 2.0;
+
+
+    // Descobrir largura e altura atuais
+    double largura = (getXmax() - getXmin()) * fator;
+    double altura = (getYmax() - getYmin()) * fator;
+
+    // Calcular os novos limites
+    double xmin = cx - largura / 2.0;
+    double xmax = cx + largura / 2.0;
+    double ymin = cy - altura / 2.0;
+    double ymax = cy + altura / 2.0;
+
+    // Atualizar a janela
+    atualizarLimites(xmin, ymin, xmax, ymax);
+}

@@ -11,6 +11,7 @@ public:
     void limpar();
 
     void aplicarTransformacao(const QString& nomeObjeto, const Matriz& transformacao);
+    Objeto* getObjeto(const QString& nome) const;
 
 private:
     QVector<Objeto*> objetos;

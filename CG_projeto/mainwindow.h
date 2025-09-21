@@ -31,5 +31,9 @@ private:
     Ui::MainWindow *ui;
     DisplayFile* df=nullptr;
     int indexTrans = -1;
+
+protected:
+    void keyPressEvent(QKeyEvent* event) override;
+    void wheelEvent(QWheelEvent* event) override;
 };
 #endif // MAINWINDOW_H
