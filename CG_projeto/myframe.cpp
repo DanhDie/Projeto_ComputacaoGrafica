@@ -6,6 +6,8 @@
 #include "Objetos/ponto.h"
 #include "mainwindow.h"
 #include "QMouseEvent"
+#include "viewport.h"
+#include "Objetos/objwindow.h"
 
 MyFrame::MyFrame(QWidget *parent) : QFrame(parent), displayFile(nullptr) {
     setStyleSheet("background-color: white;");
@@ -32,25 +34,40 @@ void MyFrame::paintEvent(QPaintEvent *event) {
     painter.setPen(Qt::black);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    for (const Objeto* obj : displayFile->getObjetos()) {
+    // pega a window do display file (assumindo que você adicionou ela com nome "janela")
+    ObjWindow* window = dynamic_cast<ObjWindow*>(displayFile->getObjeto("janela"));
+    if (!window) return;
+
+    // define viewport (área interna do frame)
+    Viewport vp(0, 0, width(), height());
+
+    // percorre todos os objetos
+    for (Objeto* obj : displayFile->getObjetos()) {
+        QVector<QPoint> pontosTela;
+
+        for (const Ponto& p : obj->getPontos()) {
+            // normaliza em relação à window
+            Ponto pNorm = window->normalizar(p, window);
+
+            // mapeia para a viewport
+            Ponto pTela = vp.mapear(pNorm);
+
+            pontosTela.append(pTela.toQPoint());
+        }
+
+        // desenha no painter
         if (obj->getTipo() == Linha) {
-                painter.drawLine(obj->getPontos()[0].toQPoint(), obj->getPontos()[1].toQPoint());
+            if (pontosTela.size() >= 2)
+                painter.drawLine(pontosTela[0], pontosTela[1]);
         }
         else if (obj->getTipo() == Poligono) {
-            QVector<QPoint> qpts;
-            qpts.reserve(obj->getPontos().size());
-            for(const Ponto &p : obj->getPontos()){
-                qpts.append(p.toQPoint());
-            }
-            painter.drawPolygon(qpts);
+            painter.drawPolygon(pontosTela);
         }
         else if (obj->getTipo() == Circulo) {
-                QPoint centro = obj->getPontos()[0].toQPoint();
-                int raio = (int)std::round(obj->getPontos()[1].x());
-                painter.drawEllipse(centro, raio, raio);
-        }
-        else if (obj->getTipo() == Complexo){
-            obj->autorretrato(&painter);
+            // círculo armazenado como centro + raio
+            QPoint centro = pontosTela[0];
+            int raio = pontosTela[1].x(); // assumindo convenção
+            painter.drawEllipse(centro, raio, raio);
         }
     }
 }

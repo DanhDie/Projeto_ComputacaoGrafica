@@ -17,6 +17,18 @@ void ObjWindow::atualizarLimites(double xmin, double ymin, double xmax, double y
     pontos[3] = Ponto(xmin, ymax);
 }
 
+Ponto ObjWindow::normalizar(const Ponto& p, const ObjWindow* window) {
+    double xn = (p.x() - window->getXmin()) / (window->getXmax() - window->getXmin());
+    double yn = (p.y() - window->getYmin()) / (window->getYmax() - window->getYmin());
+    return Ponto(xn, yn);
+}
+
+Ponto ObjWindow::desnormalizar(const Ponto& p) {
+    double x = p.x() * (getXmax() - getXmin()) + getXmin();
+    double y = p.y() * (getYmax() - getYmin()) + getYmin();
+    return Ponto(x, y);
+}
+
 double ObjWindow::getXmin() const { return pontos[0].x(); }
 double ObjWindow::getYmin() const { return pontos[0].y(); }
 double ObjWindow::getXmax() const { return pontos[2].x(); }

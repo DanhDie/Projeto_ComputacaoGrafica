@@ -12,6 +12,7 @@ public:
 
     // Converte ponto normalizado [0,1] para coordenada de tela
     Ponto mapear(const Ponto& pNormalizado) const;
+    Ponto desmapear(QPoint p);
 };
 
 #endif // VIEWPORT_H
