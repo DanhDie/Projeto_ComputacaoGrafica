@@ -81,19 +81,23 @@ void MyFrame::desenharObjetos(ObjWindow *window, Viewport vp, Objeto *obj, QPain
         painter->drawPolygon(pontosTela);
     }
     else if (obj->getTipo() == Circulo) {
-        // círculo armazenado como centro + raio
+        // centro já mapeado para viewport
         QPoint centro = pontosTela[0];
 
-        // Calcula o fator de escala baseado na largura da viewport vs window
-        double fatorEscala = static_cast<double>(vp.getVxmax() - vp.getVxmin()) /
-                             (window->getXmax() - window->getXmin());
+        // Ponto do raio no mundo
+        const Ponto& centroMundo = obj->getPontos()[0];
+        const Ponto& pontoRaioMundo = obj->getPontos()[1];
 
-        // Pega o raio original (distância entre os dois pontos)
-        Ponto p1 = obj->getPontos()[0];
-        Ponto p2 = obj->getPontos()[1];
-        double raioOriginal = sqrt(pow(p2.x() - p1.x(), 2) + pow(p2.y() - p1.y(), 2));
+        // Distância (raio) no mundo
+        double raioMundo = std::hypot(pontoRaioMundo.x(), pontoRaioMundo.y());
 
-        int raioPixel = static_cast<int>(raioOriginal * fatorEscala);
+        // Escala da window para a viewport
+        double escalaX = (vp.getVxmax() - vp.getVxmin()) / (window->getXmax() - window->getXmin());
+        double escalaY = (vp.getVymax() - vp.getVymin()) / (window->getYmax() - window->getYmin());
+
+        double escalaMedia = (escalaX + escalaY) / 2.0;
+
+        int raioPixel = static_cast<int>(std::round(raioMundo * escalaMedia));
 
         painter->drawEllipse(centro, raioPixel, raioPixel);
     }

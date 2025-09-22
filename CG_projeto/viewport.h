@@ -15,6 +15,8 @@ public:
     Ponto desmapear(QPoint p);
     double getVxmax();
     double getVxmin();
+    double getVymax();
+    double getVymin();
 };
 
 #endif // VIEWPORT_H

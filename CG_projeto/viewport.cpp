@@ -10,14 +10,16 @@ Ponto Viewport::mapear(const Ponto& pNormalizado) const {
     double xp = vxmin + xn * (vxmax - vxmin);
     double yp = vymin + (1 - yn) * (vymax - vymin); // inverte Y (Qt usa Y para baixo)
 
-    return Ponto(xp, yp);
+    return Ponto(xp, -yp);
 }
 
 double Viewport::getVxmax(){ return vxmax; }
 double Viewport::getVxmin(){ return vxmin; }
+double Viewport::getVymax(){ return vymax; }
+double Viewport::getVymin(){ return vymin; }
 
 Ponto Viewport::desmapear(QPoint p) {
     double xNorm = (p.x() - vxmin) / static_cast<double>(vxmax - vxmin);
-    double yNorm = 1.0 - (p.y() - vymin) / static_cast<double>(vymax - vymin); // inverte eixo Y
+    double yNorm = 1.0 + (p.y() - vymin) / static_cast<double>(vymax - vymin); // inverte eixo Y
     return Ponto(xNorm, yNorm);
 }
