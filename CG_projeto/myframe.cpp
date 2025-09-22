@@ -43,6 +43,7 @@ void MyFrame::paintEvent(QPaintEvent *event) {
 
     // percorre todos os objetos
     for (Objeto* obj : displayFile->getObjetos()) {
+        if (obj->getNome() == "janela") continue; // Para não desenhar a window (janela)
         //Tratador de desenho de objetos complexos
         if (obj->getTipo() == Complexo) {                   //Caso seja complexo
             QVector<Objeto*> subs = obj->getObjetos();      //Pega todos os sub objetos

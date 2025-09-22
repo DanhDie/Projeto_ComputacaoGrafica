@@ -22,6 +22,13 @@ public:
 
     void pan(double dx, double dy);
     void zoom(double fator);
+
+    // Para funcionar a rotação da janela (window) - suporte
+    void setRotacao(double angulo); //graus
+    double getRotacao() const;
+
+private:
+    double anguloRotacao = 0.0; //graus
 };
 
 #endif // OBJWINDOW_H

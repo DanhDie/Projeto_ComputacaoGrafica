@@ -145,6 +145,19 @@ void MainWindow::onAplicarTransformacao(){
     Objeto *obj=ui->comboBox->currentObjeto();
     if(!obj) return; //Nenhum objeto selecionado
 
+    // Se for a janela, só atualiza a rotação e retorna
+    if (obj->getNome() == "janela") {
+        ObjWindow* window = dynamic_cast<ObjWindow*>(obj);
+        if (window) {
+            double angulo = ui->doubleSpinBox_R->value();
+            window->setRotacao(angulo);
+            ui->frame->update();
+        }
+
+        defaultSpinBox();
+        return;
+    }
+
     Ponto p=refPonto(obj);
 
     //Matriz da Translação

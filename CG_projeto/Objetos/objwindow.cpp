@@ -18,15 +18,57 @@ void ObjWindow::atualizarLimites(double xmin, double ymin, double xmax, double y
 }
 
 Ponto ObjWindow::normalizar(const Ponto& p, const ObjWindow* window) {
-    double xn = (p.x() - window->getXmin()) / (window->getXmax() - window->getXmin());
-    double yn = (p.y() - window->getYmin()) / (window->getYmax() - window->getYmin());
+    // Aplicando rotação inversa à janela (simular o espaço local da window)
+    double anguloRad = -window->getRotacao() * M_PI / 180.0;  // negativo = inversa
+
+    // Centro da window
+    double cx = (window->getXmin() + window->getXmax()) / 2.0;
+    double cy = (window->getYmin() + window->getYmax()) / 2.0;
+
+    // Transladar ponto para a origem da rotação
+    double x = p.x() - cx;
+    double y = p.y() - cy;
+
+    // Aplicando rotação inversa
+    double xr = x * cos(anguloRad) - y * sin(anguloRad);
+    double yr = x * sin(anguloRad) + y * cos(anguloRad);
+
+    // Transladar de volta para o centro da window
+    xr += cx;
+    yr += cy;
+
+    // Normalizar
+    double xn = (xr - window->getXmin()) / (window->getXmax() - window->getXmin());
+    double yn = (yr - window->getYmin()) / (window->getYmax() - window->getYmin());
+
     return Ponto(xn, yn);
 }
 
+
 Ponto ObjWindow::desnormalizar(const Ponto& p) {
+    // Desnormaliza as coordenadas
     double x = p.x() * (getXmax() - getXmin()) + getXmin();
     double y = p.y() * (getYmax() - getYmin()) + getYmin();
-    return Ponto(x, y);
+
+    // Centro da window
+    double cx = (getXmin() + getXmax()) / 2.0;
+    double cy = (getYmin() + getYmax()) / 2.0;
+
+    // Translada para origem
+    double xt = x - cx;
+    double yt = y - cy;
+
+    // Aplica rotação da window - ângulo positivo
+    double anguloRad = anguloRotacao * M_PI / 180.0;
+
+    double xr = xt * cos(anguloRad) - yt * sin(anguloRad);
+    double yr = xt * sin(anguloRad) + yt * cos(anguloRad);
+
+    // Translada de volta
+    xr += cx;
+    yr += cy;
+
+    return Ponto(xr, yr);
 }
 
 double ObjWindow::getXmin() const { return pontos[0].x(); }
@@ -61,3 +103,12 @@ void ObjWindow::zoom(double fator){
     // Atualizar a janela
     atualizarLimites(xmin, ymin, xmax, ymax);
 }
+
+void ObjWindow::setRotacao(double angulo) {
+    anguloRotacao = angulo;
+}
+
+double ObjWindow::getRotacao() const {
+    return anguloRotacao;
+}
+
