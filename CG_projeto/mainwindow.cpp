@@ -5,9 +5,10 @@
 #include "matriz.h"
 #include "Objetos/ponto.h"
 #include "QVector"
-#include "objwindow.h"
 #include <QKeyEvent>
 #include <QWheelEvent>
+#include "viewport.h"
+#include "Objetos/objwindow.h"
 
 //----------------------------------- CONSTRUTORES ------------------------------------
 MainWindow::MainWindow(QWidget *parent)
@@ -116,17 +117,29 @@ void MainWindow::onComboBoxChanged(){
 }
 
 void MainWindow::onBtEsquerdoPress(QPointF p){
-    //Rotação recebe o ponto exato de onde o usuário clicou na tela
-    ui->doubleSpinBox_Rx->setValue(p.x());
-    ui->doubleSpinBox_Ry->setValue(p.y());
+    // Conversão do clique (viewport -> normalizado)
+    Viewport vp(0, 0, ui->frame->width(), ui->frame->height());
+    Ponto pNorm = vp.desmapear(p.toPoint());
 
-    //Translação não funciona informando o x e y de onde se deseje chegar, e sim passando deslocamento
-    if(!ui->comboBox->currentObjeto()) return;
+    // Pega a janela de clipping (objeto window)
+    ObjWindow* window = dynamic_cast<ObjWindow*>(df->getObjeto("janela"));
+    if (!window) return;
 
-    Ponto pAux=refPonto(ui->comboBox->currentObjeto()); //1 dos pontos do objeto selecionado
-    ui->doubleSpinBox_Tx->setValue(p.x() - pAux[0][0]); //Diferença x do Ponto clicado e o ponto do objeto
-    ui->doubleSpinBox_Ty->setValue(p.y() - pAux[1][0]); // ^   ^   y   ^   ^   ^   ^   ^   ^   ^   ^
+    // Conversão do ponto normalizado -> coordenadas do mundo (window)
+    Ponto pWindow = window->desnormalizar(pNorm);
+
+    // Agora sim você usa o ponto real:
+    ui->doubleSpinBox_Rx->setValue(pWindow[0][0]);
+    ui->doubleSpinBox_Ry->setValue(pWindow[1][0]);
+
+    if (!ui->comboBox->currentObjeto()) return;
+
+    Ponto pAux = refPonto(ui->comboBox->currentObjeto());
+
+    ui->doubleSpinBox_Tx->setValue(pWindow[0][0] - pAux[0][0]);
+    ui->doubleSpinBox_Ty->setValue(pWindow[1][0] - pAux[1][0]);
 }
+
 
 void MainWindow::onAplicarTransformacao(){
     Objeto *obj=ui->comboBox->currentObjeto();

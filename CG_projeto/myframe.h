@@ -4,6 +4,8 @@
 #include <QFrame>
 #include <QPainter>
 #include "DisplayFile.h"
+#include <Objetos/objwindow.h>
+#include <viewport.h>
 
 class MyFrame : public QFrame {
     Q_OBJECT
@@ -12,6 +14,7 @@ public:
 
     void adicionarObjeto(Objeto* obj);
     void setDisplayFile(DisplayFile* df);
+    void desenharObjetos(ObjWindow* window, Viewport vp, Objeto *obj, QPainter *painter);
 
 signals:
     void BtEsquerdoPress(QPointF p);

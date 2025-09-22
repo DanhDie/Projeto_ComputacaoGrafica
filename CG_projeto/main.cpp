@@ -42,35 +42,6 @@ int main(int argc, char *argv[])
 
     df.adicionarObjeto(new Sol("sol"));
 
-/*alguns testes q fiz de exemplo aplicando algumas transformações, pode descomentar e testar p ver como funciona
-    // Aplicar transformação de translação
-    Matriz translacao = Matriz::translacao(100, 50); // valores + move p direita - p esquerda, + p baixo - p cima
-    df.aplicarTransformacao("Triangulo", translacao);
-
-    // Aplicar rotação em torno do ponto (100, 100)
-    Matriz rotacao = Matriz::rotacaoPonto(45, 100, 100); // Rotaciona 45 graus
-    df.aplicarTransformacao("Triangulo", rotacao);
-
-    // Aplicar transformação de translação
-    Matriz translacao = Matriz::translacao(-200, 10);
-    df.aplicarTransformacao("casa", translacao);
-
-    // Aplicar rotação em torno do ponto (200,360)
-    Matriz rotacao = Matriz::rotacaoPonto(90, 200, 360); // Rotaciona 90 graus
-    df.aplicarTransformacao("casa", rotacao);
-
-    Matriz escala = Matriz::escala(2.0, 2.0); //(1.0, 1.0) fica do tam normal, (2.0, 2.0) dobra o tam, (0.5, 0.5) metade do tam, etc
-    df.aplicarTransformacao("casa", escala);
-
-    Matriz translacao = Matriz::translacao(-200, 0);
-    df.aplicarTransformacao("sol", translacao);
-
-    Matriz escala = Matriz::escala(0.5, 0.5);
-    df.aplicarTransformacao("sol", escala);
-
-    Matriz rotacao = Matriz::rotacaoPonto(180, 350, 100);
-    df.aplicarTransformacao("natalia kikuti", rotacao);
-*/
     MainWindow w; //Pelo que eu entendi, MainWindow é a tela que vai aparecer no computador
     w.setDisplayFile(&df); //Chama setDisplayFile para fazer a arrumação das coisas na tela
     w.show(); //Isso aqui diz para mostrar as coisas para você

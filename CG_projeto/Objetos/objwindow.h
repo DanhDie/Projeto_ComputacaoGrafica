@@ -10,6 +10,9 @@ public:
     // Atualiza os limites (caso a janela seja transformada)
     void atualizarLimites(double xmin, double ymin, double xmax, double ymax);
 
+    Ponto normalizar(const Ponto& p, const ObjWindow* window);
+    Ponto desnormalizar(const Ponto& p);
+
     // Retorna limites da Window
     double getXmin() const;
     double getYmin() const;
