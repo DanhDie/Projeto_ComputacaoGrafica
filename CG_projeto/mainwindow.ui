@@ -33,7 +33,7 @@
    <widget class="MyComboBox" name="comboBox">
     <property name="geometry">
      <rect>
-      <x>720</x>
+      <x>740</x>
       <y>10</y>
       <width>201</width>
       <height>28</height>
@@ -46,7 +46,7 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>780</x>
+      <x>800</x>
       <y>60</y>
       <width>121</width>
       <height>20</height>
@@ -59,8 +59,8 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>780</x>
-      <y>180</y>
+      <x>800</x>
+      <y>160</y>
       <width>121</width>
       <height>20</height>
      </rect>
@@ -72,7 +72,7 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>800</x>
+      <x>810</x>
       <y>330</y>
       <width>121</width>
       <height>20</height>
@@ -85,8 +85,8 @@
    <widget class="MyDoubleSpinBox" name="doubleSpinBox_R">
     <property name="geometry">
      <rect>
-      <x>770</x>
-      <y>200</y>
+      <x>790</x>
+      <y>180</y>
       <width>81</width>
       <height>29</height>
      </rect>
@@ -107,7 +107,7 @@
    <widget class="MyDoubleSpinBox" name="doubleSpinBox_El">
     <property name="geometry">
      <rect>
-      <x>740</x>
+      <x>750</x>
       <y>370</y>
       <width>81</width>
       <height>29</height>
@@ -129,7 +129,7 @@
    <widget class="MyPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>740</x>
+      <x>750</x>
       <y>440</y>
       <width>171</width>
       <height>31</height>
@@ -142,7 +142,7 @@
    <widget class="MyDoubleSpinBox" name="doubleSpinBox_Rx">
     <property name="geometry">
      <rect>
-      <x>740</x>
+      <x>750</x>
       <y>260</y>
       <width>81</width>
       <height>29</height>
@@ -164,7 +164,7 @@
    <widget class="MyDoubleSpinBox" name="doubleSpinBox_Ry">
     <property name="geometry">
      <rect>
-      <x>830</x>
+      <x>840</x>
       <y>260</y>
       <width>81</width>
       <height>29</height>
@@ -186,7 +186,7 @@
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>760</x>
+      <x>770</x>
       <y>240</y>
       <width>63</width>
       <height>20</height>
@@ -199,7 +199,7 @@
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>850</x>
+      <x>860</x>
       <y>240</y>
       <width>63</width>
       <height>20</height>
@@ -215,8 +215,8 @@
    <widget class="QLabel" name="label_8">
     <property name="geometry">
      <rect>
-      <x>760</x>
-      <y>90</y>
+      <x>780</x>
+      <y>80</y>
       <width>63</width>
       <height>20</height>
      </rect>
@@ -228,8 +228,8 @@
    <widget class="MyDoubleSpinBox" name="doubleSpinBox_Ty">
     <property name="geometry">
      <rect>
-      <x>830</x>
-      <y>110</y>
+      <x>850</x>
+      <y>100</y>
       <width>81</width>
       <height>29</height>
      </rect>
@@ -250,8 +250,8 @@
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
-      <x>850</x>
-      <y>90</y>
+      <x>870</x>
+      <y>80</y>
       <width>63</width>
       <height>20</height>
      </rect>
@@ -266,8 +266,8 @@
    <widget class="MyDoubleSpinBox" name="doubleSpinBox_Tx">
     <property name="geometry">
      <rect>
-      <x>740</x>
-      <y>110</y>
+      <x>760</x>
+      <y>100</y>
       <width>81</width>
       <height>29</height>
      </rect>
@@ -288,7 +288,7 @@
    <widget class="MyDoubleSpinBox" name="doubleSpinBox_Ea">
     <property name="geometry">
      <rect>
-      <x>830</x>
+      <x>840</x>
       <y>370</y>
       <width>81</width>
       <height>29</height>
@@ -310,7 +310,7 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>750</x>
+      <x>760</x>
       <y>350</y>
       <width>63</width>
       <height>20</height>
@@ -323,7 +323,7 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>840</x>
+      <x>850</x>
       <y>350</y>
       <width>63</width>
       <height>20</height>
@@ -331,6 +331,71 @@
     </property>
     <property name="text">
      <string>Altura</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>780</x>
+      <y>220</y>
+      <width>111</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ponto do eixo</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>140</y>
+      <width>241</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_2">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>310</y>
+      <width>241</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_3">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>410</y>
+      <width>241</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_4">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>40</y>
+      <width>241</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Horizontal</enum>
     </property>
    </widget>
   </widget>

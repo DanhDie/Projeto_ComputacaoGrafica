@@ -398,7 +398,7 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		../../matriz.h \
 		release/moc_predefs.h \
 		C:/Qt/6.9.1/mingw_64/bin/moc.exe
-	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h" -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -I"C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto" -I"C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto/Botoes" -I"C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto/Objetos" -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\mainwindow.h -o release\moc_mainwindow.cpp
+	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h" -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -I"C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto" -I"C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto/Botoes" -I"C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto/Objetos" -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\mainwindow.h -o release\moc_mainwindow.cpp
 
 release/moc_mycombobox.cpp: ../../Botoes/mycombobox.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QComboBox \
@@ -616,7 +616,7 @@ release/moc_mycombobox.cpp: ../../Botoes/mycombobox.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qvector.h \
 		release/moc_predefs.h \
 		C:/Qt/6.9.1/mingw_64/bin/moc.exe
-	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h" -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -I"C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto" -I"C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto/Botoes" -I"C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto/Objetos" -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\Botoes\mycombobox.h -o release\moc_mycombobox.cpp
+	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h" -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -I"C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto" -I"C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto/Botoes" -I"C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto/Objetos" -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\Botoes\mycombobox.h -o release\moc_mycombobox.cpp
 
 release/moc_mydoublespinbox.cpp: ../../Botoes/mydoublespinbox.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QDoubleSpinBox \
@@ -822,7 +822,7 @@ release/moc_mydoublespinbox.cpp: ../../Botoes/mydoublespinbox.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qregularexpression.h \
 		release/moc_predefs.h \
 		C:/Qt/6.9.1/mingw_64/bin/moc.exe
-	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h" -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -I"C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto" -I"C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto/Botoes" -I"C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto/Objetos" -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\Botoes\mydoublespinbox.h -o release\moc_mydoublespinbox.cpp
+	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h" -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -I"C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto" -I"C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto/Botoes" -I"C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto/Objetos" -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\Botoes\mydoublespinbox.h -o release\moc_mydoublespinbox.cpp
 
 release/moc_myframe.cpp: ../../myframe.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QFrame \
@@ -1035,9 +1035,13 @@ release/moc_myframe.cpp: ../../myframe.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint \
 		../../Objetos/ponto.h \
 		../../matriz.h \
+		../../Objetos/objwindow.h \
+		../../Objetos/objeto.h \
+		../../viewport.h \
+		../../ponto.h \
 		release/moc_predefs.h \
 		C:/Qt/6.9.1/mingw_64/bin/moc.exe
-	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h" -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -I"C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto" -I"C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto/Botoes" -I"C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto/Objetos" -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\myframe.h -o release\moc_myframe.cpp
+	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h" -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -I"C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto" -I"C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto/Botoes" -I"C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto/Objetos" -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\myframe.h -o release\moc_myframe.cpp
 
 release/moc_mypushbutton.cpp: ../../Botoes/mypushbutton.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QPushButton \
@@ -1241,7 +1245,7 @@ release/moc_mypushbutton.cpp: ../../Botoes/mypushbutton.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qguiapplication_platform.h \
 		release/moc_predefs.h \
 		C:/Qt/6.9.1/mingw_64/bin/moc.exe
-	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h" -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -I"C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto" -I"C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto/Botoes" -I"C:/Users/natal/OneDrive/Área de Trabalho/Projeto_ComputacaoGrafica/CG_projeto/Objetos" -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\Botoes\mypushbutton.h -o release\moc_mypushbutton.cpp
+	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include "C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/release/moc_predefs.h" -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -I"C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto" -I"C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto/Botoes" -I"C:/Users/gabui/Desktop/Faculdade/Computação Gráfica/Projeto_ComputacaoGrafica/CG_projeto/Objetos" -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\Botoes\mypushbutton.h -o release\moc_mypushbutton.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1466,6 +1470,10 @@ ui_mainwindow.h: ../../mainwindow.ui \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint \
 		../../Objetos/ponto.h \
 		../../matriz.h \
+		../../Objetos/objwindow.h \
+		../../Objetos/objeto.h \
+		../../viewport.h \
+		../../ponto.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QComboBox \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qcombobox.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -2858,11 +2866,17 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qspinbox.h \
 		../../myframe.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QFrame \
+		../../Objetos/objwindow.h \
+		../../Objetos/objeto.h \
+		../../viewport.h \
+		../../ponto.h \
 		../../Botoes/mypushbutton.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QPushButton \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qpushbutton.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qabstractbutton.h \
-		../../MyFrame.h
+		../../MyFrame.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QKeyEvent \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QWheelEvent
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\..\mainwindow.cpp
 
 release/matriz.o: ../../matriz.cpp ../../matriz.h
@@ -3508,15 +3522,15 @@ release/myframe.o: ../../myframe.cpp ../../MyFrame.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QPoint \
 		../../Objetos/ponto.h \
 		../../matriz.h \
+		../../Objetos/objwindow.h \
+		../../Objetos/objeto.h \
+		../../viewport.h \
+		../../ponto.h \
 		../../mainwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QMainWindow \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qmainwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qtabwidget.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/QMouseEvent \
-		../../viewport.h \
-		../../ponto.h \
-		../../Objetos/objwindow.h \
-		../../Objetos/objeto.h
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QMouseEvent
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\myframe.o ..\..\myframe.cpp
 
 release/mypushbutton.o: ../../Botoes/mypushbutton.cpp ../../Botoes/mypushbutton.h \

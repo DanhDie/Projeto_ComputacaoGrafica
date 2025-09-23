@@ -134,10 +134,13 @@ void MainWindow::onBtEsquerdoPress(QPointF p){
 
     if (!ui->comboBox->currentObjeto()) return;
 
+    /*
+    //Código que cálcula distância para translação do objeto ao clicar na tela
     Ponto pAux = refPonto(ui->comboBox->currentObjeto());
 
     ui->doubleSpinBox_Tx->setValue(pWindow[0][0] - pAux[0][0]);
     ui->doubleSpinBox_Ty->setValue(pWindow[1][0] - pAux[1][0]);
+    */
 }
 
 
@@ -154,7 +157,6 @@ void MainWindow::onAplicarTransformacao(){
             ui->frame->update();
         }
 
-        defaultSpinBox();
         return;
     }
 
