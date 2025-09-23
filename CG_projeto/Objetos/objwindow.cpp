@@ -1,4 +1,5 @@
 #include "objwindow.h"
+#include <QDebug>
 
 ObjWindow::ObjWindow(QString nome, double xmin, double ymin, double xmax, double ymax)
     : Objeto(nome, Poligono)

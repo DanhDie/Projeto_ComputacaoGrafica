@@ -8,9 +8,9 @@ Ponto Viewport::mapear(const Ponto& pNormalizado) const {
     double yn = pNormalizado.y(); // entre 0 e 1
 
     double xp = vxmin + xn * (vxmax - vxmin);
-    double yp = vymin + (1 - yn) * (vymax - vymin); // inverte Y (Qt usa Y para baixo)
+    double yp = vymin + yn * (vymax - vymin); // inverte Y (Qt usa Y para baixo)
 
-    return Ponto(xp, -yp);
+    return Ponto(xp, yp);
 }
 
 double Viewport::getVxmax(){ return vxmax; }

@@ -152,9 +152,10 @@ void MainWindow::onAplicarTransformacao(){
     if (obj->getNome() == "janela") {
         ObjWindow* window = dynamic_cast<ObjWindow*>(obj);
         if (window) {
-            double angulo = ui->doubleSpinBox_R->value();
+            double angulo = window->getRotacao()+ui->doubleSpinBox_R->value();
             window->setRotacao(angulo);
             ui->frame->update();
+            ui->doubleSpinBox_R->setValue(0);
         }
 
         return;

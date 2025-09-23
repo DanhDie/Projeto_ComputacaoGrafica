@@ -2836,9 +2836,10 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QVariant \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QApplication \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qapplication.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QFrame \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qframe.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QLabel \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qlabel.h \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qframe.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qpicture.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextdocument.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QMenuBar \
@@ -2865,7 +2866,6 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QDoubleSpinBox \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qspinbox.h \
 		../../myframe.h \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QFrame \
 		../../Objetos/objwindow.h \
 		../../Objetos/objeto.h \
 		../../viewport.h \
