@@ -154,8 +154,15 @@ void MainWindow::onAplicarTransformacao(){
         if (window) {
             double angulo = window->getRotacao()+ui->doubleSpinBox_R->value();
             window->setRotacao(angulo);
+
+            window->pan(ui->doubleSpinBox_Tx->value(),
+                        ui->doubleSpinBox_Ty->value());
+
+            window->zoom(sqrt(ui->doubleSpinBox_El->value()*ui->doubleSpinBox_Ea->value()));
+
+            //Atualização dos frames
             ui->frame->update();
-            ui->doubleSpinBox_R->setValue(0);
+            defaultSpinBox();
         }
 
         return;
