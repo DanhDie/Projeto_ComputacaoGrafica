@@ -28,10 +28,20 @@ void MyFrame::adicionarObjeto(Objeto* obj) {
 void MyFrame::paintEvent(QPaintEvent *event) {
     QFrame::paintEvent(event);
 
+    QPainter painter(this);
+    int margin = 20;
+    QRect viewportRect(margin, margin, width() - 2*margin, height() - 2*margin);
+    QPen pen(QColor("#f3a2be"));
+    pen.setWidth(2);
+    painter.setPen(pen);
+    painter.drawRect(viewportRect);
+
+
     if (!displayFile) return;
 
-    QPainter painter(this);
-    painter.setPen(Qt::black);
+    pen.setWidth(1);
+    pen.setColor(QColor("#282b2e")); //preto
+    painter.setPen(pen);
     painter.setRenderHint(QPainter::Antialiasing);
 
     // pega a window do display file (assumindo que você adicionou ela com nome "janela")

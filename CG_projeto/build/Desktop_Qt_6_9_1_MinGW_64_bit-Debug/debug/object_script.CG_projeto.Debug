@@ -17,6 +17,8 @@ debug/objtriangulo.o
 debug/ponto.o
 debug/sol.o
 debug/viewport.o
+debug/qrc_Icone.o
+debug/qrc_icon.o
 debug/moc_mainwindow.o
 debug/moc_mycombobox.o
 debug/moc_mydoublespinbox.o

@@ -32,6 +32,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Também para o frame onde desenha (MyFrame)
     ui->frame->setFocusPolicy(Qt::StrongFocus);
+    setWindowTitle("Skyrim 3 - NathGhostKiller strikes again!");
+    setWindowIcon(QIcon(":/new/imagens/icon.ico"));
+
+
 }
 
 MainWindow::~MainWindow()
