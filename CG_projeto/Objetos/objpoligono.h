@@ -10,6 +10,7 @@ public:
     ObjPoligono(QString nome, const Ponto* pontos, int quantidade, TipoObjeto tipo);
 
     void desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const override;
+    Ponto getPontoReferencia() const override;
 };
 
 #endif // OBJPOLIGONO_H

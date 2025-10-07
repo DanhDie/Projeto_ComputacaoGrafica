@@ -72,27 +72,12 @@ void MainWindow :: setDisplayFile(DisplayFile *displayFile){
 }
 
 Ponto MainWindow::refPonto(Objeto *obj){
-    QVector<Ponto> pontos;
-
-    if (obj->getTipo() == Complexo) {
-        QVector<Objeto*> subs = obj->getObjetos();
-        for (Objeto* sub : subs) {
-            pontos.append(sub->getPontos()); // pega TODOS os pontos de TODOS os subobjetos
-        }
-    } else {
-        pontos = obj->getPontos();
+    if (obj == nullptr) {
+        return Ponto(0,0); // Segurança
     }
-
-    double somaX = 0.0, somaY = 0.0;
-    for (const Ponto &p : pontos) {
-        somaX += p[0][0];
-        somaY += p[1][0];
-    }
-
-    double cx = somaX / pontos.size();
-    double cy = somaY / pontos.size();
-
-    return Ponto(cx, cy);
+    // Graças ao polimorfismo, a versão correta de getPontoReferencia()
+    // será chamada automaticamente, seja para um Círculo, Linha ou Complexo.
+    return obj->getPontoReferencia();
 }
 void MainWindow::defaultSpinBox(){
     if(!ui->comboBox->currentObjeto()) return;

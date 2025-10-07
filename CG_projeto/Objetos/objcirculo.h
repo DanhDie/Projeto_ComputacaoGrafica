@@ -9,6 +9,7 @@ public:
     ObjCirculo(QString nome, int cenX, int cenY, int raio, TipoObjeto tipo = Circulo);
     void desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const override;
     void transformar(const Matriz& transformacao) override;
+    Ponto getPontoReferencia() const override;
 
     // Métodos adicionais para círculo
     QPoint getCentro() const;

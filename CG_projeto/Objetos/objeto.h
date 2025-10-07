@@ -32,6 +32,7 @@ public:
     QString getNome() const;
     TipoObjeto getTipo() const;
     QVector<Ponto> getPontos() const;
+    virtual Ponto getPontoReferencia() const;
 
     virtual void desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window) const =0;
     /*

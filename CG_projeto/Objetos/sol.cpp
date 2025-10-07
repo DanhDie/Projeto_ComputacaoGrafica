@@ -94,3 +94,18 @@ void Sol::transformar(const Matriz& transformacao) {
         obj->transformar(transformacao);
     }
 }
+
+Ponto Sol::getPontoReferencia() const {
+    QVector<Objeto*> subs = this->getObjetos();
+    if (subs.isEmpty()) {
+        return Ponto(0, 0);
+    }
+
+    double somaX = 0.0, somaY = 0.0;
+    for (Objeto* sub : subs) {
+        Ponto refSub = sub->getPontoReferencia(); // Chama a função virtual recursivamente!
+        somaX += refSub.x();
+        somaY += refSub.y();
+    }
+    return Ponto(somaX / subs.size(), somaY / subs.size());
+}

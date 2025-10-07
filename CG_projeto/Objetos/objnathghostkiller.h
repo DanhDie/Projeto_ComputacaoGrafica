@@ -17,8 +17,8 @@ public:
 
     const QVector<Objeto*> getObjetos() const; //método para pegar os objetos para desenhar
     void desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const override;
-
     void transformar(const Matriz& transformacao) override;
+    Ponto getPontoReferencia() const override;
 
 private:
     QVector<Objeto*> objPrimitivos; //Vetor dos objetos primitivos contidos dentro desse objeto

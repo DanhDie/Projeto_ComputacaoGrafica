@@ -45,6 +45,19 @@ void Objeto::transformar(const Matriz& transformacao) {
     }
 }
 
+Ponto Objeto::getPontoReferencia() const {
+    // Implementação padrão: calcula o centroide (lógica da sua função original)
+    if (pontos.isEmpty()) {
+        return Ponto(0, 0);
+    }
+    double somaX = 0.0, somaY = 0.0;
+    for (const Ponto &p : pontos) {
+        somaX += p.x(); // Usando .x() e .y() para mais clareza
+        somaY += p.y();
+    }
+    return Ponto(somaX / pontos.size(), somaY / pontos.size());
+}
+
 const QVector<Objeto*> Objeto::getObjetos() const{
     return {};
 }

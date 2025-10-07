@@ -2,6 +2,7 @@
 #include "ponto.h"
 #include "Objetos/objwindow.h"
 #include <QPainter>
+#include <cmath>
 
 ObjCirculo::ObjCirculo(QString nome, int cenX, int cenY, int raio, TipoObjeto tipo)
     : Objeto (nome, tipo){
@@ -16,8 +17,7 @@ void ObjCirculo::desenhar(QPainter *painter,const Viewport &vp, const ObjWindow 
     QPoint centro = pontosTela[0];
 
     // Ponto do raio no mundo
-    const Ponto& centroMundo = this->getPontos()[0];
-    const Ponto& pontoRaioMundo = this->getPontos()[1];
+    const Ponto pontoRaioMundo = (this->getPontos()).at(1);
 
     // Distância (raio) no mundo
     double raioMundo = std::hypot(pontoRaioMundo.x(), pontoRaioMundo.y());
@@ -34,21 +34,36 @@ void ObjCirculo::desenhar(QPainter *painter,const Viewport &vp, const ObjWindow 
 }
 
 void ObjCirculo::transformar(const Matriz& transformacao) {
-    // Para detectar se há escala na transformação
+    // 1. Calcular os fatores de escala com base na matriz de transformação.
+    // Isso é feito calculando o comprimento dos vetores base da matriz.
     double escalaX = std::sqrt(transformacao[0][0] * transformacao[0][0] + transformacao[1][0] * transformacao[1][0]);
     double escalaY = std::sqrt(transformacao[0][1] * transformacao[0][1] + transformacao[1][1] * transformacao[1][1]);
 
-    // Transforma o centro
-    Ponto centro = pontos[0];
-    Matriz centroTransformado = transformacao * centro;
-    pontos[0].setX(centroTransformado[0][0]);
-    pontos[0].setY(centroTransformado[1][0]);
+    // 2. Transformar o ponto central do objeto.
+    // Esta parte permanece a mesma.
+    Ponto centroAntigo = pontos[0];
+    Matriz centroNovoMatriz = transformacao * centroAntigo;
+    pontos[0].setX(centroNovoMatriz[0][0]);
+    pontos[0].setY(centroNovoMatriz[1][0]);
 
-    double escalaMedia = (escalaX + escalaY) / 2.0;
-    int novoRaio = static_cast<int>(std::round(getRaio() * escalaMedia));
-    setRaio(novoRaio);
+    // 3. Calcular a escala combinada usando a média geométrica para preservar a área.
+    // Esta é a principal melhoria em relação à média aritmética.
+    double escalaCombinada = std::sqrt(escalaX * escalaY);
+
+    // Se por algum motivo uma das escalas for zero, a raiz pode dar NaN ou 0.
+    // Um tratamento simples é verificar se o valor é válido.
+    if (std::isnan(escalaCombinada)) {
+        escalaCombinada = 0.0;
+    }
+
+    // 4. Aplicar a escala combinada ao raio único do círculo.
+    double novoRaio = getRaio() * escalaCombinada;
+    setRaio(static_cast<int>(std::round(novoRaio)));
 }
 
+Ponto ObjCirculo::getPontoReferencia() const{
+    return pontos[0]; //O centro é um ponto
+}
 QPoint ObjCirculo::getCentro() const {
     return pontos[0].toQPoint();
 }
