@@ -1,11 +1,17 @@
 #ifndef OBJETO_H
 #define OBJETO_H
 
-#include <QPainter>
 #include <QString>
 #include <QPoint>
 #include <QVector>
 #include "ponto.h"
+#include "viewport.h"
+
+//Fowarding declaration
+//#include : informa que ESTE arquivo tem que incluir o .h e .cpp inteirinho dos arquivos citados
+//Gasto desnecessário de memória quando você só tá referenciando um tipo, e não usando ele e seus métodos diretamente.
+class QPainter;
+
 
 enum TipoObjeto {
     Linha,
@@ -13,6 +19,9 @@ enum TipoObjeto {
     Circulo,
     Complexo
 };
+
+class ObjWindow;
+class QPainter;
 
 class Objeto {
 public:
@@ -23,14 +32,14 @@ public:
     QString getNome() const;
     TipoObjeto getTipo() const;
     QVector<Ponto> getPontos() const;
-    virtual void autorretrato(QPainter *painter) const;
+
+    virtual void desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window) const =0;
     /*
      * Essa VIADAGEM de "const" no final serve para informar ao compilador BURRO que não sabe que a função não muda nada que
      * ADIVINHA? ELA NÃO MUDA NADA
      */
 
-    void aplicarTransformacao(const Matriz& transformacao);
-    virtual const QVector<Objeto*>& getObjetos() const;
+    virtual const QVector<Objeto*> getObjetos() const;
     virtual void transformar(const Matriz& transformacao);
 
 private:
@@ -38,6 +47,8 @@ private:
     TipoObjeto tipo;
 protected:
     QVector<Ponto> pontos;  // para círculos: pontos[0] = centro, pontos[1].x() = raio
+
+    QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window) const;
 };
 
 #endif // OBJETO_H

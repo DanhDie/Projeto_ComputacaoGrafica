@@ -32,7 +32,7 @@ ObjNathGhostKiller::~ObjNathGhostKiller(){ //Destrutor, porque DE ACORDO COM IA 
 
 
 // ------------------------ A partir daqui vemos os métodos--------------------------
-const QVector<Objeto*>& ObjNathGhostKiller::getObjetos() const { //É importante cuidar da sintaxe, por causa dos "*"
+const QVector<Objeto*> ObjNathGhostKiller::getObjetos() const { //É importante cuidar da sintaxe, por causa dos "*"
     return objPrimitivos;
 }
 
@@ -41,24 +41,9 @@ const QVector<Objeto*>& ObjNathGhostKiller::getObjetos() const { //É importante
 * O ObjNathGhostKiller não tem Polígonos, então esse teste de TipoObjeto == poligono não é necessario
 * mas, como esse é um objeto para servir de base para os outros, eu vou deixar aqui para ajudar quem quer que tá lendo isso
 */
-void ObjNathGhostKiller :: autorretrato(QPainter* painter) const{
+void ObjNathGhostKiller :: desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const{
     for (const Objeto* obj : getObjetos()) {
-        if (obj->getTipo() == Linha) {
-            painter->drawLine(obj->getPontos()[0].toQPoint(), obj->getPontos()[1].toQPoint());
-        }
-        else if (obj->getTipo() == Poligono) {
-            QVector<QPoint> qpts;
-            qpts.reserve(obj->getPontos().size());
-            for (const Ponto &p : obj->getPontos()){
-                qpts.append(p.toQPoint());
-            }
-            painter->drawPolygon(qpts);
-        }
-        else if (obj->getTipo() == Circulo) {
-            QPoint centro = obj->getPontos()[0].toQPoint();
-            int raio = (int)std::round(obj->getPontos()[1].x());
-            painter->drawEllipse(centro, raio, raio);
-        }
+        obj->desenhar(painter,vp,window);
     }
 }
 

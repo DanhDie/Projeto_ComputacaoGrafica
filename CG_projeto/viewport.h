@@ -13,10 +13,10 @@ public:
     // Converte ponto normalizado [0,1] para coordenada de tela
     Ponto mapear(const Ponto& pNormalizado) const;
     Ponto desmapear(QPoint p);
-    double getVxmax();
-    double getVxmin();
-    double getVymax();
-    double getVymin();
+    double getVxmax()const;
+    double getVxmin()const;
+    double getVymax()const;
+    double getVymin()const;
 };
 
 #endif // VIEWPORT_H

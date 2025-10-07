@@ -14,7 +14,6 @@ public:
 
     void adicionarObjeto(Objeto* obj);
     void setDisplayFile(DisplayFile* df);
-    void desenharObjetos(ObjWindow* window, Viewport vp, Objeto *obj, QPainter *painter);
 
 signals:
     void BtEsquerdoPress(QPointF p);

@@ -1,5 +1,6 @@
 #include "Objeto.h"
 #include "ponto.h"
+#include "Objetos/objwindow.h"
 
 Objeto::Objeto(QString nome, TipoObjeto tipo)
     : nome(nome), tipo(tipo) {}
@@ -20,9 +21,22 @@ TipoObjeto Objeto::getTipo() const {
 QVector<Ponto> Objeto::getPontos() const {
     return pontos;
 }
-void Objeto :: autorretrato(QPainter *painter) const{}
 
-void Objeto::aplicarTransformacao(const Matriz& transformacao) {
+QVector<QPoint>Objeto::ajustarPontos(const Viewport &vp,const ObjWindow &window) const{
+    QVector<QPoint> pontosTela;
+    for (const Ponto& p : this->getPontos()) {
+        // normaliza em relação à window
+        Ponto pNorm = window.normalizar(p);
+
+        // mapeia para a viewport
+        Ponto pTela = vp.mapear(pNorm);
+
+        pontosTela.append(pTela.toQPoint());
+    }
+    return pontosTela;
+}
+
+void Objeto::transformar(const Matriz& transformacao) {
     for (Ponto& ponto : pontos) {
         // Multiplica cada ponto pela matriz de transformação
         Matriz pontoTransformado = transformacao * ponto;
@@ -31,10 +45,6 @@ void Objeto::aplicarTransformacao(const Matriz& transformacao) {
     }
 }
 
-void Objeto::transformar(const Matriz& transformacao) {
-    aplicarTransformacao(transformacao);
-}
-
-const QVector<Objeto*>& Objeto::getObjetos() const{
+const QVector<Objeto*> Objeto::getObjetos() const{
     return {};
 }

@@ -93,29 +93,14 @@ ObjCasa::~ObjCasa(){ //Destrutor
     }
 }
 
-const QVector<Objeto*>& ObjCasa::getObjetos() const {
+const QVector<Objeto*> ObjCasa::getObjetos() const {
     return objPrimitivos;
 }
 
 //Para se auto desenhar
-void ObjCasa :: autorretrato(QPainter* painter) const{
+void ObjCasa :: desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const{
     for (const Objeto* obj : getObjetos()) {
-        if (obj->getTipo() == Linha) {
-            painter->drawLine(obj->getPontos()[0].toQPoint(), obj->getPontos()[1].toQPoint());
-        }
-        else if (obj->getTipo() == Poligono) {
-            QVector<QPoint> qpts;
-            qpts.reserve(obj->getPontos().size());
-            for (const Ponto &p : obj->getPontos()){
-                qpts.append(p.toQPoint());
-            }
-            painter->drawPolygon(qpts);
-        }
-        else if (obj->getTipo() == Circulo) {
-            QPoint centro = obj->getPontos()[0].toQPoint();
-            int raio = (int)std::round(obj->getPontos()[1].x());
-            painter->drawEllipse(centro, raio, raio);
-        }
+        obj->desenhar(painter,vp,window);
     }
 }
 

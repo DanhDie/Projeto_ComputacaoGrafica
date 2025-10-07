@@ -17,8 +17,8 @@ public:
     ObjCasa(QString nome);
     ~ObjCasa();
 
-    const QVector<Objeto*>& getObjetos() const;
-    void autorretrato(QPainter* painter) const;
+    const QVector<Objeto*> getObjetos() const;
+    void desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const override;
 
     void transformar(const Matriz& transformacao) override;
 

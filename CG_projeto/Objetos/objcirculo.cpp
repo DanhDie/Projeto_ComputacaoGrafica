@@ -1,10 +1,36 @@
 #include "objcirculo.h"
 #include "ponto.h"
+#include "Objetos/objwindow.h"
+#include <QPainter>
 
 ObjCirculo::ObjCirculo(QString nome, int cenX, int cenY, int raio, TipoObjeto tipo)
     : Objeto (nome, tipo){
-        adicionarPonto(Ponto(cenX, cenY)); //Ponto central
-        adicionarPonto(Ponto(raio, 0));    //Raio do circulo
+    adicionarPonto(Ponto(cenX, cenY)); //Ponto central
+    adicionarPonto(Ponto(raio, 0));    //Raio do circulo
+}
+
+void ObjCirculo::desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const{
+    QVector<QPoint> pontosTela=ajustarPontos(vp, window);
+
+    // centro já mapeado para viewport
+    QPoint centro = pontosTela[0];
+
+    // Ponto do raio no mundo
+    const Ponto& centroMundo = this->getPontos()[0];
+    const Ponto& pontoRaioMundo = this->getPontos()[1];
+
+    // Distância (raio) no mundo
+    double raioMundo = std::hypot(pontoRaioMundo.x(), pontoRaioMundo.y());
+
+    // Escala da window para a viewport
+    double escalaX = (vp.getVxmax() - vp.getVxmin()) / (window.getXmax() - window.getXmin());
+    double escalaY = (vp.getVymax() - vp.getVymin()) / (window.getYmax() - window.getYmin());
+
+    double escalaMedia = (escalaX + escalaY) / 2.0;
+
+    int raioPixel = static_cast<int>(std::round(raioMundo * escalaMedia));
+
+    painter->drawEllipse(centro, raioPixel, raioPixel);
 }
 
 void ObjCirculo::transformar(const Matriz& transformacao) {
@@ -18,12 +44,9 @@ void ObjCirculo::transformar(const Matriz& transformacao) {
     pontos[0].setX(centroTransformado[0][0]);
     pontos[0].setY(centroTransformado[1][0]);
 
-    // Ajusta o raio se houver escala (usa a média das escalas X e Y)
-    if (std::abs(escalaX - 1.0) > 0.001 || std::abs(escalaY - 1.0) > 0.001) {
-        double escalaMedia = (escalaX + escalaY) / 2.0;
-        int novoRaio = static_cast<int>(std::round(getRaio() * escalaMedia));
-        setRaio(novoRaio);
-    }
+    double escalaMedia = (escalaX + escalaY) / 2.0;
+    int novoRaio = static_cast<int>(std::round(getRaio() * escalaMedia));
+    setRaio(novoRaio);
 }
 
 QPoint ObjCirculo::getCentro() const {

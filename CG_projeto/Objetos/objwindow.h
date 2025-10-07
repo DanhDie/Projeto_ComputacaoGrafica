@@ -10,7 +10,7 @@ public:
     // Atualiza os limites (caso a janela seja transformada)
     void atualizarLimites(double xmin, double ymin, double xmax, double ymax);
 
-    Ponto normalizar(const Ponto& p, const ObjWindow* window);
+    Ponto normalizar(const Ponto& p) const;
     Ponto desnormalizar(const Ponto& p);
 
     // Retorna limites da Window
@@ -26,6 +26,8 @@ public:
     // Para funcionar a rotação da janela (window) - suporte
     void setRotacao(double angulo); //graus
     double getRotacao() const;
+
+    void desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const override; //Cumprindo contrato
 
 private:
     double anguloRotacao = 0.0; //graus

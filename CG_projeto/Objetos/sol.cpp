@@ -78,29 +78,14 @@ Sol::~Sol(){ //Destrutor
     }
 }
 
-const QVector<Objeto*>& Sol::getObjetos() const {
+const QVector<Objeto*> Sol::getObjetos() const {
     return objPrimitivos;
 }
 
 
-void Sol :: autorretrato(QPainter* painter) const{
-    for (const Objeto* obj : getObjetos()) {
-        if (obj->getTipo() == Linha) {
-            painter->drawLine(obj->getPontos()[0].toQPoint(), obj->getPontos()[1].toQPoint());
-        }
-        else if (obj->getTipo() == Poligono) {
-            QVector<QPoint> qpts;
-            qpts.reserve(obj->getPontos().size());
-            for (const Ponto &p : obj->getPontos()){
-                qpts.append(p.toQPoint());
-            }
-            painter->drawPolygon(qpts);
-        }
-        else if (obj->getTipo() == Circulo) {
-            QPoint centro = obj->getPontos()[0].toQPoint();
-            int raio = (int)std::round(obj->getPontos()[1].x());
-            painter->drawEllipse(centro, raio, raio);
-        }
+void Sol :: desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const{
+    for (Objeto* obj : getObjetos()) {
+        obj->desenhar(painter,vp,window);
     }
 }
 
