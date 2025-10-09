@@ -33,15 +33,11 @@ public:
     TipoObjeto getTipo() const;
     QVector<Ponto> getPontos() const;
     virtual Ponto getPontoReferencia() const;
+    virtual const QVector<Objeto*> getObjetos() const;
 
     virtual void desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window) const =0;
-    /*
-     * Essa VIADAGEM de "const" no final serve para informar ao compilador BURRO que não sabe que a função não muda nada que
-     * ADIVINHA? ELA NÃO MUDA NADA
-     */
-
-    virtual const QVector<Objeto*> getObjetos() const;
     virtual void transformar(const Matriz& transformacao);
+    void clipping(Ponto *p, ObjWindow &window);
 
 private:
     QString nome;

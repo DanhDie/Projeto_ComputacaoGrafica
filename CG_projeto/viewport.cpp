@@ -8,7 +8,7 @@ Ponto Viewport::mapear(const Ponto& pNormalizado) const {
     double yn = pNormalizado.y();
 
     double xp = vxmin + xn * (vxmax - vxmin);
-    double yp = vymin + (1.0 - yn) * (vymax - vymin); // <- mesma inversão
+    double yp = vymin + (yn) * (vymax - vymin); // <- mesma inversão
 
     return Ponto(xp, yp);
 }
