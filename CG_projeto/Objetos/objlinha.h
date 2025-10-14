@@ -16,6 +16,6 @@ public:
     Ponto getPontoReferencia() const override;
 
 protected:
-    QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window) const override;
+    QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window, bool desenhar) const override;
 };
 #endif // OBJLINHA_H

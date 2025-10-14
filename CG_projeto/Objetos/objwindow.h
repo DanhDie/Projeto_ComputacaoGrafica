@@ -29,6 +29,9 @@ public:
 
     void desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const override; //Cumprindo contrato
 
+protected:
+    QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const override;
+
 private:
     double anguloRotacao = 0.0; //graus
 };

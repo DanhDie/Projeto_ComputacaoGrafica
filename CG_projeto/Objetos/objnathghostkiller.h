@@ -20,6 +20,9 @@ public:
     void transformar(const Matriz& transformacao) override;
     Ponto getPontoReferencia() const override;
 
+protected:
+    QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const override;
+
 private:
     QVector<Objeto*> objPrimitivos; //Vetor dos objetos primitivos contidos dentro desse objeto
 };

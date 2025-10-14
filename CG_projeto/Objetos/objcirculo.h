@@ -16,6 +16,9 @@ public:
     int getRaio() const;
     void setCentro(const QPoint& centro);
     void setRaio(int raio);
+
+protected:
+    QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const override;
 };
 
 #endif // OBJCIRCULO_H

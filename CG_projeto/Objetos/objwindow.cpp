@@ -114,4 +114,5 @@ double ObjWindow::getRotacao() const {
 }
 
 void ObjWindow::desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const{}
+QVector<QPoint>ObjWindow::ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const{}
 

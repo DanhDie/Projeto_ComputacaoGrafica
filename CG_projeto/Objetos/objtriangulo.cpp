@@ -2,6 +2,7 @@
 #include "ponto.h"
 #include <QPainter>
 #include <limits>
+#include "Objetos/objwindow.h"
 
 ObjTriangulo::ObjTriangulo(QString nome, int priX, int priY, int segX, int segY, int terX, int terY, TipoObjeto tipo)
     : Objeto (nome, tipo){
@@ -15,11 +16,33 @@ ObjTriangulo::ObjTriangulo(QString nome, int priX, int priY, int segX, int segY,
 }
 
 void ObjTriangulo::desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const{
-    QVector<QPoint>pontosTela=ajustarPontos(vp,window);
+    bool desenhar;
+    QVector<QPoint>pontosTela=ajustarPontos(vp,window,desenhar);
 
     if(pontosTela.size() >= 3)painter->drawPolygon(pontosTela);
 }
 
+QVector<QPoint>ObjTriangulo::ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const{
+    QVector<QPoint> pontosTela;
+    const QVector<Ponto> pts = this->getPontos(); //Para fins de performance
+
+    for (const Ponto& pOriginal : pts) {
+        Ponto p=pOriginal; //Cópia do ponto
+
+        // normaliza em relação à window
+        Ponto pNorm = window.normalizar(p);
+
+        //"antes da transformada da viewport", portanto o clipping vai entrar aqui
+        //clipping(&pNorm,window); //Resolvedor de clipping
+
+        // mapeia para a viewport
+        Ponto pTela = vp.mapear(pNorm);
+
+        pontosTela.append(pTela.toQPoint());
+    }
+
+    return pontosTela;
+}
 
 Ponto ObjTriangulo::getPontoReferencia() const {
     const QVector<Ponto>& vertices = this->getPontos();

@@ -95,6 +95,8 @@ void Sol::transformar(const Matriz& transformacao) {
     }
 }
 
+QVector<QPoint>Sol::ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const{}
+
 Ponto Sol::getPontoReferencia() const {
     QVector<Objeto*> subs = this->getObjetos();
     if (subs.isEmpty()) {

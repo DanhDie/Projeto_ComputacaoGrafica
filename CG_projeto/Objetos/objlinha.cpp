@@ -12,12 +12,14 @@ ObjLinha::ObjLinha(QString nome, int priX, int priY, int segX, int segY, TipoObj
 }
 
 void ObjLinha::desenhar(QPainter*painter,const Viewport &vp,const ObjWindow&window)const{
-    QVector<QPoint>pontosTela=ajustarPontos(vp,window);
+    bool desenhar=true;
+    QVector<QPoint>pontosTela=ajustarPontos(vp,window,desenhar);
 
+    if(!desenhar) return;
     if (pontosTela.size() >= 2) painter->drawLine(pontosTela[0], pontosTela[1]);
 }
 
-QVector<QPoint>ObjLinha::ajustarPontos(const Viewport &vp,const ObjWindow &window) const{
+QVector<QPoint>ObjLinha::ajustarPontos(const Viewport &vp,const ObjWindow &window, bool desenhar) const{
     QVector<QPoint> pontosTela;
     const QVector<Ponto> pts = this->getPontos();
 
@@ -30,7 +32,8 @@ QVector<QPoint>ObjLinha::ajustarPontos(const Viewport &vp,const ObjWindow &windo
     Ponto p2Norm = window.normalizar(p2);
 
     //CohenSutherland
-    ClippingUtil::cohenSutherland(&p1Norm, &p2Norm, window);
+    desenhar = Clipping::cohenSutherland(p1Norm, p2Norm, window);
+    if(!desenhar) return pontosTela;
 
     // Mapeamento dos pontos
     Ponto p1Tela = vp.mapear(p1Norm);

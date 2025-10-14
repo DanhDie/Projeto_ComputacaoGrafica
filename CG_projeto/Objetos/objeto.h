@@ -44,7 +44,7 @@ private:
 protected:
     QVector<Ponto> pontos;  // para círculos: pontos[0] = centro, pontos[1].x() = raio
 
-    virtual QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window) const = 0;
+    virtual QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const = 0;
 };
 
 #endif // OBJETO_H

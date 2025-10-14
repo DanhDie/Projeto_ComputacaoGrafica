@@ -22,12 +22,6 @@ QVector<Ponto> Objeto::getPontos() const {
     return pontos;
 }
 
-QVector<QPoint>Objeto::ajustarPontos(const Viewport &vp,const ObjWindow &window) const{
-    QVector<QPoint> pontosTela;
-    const QVector<Ponto> pts = this->getPontos(); //Para fins de performance
-    return pontosTela;
-}
-
 void Objeto::transformar(const Matriz& transformacao) {
     for (Ponto& ponto : pontos) {
         // Multiplica cada ponto pela matriz de transformação

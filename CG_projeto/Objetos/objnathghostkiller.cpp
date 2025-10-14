@@ -36,11 +36,6 @@ const QVector<Objeto*> ObjNathGhostKiller::getObjetos() const { //É importante 
     return objPrimitivos;
 }
 
-/*
-* Método para o Objeto Complexo se auto desenhar
-* O ObjNathGhostKiller não tem Polígonos, então esse teste de TipoObjeto == poligono não é necessario
-* mas, como esse é um objeto para servir de base para os outros, eu vou deixar aqui para ajudar quem quer que tá lendo isso
-*/
 void ObjNathGhostKiller :: desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const{
     for (const Objeto* obj : getObjetos()) {
         obj->desenhar(painter,vp,window);
@@ -52,6 +47,8 @@ void ObjNathGhostKiller::transformar(const Matriz& transformacao) {
         obj->transformar(transformacao);
     }
 }
+
+QVector<QPoint>ObjNathGhostKiller::ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const{}
 
 Ponto ObjNathGhostKiller::getPontoReferencia() const{
     QVector<Objeto*> subs = this->getObjetos();

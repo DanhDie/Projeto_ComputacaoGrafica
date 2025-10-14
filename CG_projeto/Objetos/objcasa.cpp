@@ -110,6 +110,8 @@ void ObjCasa::transformar(const Matriz& transformacao) {
     }
 }
 
+QVector<QPoint>ObjCasa::ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const{}
+
 Ponto ObjCasa::getPontoReferencia() const {
     QVector<Objeto*> subs = this->getObjetos();
     if (subs.isEmpty()) {
