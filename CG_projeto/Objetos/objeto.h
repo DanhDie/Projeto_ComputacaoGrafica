@@ -37,7 +37,6 @@ public:
 
     virtual void desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window) const =0;
     virtual void transformar(const Matriz& transformacao);
-    void clipping(Ponto *p, ObjWindow &window);
 
 private:
     QString nome;
@@ -45,7 +44,7 @@ private:
 protected:
     QVector<Ponto> pontos;  // para círculos: pontos[0] = centro, pontos[1].x() = raio
 
-    QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window) const;
+    virtual QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window) const = 0;
 };
 
 #endif // OBJETO_H

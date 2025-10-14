@@ -1,6 +1,7 @@
 #include "ObjLinha.h"
 #include "ponto.h"
 #include <QPainter>
+#include "clippingutil.h"
 
 // ":" Neste contexto significa inicialização; O ObjLinha inicializa a si mesmo e instância um Objeto
 // para guardar seu nome e pontos
@@ -14,6 +15,33 @@ void ObjLinha::desenhar(QPainter*painter,const Viewport &vp,const ObjWindow&wind
     QVector<QPoint>pontosTela=ajustarPontos(vp,window);
 
     if (pontosTela.size() >= 2) painter->drawLine(pontosTela[0], pontosTela[1]);
+}
+
+QVector<QPoint>ObjLinha::ajustarPontos(const Viewport &vp,const ObjWindow &window) const{
+    QVector<QPoint> pontosTela;
+    const QVector<Ponto> pts = this->getPontos();
+
+    // Cópia dos pontos
+    Ponto p1 = pts[0];
+    Ponto p2 = pts[1];
+
+    // Normalização das cópias
+    Ponto p1Norm = window.normalizar(p1);
+    Ponto p2Norm = window.normalizar(p2);
+
+    //CohenSutherland
+    ClippingUtil::cohenSutherland(&p1Norm, &p2Norm, window);
+
+    // Mapeamento dos pontos
+    Ponto p1Tela = vp.mapear(p1Norm);
+    Ponto p2Tela = vp.mapear(p2Norm);
+
+    // Atribuição final
+    pontosTela.append(p1Tela.toQPoint());
+    pontosTela.append(p2Tela.toQPoint());
+
+    // Retorno dos pontos processados para desenho
+    return pontosTela;
 }
 
 Ponto ObjLinha::getPontoReferencia() const {

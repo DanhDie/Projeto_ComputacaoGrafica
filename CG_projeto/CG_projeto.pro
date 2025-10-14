@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     Objetos/objwindow.cpp \
+    clippingutil.cpp \
     displayfile.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -31,6 +32,7 @@ SOURCES += \
 
 HEADERS += \
     Objetos/objwindow.h \
+    clippingutil.h \
     displayfile.h \
     mainwindow.h \
     matriz.h \
