@@ -49,7 +49,12 @@ void MyFrame::paintEvent(QPaintEvent *event) {
     painter.setRenderHint(QPainter::Antialiasing);
 
     // define viewport (área interna do frame)
-    Viewport vp(0, 0, width(), height());
+    Viewport vp(
+        viewportRect.left(),
+        viewportRect.top(),
+        viewportRect.right(),
+        viewportRect.bottom()
+        );
 
     // percorre todos os objetos
     for (Objeto* obj : displayFile->getObjetos()) {

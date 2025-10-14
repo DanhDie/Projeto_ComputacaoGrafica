@@ -32,7 +32,7 @@ QVector<QPoint>ObjLinha::ajustarPontos(const Viewport &vp,const ObjWindow &windo
     Ponto p2Norm = window.normalizar(p2);
 
     //CohenSutherland
-    desenhar = Clipping::cohenSutherland(p1Norm, p2Norm, window);
+    desenhar = Clipping::cohenSutherland(p1Norm, p2Norm);
     if(!desenhar) return pontosTela;
 
     // Mapeamento dos pontos

@@ -6,9 +6,9 @@
 
 // O namespace declara as funções que existirão.
 namespace Clipping {
-void calcularRC(const Ponto& p, int RC[4], const ObjWindow& window);
-void calcularClipping(Ponto &p, double m, int RC[4], const ObjWindow& window);
-bool cohenSutherland(Ponto& p1, Ponto& p2, const ObjWindow& w);
+void calcularRC(const Ponto& p, int RC[4]);
+void calcularClipping(Ponto &p, double m, int RC[4]);
+bool cohenSutherland(Ponto& p1, Ponto& p2);
 
 } // Fim do namespace Clipping
 
