@@ -3,41 +3,56 @@
 #include <QPainter>
 #include <limits>
 #include "Objetos/objwindow.h"
+#include "clippingutil.h"
 
 ObjTriangulo::ObjTriangulo(QString nome, int priX, int priY, int segX, int segY, int terX, int terY, TipoObjeto tipo)
     : Objeto (nome, tipo){
-        /*
-         * Dependendo dos pontos que você coloca a orientação do triângulo muda,
-         * brinque a vontade com isso;
-        */
-        adicionarPonto(Ponto(priX,priY));
-        adicionarPonto(Ponto(segX,segY));
-        adicionarPonto(Ponto(terX,terY));
+    adicionarPonto(Ponto(priX,priY));
+    adicionarPonto(Ponto(segX,segY));
+    adicionarPonto(Ponto(terX,terY));
 }
 
 void ObjTriangulo::desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const{
-    bool desenhar;
-    QVector<QPoint>pontosTela=ajustarPontos(vp,window,desenhar);
+    const QVector<Ponto> pts = this->getPontos();
 
-    if(pontosTela.size() >= 3)painter->drawPolygon(pontosTela);
+    if (pts.size() < 3) {
+        return;
+    }
+
+    // Normaliza todos os pontos
+    QVector<Ponto> pontosNormalizados;
+    for (const Ponto& pOriginal : pts) {
+        Ponto pNorm = window.normalizar(pOriginal);
+        pontosNormalizados.append(pNorm);
+    }
+
+    // Aplica clipping no triângulo
+    QVector<Ponto> pontosClipped;
+    bool deveDesenhar = Clipping::clipPoligono(pontosNormalizados, pontosClipped);
+
+    if (!deveDesenhar || pontosClipped.size() < 3) {
+        return;
+    }
+
+    // Mapeia para a viewport e desenha
+    QVector<QPoint> pontosTela;
+    for (const Ponto& pNorm : pontosClipped) {
+        Ponto pTela = vp.mapear(pNorm);
+        pontosTela.append(pTela.toQPoint());
+    }
+
+    painter->drawPolygon(pontosTela);
 }
 
-QVector<QPoint>ObjTriangulo::ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const{
+// Mantenha ajustarPontos vazia ou básica para compatibilidade
+QVector<QPoint> ObjTriangulo::ajustarPontos(const Viewport &vp, const ObjWindow &window, bool desenhar) const {
     QVector<QPoint> pontosTela;
-    const QVector<Ponto> pts = this->getPontos(); //Para fins de performance
+    // Implementação básica ou vazia, já que não é mais usada
+    const QVector<Ponto> pts = this->getPontos();
 
     for (const Ponto& pOriginal : pts) {
-        Ponto p=pOriginal; //Cópia do ponto
-
-        // normaliza em relação à window
-        Ponto pNorm = window.normalizar(p);
-
-        //"antes da transformada da viewport", portanto o clipping vai entrar aqui
-        //clipping(&pNorm,window); //Resolvedor de clipping
-
-        // mapeia para a viewport
+        Ponto pNorm = window.normalizar(pOriginal);
         Ponto pTela = vp.mapear(pNorm);
-
         pontosTela.append(pTela.toQPoint());
     }
 

@@ -86,40 +86,38 @@ bool Clipping::cohenSutherland(Ponto& p1, Ponto& p2){
 // Implementação do clipping de polígonos usando Sutherland-Hodgman
 bool Clipping::clipPoligono(const QVector<Ponto>& poligonoEntrada, QVector<Ponto>& poligonoSaida) {
     if (poligonoEntrada.size() < 3) {
-        return false; // Polígono inválido
+        return false;
     }
 
     QVector<Ponto> listaAtual = poligonoEntrada;
     QVector<Ponto> listaProxima;
 
-    // Clipping contra as 4 bordas da window normalizada (-1 a 1)
-    // Borda esquerda (x = -1)
-    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 1, -1.0, true); // ESQUERDA = 1
+    // MUDANÇA AQUI: Use 0.0 e 1.0 em vez de -1.0 e 1.0
+    // Borda esquerda (x = 0.0)
+    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 1, 0.0, true);
     listaAtual = listaProxima;
     listaProxima.clear();
 
     if (listaAtual.size() < 3) return false;
 
-    // Borda direita (x = 1)
-    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 2, 1.0, true); // DIREITA = 2
+    // Borda direita (x = 1.0)
+    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 2, 1.0, true);
     listaAtual = listaProxima;
     listaProxima.clear();
 
     if (listaAtual.size() < 3) return false;
 
-    // Borda inferior (y = -1)
-    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 4, -1.0, false); // ABAIXO = 4
+    // Borda inferior (y = 0.0)
+    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 4, 0.0, false);
     listaAtual = listaProxima;
     listaProxima.clear();
 
     if (listaAtual.size() < 3) return false;
 
-    // Borda superior (y = 1)
-    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 8, 1.0, false); // ACIMA = 8
+    // Borda superior (y = 1.0)
+    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 8, 1.0, false);
 
     poligonoSaida = listaProxima;
-
-    // Retorna true se o polígono resultante tiver pelo menos 3 vértices
     return poligonoSaida.size() >= 3;
 }
 
@@ -197,10 +195,11 @@ Ponto Clipping::PolygonClip::calcularInterseccao(const Ponto& p1, const Ponto& p
 int Clipping::PolygonClip::calcularCodigoRegiao(double x, double y) {
     int codigo = 0; // DENTRO
 
-    if (x < -1.0)       codigo |= 1; // ESQUERDA
-    else if (x > 1.0)   codigo |= 2; // DIREITA
-    if (y < -1.0)       codigo |= 4; // ABAIXO
-    else if (y > 1.0)   codigo |= 8; // ACIMA
+    // MUDANÇA AQUI: Use 0.0 e 1.0
+    if (x < 0.0)       codigo |= 1; // ESQUERDA
+    else if (x > 1.0)  codigo |= 2; // DIREITA
+    if (y < 0.0)       codigo |= 4; // ABAIXO
+    else if (y > 1.0)  codigo |= 8; // ACIMA
 
     return codigo;
 }
