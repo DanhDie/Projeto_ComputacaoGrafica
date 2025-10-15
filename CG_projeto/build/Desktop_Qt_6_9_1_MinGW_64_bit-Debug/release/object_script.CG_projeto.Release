@@ -1,4 +1,5 @@
 release/objwindow.o
+release/clippingutil.o
 release/displayfile.o
 release/main.o
 release/mainwindow.o

@@ -1,5 +1,6 @@
 #include "clippingutil.h"
 #include "QWidget"
+
 void Clipping::calcularRC(const Ponto& p, int RC[4]){
     const double Xmin = 0.0, Xmax = 1.0;
     const double Ymin = 0.0, Ymax = 1.0;
@@ -80,4 +81,126 @@ bool Clipping::cohenSutherland(Ponto& p1, Ponto& p2){
     calcularClipping(p2,m,RC2);
 
     return true;
+}
+
+// Implementação do clipping de polígonos usando Sutherland-Hodgman
+bool Clipping::clipPoligono(const QVector<Ponto>& poligonoEntrada, QVector<Ponto>& poligonoSaida) {
+    if (poligonoEntrada.size() < 3) {
+        return false; // Polígono inválido
+    }
+
+    QVector<Ponto> listaAtual = poligonoEntrada;
+    QVector<Ponto> listaProxima;
+
+    // Clipping contra as 4 bordas da window normalizada (-1 a 1)
+    // Borda esquerda (x = -1)
+    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 1, -1.0, true); // ESQUERDA = 1
+    listaAtual = listaProxima;
+    listaProxima.clear();
+
+    if (listaAtual.size() < 3) return false;
+
+    // Borda direita (x = 1)
+    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 2, 1.0, true); // DIREITA = 2
+    listaAtual = listaProxima;
+    listaProxima.clear();
+
+    if (listaAtual.size() < 3) return false;
+
+    // Borda inferior (y = -1)
+    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 4, -1.0, false); // ABAIXO = 4
+    listaAtual = listaProxima;
+    listaProxima.clear();
+
+    if (listaAtual.size() < 3) return false;
+
+    // Borda superior (y = 1)
+    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 8, 1.0, false); // ACIMA = 8
+
+    poligonoSaida = listaProxima;
+
+    // Retorna true se o polígono resultante tiver pelo menos 3 vértices
+    return poligonoSaida.size() >= 3;
+}
+
+// Função auxiliar para clipping contra uma borda específica
+void Clipping::PolygonClip::clipAgainstEdge(const QVector<Ponto>& entrada, QVector<Ponto>& saida,
+                                            int edge, double clipValue, bool isVertical) {
+    if (entrada.empty()) return;
+
+    Ponto pontoAnterior = entrada.last();
+    bool anteriorDentro = false;
+
+    // Verifica se o último ponto está dentro em relação à borda atual
+    if (isVertical) {
+        // Borda vertical (esquerda/direita) - verifica coordenada x
+        anteriorDentro = (edge == 1) ? (pontoAnterior.x() >= clipValue) : (pontoAnterior.x() <= clipValue); // ESQUERDA=1, DIREITA=2
+    } else {
+        // Borda horizontal (acima/abaixo) - verifica coordenada y
+        anteriorDentro = (edge == 4) ? (pontoAnterior.y() >= clipValue) : (pontoAnterior.y() <= clipValue); // ABAIXO=4, ACIMA=8
+    }
+
+    for (const Ponto& pontoAtual : entrada) {
+        bool atualDentro = false;
+
+        // Verifica se o ponto atual está dentro em relação à borda atual
+        if (isVertical) {
+            // Borda vertical
+            atualDentro = (edge == 1) ? (pontoAtual.x() >= clipValue) : (pontoAtual.x() <= clipValue);
+        } else {
+            // Borda horizontal
+            atualDentro = (edge == 4) ? (pontoAtual.y() >= clipValue) : (pontoAtual.y() <= clipValue);
+        }
+
+        if (atualDentro) {
+            // Ponto atual está DENTRO
+            if (!anteriorDentro) {
+                // Ponto anterior estava FORA -> adiciona interseção
+                Ponto interseccao = calcularInterseccao(pontoAnterior, pontoAtual, edge, clipValue, isVertical);
+                saida.append(interseccao);
+            }
+            // Adiciona ponto atual
+            saida.append(pontoAtual);
+        } else if (anteriorDentro) {
+            // Ponto atual está FORA, ponto anterior estava DENTRO -> adiciona interseção
+            Ponto interseccao = calcularInterseccao(pontoAnterior, pontoAtual, edge, clipValue, isVertical);
+            saida.append(interseccao);
+        }
+
+        pontoAnterior = pontoAtual;
+        anteriorDentro = atualDentro;
+    }
+}
+
+// Função para calcular interseção entre dois pontos com uma borda
+Ponto Clipping::PolygonClip::calcularInterseccao(const Ponto& p1, const Ponto& p2, int edge, double clipValue, bool isVertical) {
+    double x, y;
+
+    if (isVertical) {
+        // Borda vertical (x = clipValue)
+        x = clipValue;
+        // Interpola y
+        double t = (clipValue - p1.x()) / (p2.x() - p1.x());
+        y = p1.y() + t * (p2.y() - p1.y());
+    } else {
+        // Borda horizontal (y = clipValue)
+        y = clipValue;
+        // Interpola x
+        double t = (clipValue - p1.y()) / (p2.y() - p1.y());
+        x = p1.x() + t * (p2.x() - p1.x());
+    }
+
+    return Ponto(x, y);
+}
+
+// Função para calcular código de região (pode ser útil)
+int Clipping::PolygonClip::calcularCodigoRegiao(double x, double y) {
+    int codigo = 0; // DENTRO
+
+    if (x < -1.0)       codigo |= 1; // ESQUERDA
+    else if (x > 1.0)   codigo |= 2; // DIREITA
+    if (y < -1.0)       codigo |= 4; // ABAIXO
+    else if (y > 1.0)   codigo |= 8; // ACIMA
+
+    return codigo;
 }

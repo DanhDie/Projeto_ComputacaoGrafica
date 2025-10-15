@@ -1,4 +1,5 @@
 debug/objwindow.o
+debug/clippingutil.o
 debug/displayfile.o
 debug/main.o
 debug/mainwindow.o

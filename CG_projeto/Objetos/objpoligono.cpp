@@ -3,6 +3,7 @@
 #include <QPainter>
 #include <limits>
 #include "Objetos/objwindow.h"
+#include "clippingutil.h"
 
 ObjPoligono::ObjPoligono(QString nome, const Ponto* pontos, int quantidade, TipoObjeto tipo)
     : Objeto(nome, tipo)
@@ -19,22 +20,32 @@ void ObjPoligono::desenhar(QPainter *painter,const Viewport &vp, const ObjWindow
     if(pontosTela.size() >= 4)painter->drawPolygon(pontosTela);
 }
 
-QVector<QPoint>ObjPoligono::ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const{
+QVector<QPoint> ObjPoligono::ajustarPontos(const Viewport &vp, const ObjWindow &window, bool desenhar) const {
     QVector<QPoint> pontosTela;
-    const QVector<Ponto> pts = this->getPontos(); //Para fins de performance
+    const QVector<Ponto> pts = this->getPontos();
 
+    if (pts.size() < 3) {
+        return pontosTela;
+    }
+
+    // Normaliza todos os pontos
+    QVector<Ponto> pontosNormalizados;
     for (const Ponto& pOriginal : pts) {
-        Ponto p=pOriginal; //Cópia do ponto
+        Ponto pNorm = window.normalizar(pOriginal);
+        pontosNormalizados.append(pNorm);
+    }
 
-        // normaliza em relação à window
-        Ponto pNorm = window.normalizar(p);
+    // Aplica clipping no polígono
+    QVector<Ponto> pontosClipped;
+    desenhar = Clipping::clipPoligono(pontosNormalizados, pontosClipped);
 
-        //"antes da transformada da viewport", portanto o clipping vai entrar aqui
-        //clipping(&pNorm,window); //Resolvedor de clipping
+    if (!desenhar) {
+        return pontosTela;
+    }
 
-        // mapeia para a viewport
+    // Mapeia para a viewport
+    for (const Ponto& pNorm : pontosClipped) {
         Ponto pTela = vp.mapear(pNorm);
-
         pontosTela.append(pTela.toQPoint());
     }
 
