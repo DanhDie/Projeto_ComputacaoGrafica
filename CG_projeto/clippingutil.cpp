@@ -53,26 +53,39 @@ bool Clipping::cohenSutherland(Ponto& p1, Ponto& p2) {
 }
 
 bool Clipping::clipPoligono(const QVector<Ponto>& poligonoEntrada, QVector<Ponto>& poligonoSaida) {
-    if (poligonoEntrada.size() < 3) return false;
+    if (poligonoEntrada.size() < 3) {
+        return false;
+    }
 
     QVector<Ponto> listaAtual = poligonoEntrada;
     QVector<Ponto> listaProxima;
 
-    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 1, -1.0, true);  // Esquerda
-    listaAtual = listaProxima; listaProxima.clear();
+    // MUDANÇA AQUI: Use 0.0 e 1.0 em vez de -1.0 e 1.0
+    // Borda esquerda (x = 0.0)
+    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 1, 0.0, true);
+    listaAtual = listaProxima;
+    listaProxima.clear();
+
     if (listaAtual.size() < 3) return false;
 
-    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 2, 1.0, true);   // Direita
-    listaAtual = listaProxima; listaProxima.clear();
+    // Borda direita (x = 1.0)
+    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 2, 1.0, true);
+    listaAtual = listaProxima;
+    listaProxima.clear();
+
     if (listaAtual.size() < 3) return false;
 
-    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 4, -1.0, false); // Abaixo
-    listaAtual = listaProxima; listaProxima.clear();
+    // Borda inferior (y = 0.0)
+    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 4, 0.0, false);
+    listaAtual = listaProxima;
+    listaProxima.clear();
+
     if (listaAtual.size() < 3) return false;
 
-    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 8, 1.0, false);  // Acima
+    // Borda superior (y = 1.0)
+    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 8, 1.0, false);
+
     poligonoSaida = listaProxima;
-
     return poligonoSaida.size() >= 3;
 }
 
@@ -130,11 +143,14 @@ Ponto Clipping::PolygonClip::calcularInterseccao(const Ponto& p1, const Ponto& p
 }
 
 int Clipping::PolygonClip::calcularCodigoRegiao(double x, double y) {
-    int codigo = 0;
-    if (x < -1.0) codigo |= 1;
-    else if (x > 1.0) codigo |= 2;
-    if (y < -1.0) codigo |= 4;
-    else if (y > 1.0) codigo |= 8;
+    int codigo = 0; // DENTRO
+
+    // MUDANÇA AQUI: Use 0.0 e 1.0
+    if (x < 0.0)       codigo |= 1; // ESQUERDA
+    else if (x > 1.0)  codigo |= 2; // DIREITA
+    if (y < 0.0)       codigo |= 4; // ABAIXO
+    else if (y > 1.0)  codigo |= 8; // ACIMA
+
     return codigo;
 }
 
