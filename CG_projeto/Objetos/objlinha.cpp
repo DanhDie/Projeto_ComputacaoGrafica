@@ -1,4 +1,5 @@
 #include "ObjLinha.h"
+#include "objwindow.h"
 #include "ponto.h"
 #include <QPainter>
 #include "clippingutil.h"
