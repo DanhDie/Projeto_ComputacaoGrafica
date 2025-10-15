@@ -146,7 +146,7 @@ static QVector<Ponto> gerarAproximacaoCirculo(const Ponto& centro, double raio, 
     for (int i = 0; i < segmentos; ++i) {
         double theta = (TWO_PI * i) / segmentos;
         double x = centro.x() + raio * std::cos(theta);
-        double y = centro.y() + raio * std::sin(theta);
+        double y = centro.y() + raio * std::sin(theta)*1.3;
         resultado.append(Ponto(x, y));
     }
     return resultado;
