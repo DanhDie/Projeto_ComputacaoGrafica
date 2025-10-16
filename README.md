@@ -1,15 +1,22 @@
 # Motor Gráfico
 
 #### *Bem-vindo!*
-Este é um projeto em andamento de desenvolvimento de um motor gráfico 2D (com suporte para 3D planejado no futuro), cujo objetivo primário é estudar, aplicar e fundamentar conhecimentos básicos essenciais de Computação Gráfica. O programa está sendo desenvolvido na plataforma Qt Creator.
+O programa está sendo desenvolvido na plataforma Qt Creator.
 
 #### Features implementadas:
 - Display File, área de desenho, primitivas e funções de desenho;
 - Transformações geométricas nos desenhos (Translação, Rotação e Escala);
-- Input do usuário via botões na tela, mouse e setas do teclado;
 - Window, Viewport, função de normalização de transformada de visualização;
+- Mecanismo de transformação no objeto e navegação de câmera;
+- Recebimento de input do usuário via botões na tela, mouse e setas do teclado;
 - Clipping (em pontos, linhas e polígonos) utilizando o algoritmo de Cohen-Sutherland.
 
+#### Features planejadas:
+- Leitura de arquivos do tipo OBJ;
+- Atualização de funções de transformação para 3D;
+- Projeção ortogonal;
+- Projeção de perspectiva;
+  
 ---
 
 ##### No momento, a forma mais segura e recomendada de testar o programa, é através da IDE do Qt Creator.
