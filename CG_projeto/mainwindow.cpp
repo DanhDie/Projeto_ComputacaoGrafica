@@ -32,6 +32,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Também para o frame onde desenha (MyFrame)
     ui->frame->setFocusPolicy(Qt::StrongFocus);
+    setWindowTitle("Skyrim 3 - NathGhostKiller strikes again!");
+    setWindowIcon(QIcon(":/new/imagens/icon.ico"));
+
+
 }
 
 MainWindow::~MainWindow()
@@ -68,28 +72,12 @@ void MainWindow :: setDisplayFile(DisplayFile *displayFile){
 }
 
 Ponto MainWindow::refPonto(Objeto *obj){
-    QVector<Ponto> pontos;
-
-    if (obj->getTipo() == Complexo) {
-        // Se for um objeto composto, pega o primeiro subobjeto (ajuste se precisar)
-        QVector<Objeto*> subs = obj->getObjetos();
-        for (Objeto* sub : subs) {
-            pontos += sub->getPontos(); // pega TODOS os pontos de TODOS os subobjetos
-        }
-    } else {
-        pontos = obj->getPontos();
+    if (obj == nullptr) {
+        return Ponto(0,0); // Segurança
     }
-
-    double somaX = 0.0, somaY = 0.0;
-    for (const Ponto &p : pontos) {
-        somaX += p[0][0];
-        somaY += p[1][0];
-    }
-
-    double cx = somaX / pontos.size();
-    double cy = somaY / pontos.size();
-
-    return Ponto(cx, cy);
+    // Graças ao polimorfismo, a versão correta de getPontoReferencia()
+    // será chamada automaticamente, seja para um Círculo, Linha ou Complexo.
+    return obj->getPontoReferencia();
 }
 void MainWindow::defaultSpinBox(){
     if(!ui->comboBox->currentObjeto()) return;
@@ -183,7 +171,7 @@ void MainWindow::onAplicarTransformacao(){
                                    p[0][0],p[1][0]);
     //Cálculo da Matriz final
     Matriz Final = T * R * E;
-    df->aplicarTransformacao(obj->getNome(), Final);
+    df->transformar(obj->getNome(), Final);
 
     //Atualiza os frames para mostrar a transformação
     MyFrame* frame = qobject_cast<MyFrame*>(ui->frame);
@@ -216,7 +204,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
         window->pan(0, 10); //move para baixo 10 unidades
         break;
 
-    // zoom com + e -
+        // zoom com + e -
 
     case Qt::Key_Plus:
     case Qt::Key_Equal: // "+", pode ser shift + "="

@@ -78,29 +78,14 @@ Sol::~Sol(){ //Destrutor
     }
 }
 
-const QVector<Objeto*>& Sol::getObjetos() const {
+const QVector<Objeto*> Sol::getObjetos() const {
     return objPrimitivos;
 }
 
 
-void Sol :: autorretrato(QPainter* painter) const{
-    for (const Objeto* obj : getObjetos()) {
-        if (obj->getTipo() == Linha) {
-            painter->drawLine(obj->getPontos()[0].toQPoint(), obj->getPontos()[1].toQPoint());
-        }
-        else if (obj->getTipo() == Poligono) {
-            QVector<QPoint> qpts;
-            qpts.reserve(obj->getPontos().size());
-            for (const Ponto &p : obj->getPontos()){
-                qpts.append(p.toQPoint());
-            }
-            painter->drawPolygon(qpts);
-        }
-        else if (obj->getTipo() == Circulo) {
-            QPoint centro = obj->getPontos()[0].toQPoint();
-            int raio = (int)std::round(obj->getPontos()[1].x());
-            painter->drawEllipse(centro, raio, raio);
-        }
+void Sol :: desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const{
+    for (Objeto* obj : getObjetos()) {
+        obj->desenhar(painter,vp,window);
     }
 }
 
@@ -108,4 +93,21 @@ void Sol::transformar(const Matriz& transformacao) {
     for (Objeto* obj : objPrimitivos) {
         obj->transformar(transformacao);
     }
+}
+
+QVector<QPoint>Sol::ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const{}
+
+Ponto Sol::getPontoReferencia() const {
+    QVector<Objeto*> subs = this->getObjetos();
+    if (subs.isEmpty()) {
+        return Ponto(0, 0);
+    }
+
+    double somaX = 0.0, somaY = 0.0;
+    for (Objeto* sub : subs) {
+        Ponto refSub = sub->getPontoReferencia(); // Chama a função virtual recursivamente!
+        somaX += refSub.x();
+        somaY += refSub.y();
+    }
+    return Ponto(somaX / subs.size(), somaY / subs.size());
 }

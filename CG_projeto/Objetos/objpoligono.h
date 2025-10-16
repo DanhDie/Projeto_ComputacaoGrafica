@@ -8,6 +8,12 @@
 class ObjPoligono : public Objeto {
 public:
     ObjPoligono(QString nome, const Ponto* pontos, int quantidade, TipoObjeto tipo);
+
+    void desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const override;
+    Ponto getPontoReferencia() const override;
+
+protected:
+    QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const override;
 };
 
 #endif // OBJPOLIGONO_H

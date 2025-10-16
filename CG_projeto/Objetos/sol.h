@@ -16,10 +16,13 @@ public:
     Sol(QString nome);
     ~Sol();
 
-    const QVector<Objeto*>& getObjetos() const;
-    void autorretrato(QPainter* painter) const;
-
+    const QVector<Objeto*> getObjetos() const;
+    void desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const override;
     void transformar(const Matriz& transformacao) override;
+    Ponto getPontoReferencia() const override;
+
+protected:
+    QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const override;
 
 private:
     QVector<Objeto*> objPrimitivos;

@@ -1,4 +1,5 @@
 release/objwindow.o
+release/clippingutil.o
 release/displayfile.o
 release/main.o
 release/mainwindow.o
@@ -17,6 +18,8 @@ release/objtriangulo.o
 release/ponto.o
 release/sol.o
 release/viewport.o
+release/qrc_Icone.o
+release/qrc_icon.o
 release/moc_mainwindow.o
 release/moc_mycombobox.o
 release/moc_mydoublespinbox.o

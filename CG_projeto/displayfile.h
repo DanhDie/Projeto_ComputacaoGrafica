@@ -10,7 +10,7 @@ public:
     const QVector<Objeto*>& getObjetos() const;
     void limpar();
 
-    void aplicarTransformacao(const QString& nomeObjeto, const Matriz& transformacao);
+    void transformar(const QString& nomeObjeto, const Matriz& transformacao);
     Objeto* getObjeto(const QString& nome) const;
 
 private:

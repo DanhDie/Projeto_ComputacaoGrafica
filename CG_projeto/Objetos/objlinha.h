@@ -11,5 +11,11 @@ class ObjLinha : public Objeto
 {
 public:
     ObjLinha(QString nome, int priX, int priY, int segX, int segY, TipoObjeto tipo=Linha); //Construtor de ObjLinha
+
+    void desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const override;
+    Ponto getPontoReferencia() const override;
+
+protected:
+    QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window, bool desenhar) const override;
 };
 #endif // OBJLINHA_H

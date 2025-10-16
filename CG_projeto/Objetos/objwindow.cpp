@@ -18,13 +18,13 @@ void ObjWindow::atualizarLimites(double xmin, double ymin, double xmax, double y
     pontos[3] = Ponto(xmin, ymax);
 }
 
-Ponto ObjWindow::normalizar(const Ponto& p, const ObjWindow* window) {
+Ponto ObjWindow::normalizar(const Ponto& p) const {
     // Aplicando rotação inversa à janela (simular o espaço local da window)
-    double anguloRad = -window->getRotacao() * M_PI / 180.0;  // negativo = inversa
+    double anguloRad = -this->getRotacao() * M_PI / 180.0;  // negativo = inversa
 
-    // Centro da window
-    double cx = (window->getXmin() + window->getXmax()) / 2.0;
-    double cy = (window->getYmin() + window->getYmax()) / 2.0;
+    // Centro da this
+    double cx = (this->getXmin() + this->getXmax()) / 2.0;
+    double cy = (this->getYmin() + this->getYmax()) / 2.0;
 
     // Transladar ponto para a origem da rotação
     double x = p.x() - cx;
@@ -34,13 +34,13 @@ Ponto ObjWindow::normalizar(const Ponto& p, const ObjWindow* window) {
     double xr = x * cos(anguloRad) - y * sin(anguloRad);
     double yr = x * sin(anguloRad) + y * cos(anguloRad);
 
-    // Transladar de volta para o centro da window
+    // Transladar de volta para o centro da this
     xr += cx;
     yr += cy;
 
     // Normalizar
-    double xn = (xr - window->getXmin()) / (window->getXmax() - window->getXmin());
-    double yn = (yr - window->getYmin()) / (window->getYmax() - window->getYmin());
+    double xn = (xr - this->getXmin()) / (this->getXmax() - this->getXmin());
+    double yn = (yr - this->getYmin()) / (this->getYmax() - this->getYmin());
 
     return Ponto(xn, yn);
 }
@@ -112,4 +112,7 @@ void ObjWindow::setRotacao(double angulo) {
 double ObjWindow::getRotacao() const {
     return anguloRotacao;
 }
+
+void ObjWindow::desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const{}
+QVector<QPoint>ObjWindow::ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const{}
 
