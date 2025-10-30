@@ -17,7 +17,8 @@ enum TipoObjeto {
     Linha,
     Poligono,
     Circulo,
-    Complexo
+    Complexo,
+    Modelo3D
 };
 
 class ObjWindow;
@@ -40,8 +41,9 @@ public:
 
 private:
     QString nome;
-    TipoObjeto tipo;
+
 protected:
+    TipoObjeto tipo;
     QVector<Ponto> pontos;  // para círculos: pontos[0] = centro, pontos[1].x() = raio
 
     virtual QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const = 0;

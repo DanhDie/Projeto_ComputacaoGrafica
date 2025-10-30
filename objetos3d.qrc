@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/Modelos">
+        <file>Modelos/Charizard.obj</file>
+        <file>Modelos/UmbreonLowPoly.obj</file>
+    </qresource>
+</RCC>

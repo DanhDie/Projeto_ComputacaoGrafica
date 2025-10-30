@@ -12,6 +12,7 @@
 #include "Objetos/objcasa.h"
 #include "Objetos/Sol.h"
 #include "Objetos/objwindow.h"
+#include "Objetos/objmodelo3d.h"
 /*
  * ---------------------------------------------
 */
@@ -33,6 +34,14 @@ int main(int argc, char *argv[])
     */
     ObjWindow* window = new ObjWindow("janela", 0, 0, 400, 300);
     df.adicionarObjeto(window);
+
+
+    ObjModelo3D* pokemon1 = new ObjModelo3D("charizard",":/Modelos/Modelos/Charizard.obj");
+    df.adicionarObjeto(pokemon1);
+
+    df.adicionarObjeto(new ObjModelo3D("umbreon",":/Modelos/Modelos/UmbreonLowPoly.obj"));
+
+
 
     df.adicionarObjeto(new ObjTriangulo ("Triangulo", 50, 50, 150, 50, 100, 150));
 
