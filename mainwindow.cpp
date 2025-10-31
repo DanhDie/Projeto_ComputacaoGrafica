@@ -69,6 +69,10 @@ void MainWindow :: setDisplayFile(DisplayFile *displayFile){
     //Ajeitando os botões do menu, 1 é a escala padrão
     ui->doubleSpinBox_El->setValue(1.0);
     ui->doubleSpinBox_Ea->setValue(1.0);
+    ui->doubleSpinBox_Ep->setValue(1.0);
+    ui->comboBox_Re->addItem("x");
+    ui->comboBox_Re->addItem("y");
+    ui->comboBox_Re->addItem("z");
 }
 
 Ponto MainWindow::refPonto(Objeto *obj){
@@ -86,12 +90,15 @@ void MainWindow::defaultSpinBox(){
     ui->doubleSpinBox_R->setValue(0);
     ui->doubleSpinBox_Rx->setValue(p[0][0]);
     ui->doubleSpinBox_Ry->setValue(p[1][0]);
+    ui->doubleSpinBox_Rz->setValue(p[2][0]);
 
     ui->doubleSpinBox_Tx->setValue(0);
     ui->doubleSpinBox_Ty->setValue(0);
+    ui->doubleSpinBox_Tz->setValue(0);
 
     ui->doubleSpinBox_El->setValue(1.0);
     ui->doubleSpinBox_Ea->setValue(1.0);
+    ui->doubleSpinBox_Ep->setValue(1.0);
 }
 
 //---------------------------------------------------------------------
@@ -119,6 +126,7 @@ void MainWindow::onBtEsquerdoPress(QPointF p){
     // Agora sim você usa o ponto real:
     ui->doubleSpinBox_Rx->setValue(pWindow[0][0]);
     ui->doubleSpinBox_Ry->setValue(pWindow[1][0]);
+    ui->doubleSpinBox_Rz->setValue(pWindow[2][0]);
 
     if (!ui->comboBox->currentObjeto()) return;
 
@@ -157,18 +165,22 @@ void MainWindow::onAplicarTransformacao(){
     }
 
     Ponto p=refPonto(obj);
-
+    const char *r=(ui->comboBox_Re->currentText()).toUtf8().constData();
     //Matriz da Translação
     Matriz T = Matriz::translacao(ui->doubleSpinBox_Tx->value(),
-                                  ui->doubleSpinBox_Ty->value());
+                                  ui->doubleSpinBox_Ty->value(),
+                                  ui->doubleSpinBox_Tz->value());
     //Matriz da Rotação
     Matriz R = Matriz::rotacaoPonto(ui->doubleSpinBox_R->value(),
                                     ui->doubleSpinBox_Rx->value(),
-                                    ui->doubleSpinBox_Ry->value());
+                                    ui->doubleSpinBox_Ry->value(),
+                                    ui->doubleSpinBox_Rz->value(),
+                                    *r);
     //Matriz da Escala
     Matriz E = Matriz::escalaPonto(ui->doubleSpinBox_El->value(),
                                    ui->doubleSpinBox_Ea->value(),
-                                   p[0][0],p[1][0]);
+                                   ui->doubleSpinBox_Ep->value(),
+                                   p[0][0],p[1][0],p[2][0]);
     //Cálculo da Matriz final
     Matriz Final = T * R * E;
     df->transformar(obj->getNome(), Final);
