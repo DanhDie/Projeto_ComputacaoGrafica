@@ -9,6 +9,7 @@
 #include "Objetos/objwindow.h"
 #include <QPainter>
 #include <QString>
+#include <Objetos/ponto.h>
 
 class ObjModelo3D : public Objeto {
 public:
@@ -26,7 +27,7 @@ private:
     LeitorOBJ leitor;
 
     // implementação obrigatória (classe base tem =0)
-    QVector<QPoint> ajustarPontos(const Viewport &vp, const ObjWindow &window, bool desenhar) const override;
+    QVector<QPoint> ajustarPontos(const Viewport &vp, const ObjWindow &window, bool &desenhar) const;
 
     QVector<QPoint> projetarVertices2D(const Viewport& vp, const ObjWindow& window) const;
 };

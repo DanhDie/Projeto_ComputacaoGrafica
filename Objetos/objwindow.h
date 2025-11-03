@@ -12,8 +12,8 @@ public:
     void atualizarLimites(double xmin, double ymin, double zmin,
                           double xmax, double ymax, double zmax);
 
-    Ponto3D normalizar(const Ponto3D& p) const;
-    Ponto3D desnormalizar(const Ponto3D& p);
+    Ponto3D normalizar(const Ponto3D p) const;
+    Ponto3D desnormalizar(const Ponto3D p);
 
     // Getters
     double getXmin() const;
