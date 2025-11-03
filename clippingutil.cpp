@@ -5,8 +5,8 @@
 
 
 void Clipping::calcularRC(const Ponto3D& p, int RC[4]) {
-    const double Xmin = 0.0, Xmax = 1.0;
-    const double Ymin = 0.0, Ymax = 1.0;
+    const double Xmin = -1.0, Xmax = 1.0;
+    const double Ymin = -1.0, Ymax = 1.0;
     RC[0] = RC[1] = RC[2] = RC[3] = 0;
 
     if (p.y() < Ymin) RC[0] = 1; // Borda superior
@@ -14,17 +14,23 @@ void Clipping::calcularRC(const Ponto3D& p, int RC[4]) {
     if (p.x() > Xmax) RC[2] = 1; // Direita
     if (p.x() < Xmin) RC[3] = 1; // Esquerda
 }
-
+bool Clipping::validarCoord(double v){
+    return (v >= -1.0 && v <= 1.0);
+}
 void Clipping::calcularClipping(Ponto3D &p, double m, int RC[4]) {
-    const double Xmin = 0.0, Xmax = 1.0;
-    const double Ymin = 0.0, Ymax = 1.0;
+    const double Xmin = -1.0, Xmax = 1.0;
+    const double Ymin = -1.0, Ymax = 1.0;
     double x = p.x();
     double y = p.y();
 
     if (RC[0]) { y = Ymin; x = p.x() + ((1/m) * (y - p.y())); }
     if (RC[1]) { y = Ymax; x = p.x() + ((1/m) * (y - p.y())); }
-    if (RC[2]) { x = Xmax; y = (m * (x - p.x())) + p.y(); }
-    if (RC[3]) { x = Xmin; y = (m * (x - p.x())) + p.y(); }
+
+
+    if(!validarCoord(x)){
+        if (RC[2]) { x = Xmax; y = (m * (x - p.x())) + p.y(); }
+        if (RC[3]) { x = Xmin; y = (m * (x - p.x())) + p.y(); }
+    }
 
     p.setX(x);
     p.setY(y);
@@ -40,13 +46,12 @@ bool Clipping::cohenSutherland(Ponto3D& p1, Ponto3D& p2) {
 
     if (p1Dentro && p2Dentro) return true;
 
-    bool rejeitar = true;
     for (int i = 0; i < 4; ++i) {
-        if (!(RC1[i] && RC2[i])) { rejeitar = false; break; }
+        if ((RC1[i] && RC2[i])) {return false;}
     }
-    if (rejeitar) return false;
 
     double m = (p2.y() - p1.y()) / (p2.x() - p1.x());
+
     calcularClipping(p1, m, RC1);
     calcularClipping(p2, m, RC2);
 
@@ -63,7 +68,7 @@ bool Clipping::clipPoligono(const QVector<Ponto3D>& poligonoEntrada, QVector<Pon
 
     // MUDANÇA AQUI: Use 0.0 e 1.0 em vez de -1.0 e 1.0
     // Borda esquerda (x = 0.0)
-    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 1, 0.0, true);
+    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 1, -1.0, true);
     listaAtual = listaProxima;
     listaProxima.clear();
 
@@ -77,7 +82,7 @@ bool Clipping::clipPoligono(const QVector<Ponto3D>& poligonoEntrada, QVector<Pon
     if (listaAtual.size() < 3) return false;
 
     // Borda inferior (y = 0.0)
-    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 4, 0.0, false);
+    PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 4, -1.0, false);
     listaAtual = listaProxima;
     listaProxima.clear();
 
@@ -147,9 +152,9 @@ int Clipping::PolygonClip::calcularCodigoRegiao(double x, double y) {
     int codigo = 0; // DENTRO
 
     // MUDANÇA AQUI: Use 0.0 e 1.0
-    if (x < 0.0)       codigo |= 1; // ESQUERDA
+    if (x < -1.0)       codigo |= 1; // ESQUERDA
     else if (x > 1.0)  codigo |= 2; // DIREITA
-    if (y < 0.0)       codigo |= 4; // ABAIXO
+    if (y < -1.0)       codigo |= 4; // ABAIXO
     else if (y > 1.0)  codigo |= 8; // ACIMA
 
     return codigo;

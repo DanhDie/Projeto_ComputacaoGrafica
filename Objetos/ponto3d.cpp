@@ -31,7 +31,7 @@ void Ponto3D::setZ(double val) {
     (*this)[2][0] = val;
 }
 
-QPointF Ponto3D::toQPointF() const {
+QPoint Ponto3D::toQPoint() const {
     // Projeção ortogonal (descarta Z)
-    return QPointF(x(), y());
+    return QPoint(x(), y());
 }

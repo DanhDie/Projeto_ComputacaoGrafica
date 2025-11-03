@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     * Tome nota do novo padrão de instanciamento de objetos . . .
     * Dava para fazer em duas linhas separadas, claro, mas deu preguiça
     */
-    ObjWindow* window = new ObjWindow("janela", 0, 0, 400, 300);
+    ObjWindow* window = new ObjWindow("janela", 0, 0, 0, 400, 300, 1);
     df.adicionarObjeto(window);
 
 
@@ -42,8 +42,8 @@ int main(int argc, char *argv[])
     df.adicionarObjeto(new ObjModelo3D("umbreon",":/Modelos/Modelos/UmbreonLowPoly.obj"));
 
 
-
-    df.adicionarObjeto(new ObjTriangulo ("Triangulo", 50, 50, 150, 50, 100, 150));
+    // Eu vou apagar você ObjTriangulo, seu cancer de merda
+    df.adicionarObjeto(new ObjTriangulo ("Triangulo", Ponto3D(50, 50), Ponto3D(150, 50), Ponto3D(100, 150)));
 
     df.adicionarObjeto(new ObjNathGhostKiller ("natalia kikuti"));
 

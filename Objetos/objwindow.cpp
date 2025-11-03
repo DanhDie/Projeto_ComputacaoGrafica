@@ -102,7 +102,7 @@ void ObjWindow::setRotacao(double angulo) { anguloRotacao = angulo; }
 double ObjWindow::getRotacao() const { return anguloRotacao; }
 
 void ObjWindow::desenhar(QPainter*, const Viewport&, const ObjWindow&) const {}
-QVector<QPoint> ObjWindow::ajustarPontos(const Viewport&, const ObjWindow&, bool) const { return {}; }
+QVector<QPoint> ObjWindow::ajustarPontos(const Viewport&, const ObjWindow&, bool&) const { return {}; }
 
 
 

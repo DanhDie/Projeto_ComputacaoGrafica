@@ -19,11 +19,5 @@ public:
 
 protected:
     QVector<QPoint> ajustarPontos(const Viewport &vp, const ObjWindow &window, bool &desenhar) const;
-
-    // Função interna para retornar pontos 3D
-    QVector<Ponto3D> getPontos3D() const { return pontos3D; }
-
-private:
-    QVector<Ponto3D> pontos3D; // Armazena os pontos da linha em 3D
 };
 #endif // OBJLINHA_H

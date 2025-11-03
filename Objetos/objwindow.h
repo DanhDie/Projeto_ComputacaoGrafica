@@ -12,8 +12,8 @@ public:
     void atualizarLimites(double xmin, double ymin, double zmin,
                           double xmax, double ymax, double zmax);
 
-    Ponto3D normalizar(const Ponto3D p) const;
-    Ponto3D desnormalizar(const Ponto3D p);
+    Ponto3D normalizar(const Ponto3D& p) const;
+    Ponto3D desnormalizar(const Ponto3D& p);
 
     // Getters
     double getXmin() const;
@@ -31,7 +31,7 @@ public:
     void desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const override;
 
 protected:
-    QVector<QPoint> ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const;
+    QVector<QPoint> ajustarPontos(const Viewport &vp,const ObjWindow &window,bool& desenhar) const override;
 
 private:
     double anguloRotacao = 0.0; // graus

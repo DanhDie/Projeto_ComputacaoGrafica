@@ -85,3 +85,4 @@ Ponto3D Sol::getPontoReferencia() const
     return Ponto3D(somaX / subs.size(), somaY / subs.size(), somaZ / subs.size());
 }
 
+QVector<QPoint>Sol::ajustarPontos(const Viewport &vp,const ObjWindow &window,bool &desenhar) const{}

@@ -27,10 +27,33 @@ void ObjModelo3D::transformar(const Matriz& transformacao) {
     }
 }
 
-Ponto ObjModelo3D::getPontoReferencia() const {
-    if (vertices.isEmpty()) return Ponto(0, 0);
-    const Ponto3D& v = vertices.first();
-    return Ponto(v.x(), v.y());
+Ponto3D ObjModelo3D::getPontoReferencia() const {
+    // 1. Trata o caso de não haver vértices
+    if (vertices.isEmpty()) {
+        return Ponto3D(0, 0, 0);
+    }
+
+    // 2. Inicializa as somas das coordenadas
+    // Usar double garante precisão na soma e na divisão
+    double somaX = 0.0;
+    double somaY = 0.0;
+    double somaZ = 0.0;
+
+    // 3. Itera por TODOS os vértices e soma suas coordenadas
+    for (const Ponto3D& v : vertices) {
+        somaX += v.x();
+        somaY += v.y();
+        somaZ += v.z();
+    }
+
+    // 4. Calcula a média dividindo a soma pelo número de vértices
+    int numVertices = vertices.size();
+    double centroX = somaX / numVertices;
+    double centroY = somaY / numVertices;
+    double centroZ = somaZ / numVertices;
+
+    // 5. Retorna o novo Ponto3D que representa o centroide
+    return Ponto3D(centroX, centroY, centroZ);
 }
 
 QVector<QPoint> ObjModelo3D::projetarVertices2D(const Viewport& vp, const ObjWindow& window) const {
@@ -38,9 +61,8 @@ QVector<QPoint> ObjModelo3D::projetarVertices2D(const Viewport& vp, const ObjWin
     resultado.reserve(vertices.size());
 
     for (const Ponto3D& v : vertices) {
-        Ponto p2D(v.x(), v.y());
-        Ponto pNorm = window.normalizar(p2D);
-        Ponto pTela = vp.mapear(pNorm);
+        Ponto3D pNorm = window.normalizar(v);
+        Ponto3D pTela = vp.mapear(pNorm);
         resultado.append(pTela.toQPoint());
     }
 
@@ -69,7 +91,7 @@ void ObjModelo3D::desenhar(QPainter* painter, const Viewport& vp, const ObjWindo
     }
 }
 
-QVector<QPoint> ObjModelo3D::ajustarPontos(const Viewport &vp, const ObjWindow &window, bool desenhar) const {
+QVector<QPoint> ObjModelo3D::ajustarPontos(const Viewport &vp, const ObjWindow &window, bool& desenhar) const {
     // A classe 3D não usa isso diretamente, mas precisa implementar pois é virtual puro
     Q_UNUSED(vp);
     Q_UNUSED(window);

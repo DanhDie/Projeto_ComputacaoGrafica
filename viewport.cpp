@@ -6,7 +6,7 @@ Viewport::Viewport(double vxmin, double vymin, double vxmax, double vymax)
 
 Ponto3D Viewport::mapear(const Ponto3D& pNorm) const {
     double xn = (pNorm.x() + 1) / 2.0;
-    double yn = (1 - pNorm.y()) / 2.0; // inverte o Y para tela
+    double yn = (pNorm.y() + 1) / 2.0; // inverte o Y para tela
     double xTela = vxmin + xn * (vxmax - vxmin);
     double yTela = vymin + yn * (vymax - vymin);
     return Ponto3D(xTela, yTela, pNorm.z());

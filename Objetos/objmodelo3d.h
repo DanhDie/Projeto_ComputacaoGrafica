@@ -17,7 +17,7 @@ public:
 
     void desenhar(QPainter* painter, const Viewport& vp, const ObjWindow& window) const override;
     void transformar(const Matriz& transformacao) override;
-    Ponto getPontoReferencia() const override;
+    Ponto3D getPontoReferencia() const override;
 
     bool carregarModelo(const QString& caminhoOBJ);
 
@@ -27,7 +27,7 @@ private:
     LeitorOBJ leitor;
 
     // implementação obrigatória (classe base tem =0)
-    QVector<QPoint> ajustarPontos(const Viewport &vp, const ObjWindow &window, bool &desenhar) const;
+    QVector<QPoint> ajustarPontos(const Viewport &vp, const ObjWindow &window, bool& desenhar) const;
 
     QVector<QPoint> projetarVertices2D(const Viewport& vp, const ObjWindow& window) const;
 };

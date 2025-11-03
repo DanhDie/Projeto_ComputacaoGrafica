@@ -17,7 +17,7 @@ public:
     void setY(double val);
     void setZ(double val);
 
-    QPointF toQPointF() const; // Projeção ortogonal simples (x, y)
+    QPoint toQPoint() const; // Projeção ortogonal simples (x, y)
 };
 
 #endif // PONTO3D_H

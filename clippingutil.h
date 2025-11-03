@@ -8,6 +8,7 @@ class Clipping {
 public:
     // --- Cálculo de códigos de região e clipping de linhas (2D com Z preservado) ---
     static void calcularRC(const Ponto3D& p, int RC[4]);
+    static bool validarCoord(double v);
     static void calcularClipping(Ponto3D &p, double m, int RC[4]);
     static bool cohenSutherland(Ponto3D& p1, Ponto3D& p2);
 

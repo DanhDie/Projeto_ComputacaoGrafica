@@ -3,6 +3,7 @@
 #include "ponto3d.h"
 #include <QPainter>
 #include "clippingutil.h"
+#include <QDebug>
 
 // ":" Neste contexto significa inicialização; O ObjLinha inicializa a si mesmo e instancia um Objeto
 // para guardar seu nome e pontos
@@ -23,15 +24,19 @@ void ObjLinha::desenhar(QPainter* painter, const Viewport &vp, const ObjWindow &
 
 QVector<QPoint> ObjLinha::ajustarPontos(const Viewport &vp, const ObjWindow &window, bool &desenhar) const {
     QVector<QPoint> pontosTela;
-    const QVector<Ponto3D> pts = this->getPontos3D(); // obtém os pontos 3D
+    const QVector<Ponto3D> pts = this->getPontos(); // obtém os pontos 3D
 
+    if (pts.size() < 2) {
+        desenhar = false;
+        return pontosTela; // Retorna a lista vazia
+    }
     // Cópia dos pontos
     Ponto3D p1 = pts[0];
     Ponto3D p2 = pts[1];
 
     // Normalização das cópias (2D dentro do window)
-    Ponto3D p1Norm = window.normalizar(Ponto3D(p1.x(), p1.y(), p1.z()));
-    Ponto3D p2Norm = window.normalizar(Ponto3D(p2.x(), p2.y(), p2.z()));
+    Ponto3D p1Norm = window.normalizar(p1);
+    Ponto3D p2Norm = window.normalizar(p2);
 
     // Cohen-Sutherland
     desenhar = Clipping::cohenSutherland(p1Norm, p2Norm);
@@ -52,8 +57,8 @@ QVector<QPoint> ObjLinha::ajustarPontos(const Viewport &vp, const ObjWindow &win
 
 Ponto3D ObjLinha::getPontoReferencia() const {
     // Para uma linha, pode ser o ponto médio.
-    const Ponto3D& p1 = pontos3D[0];
-    const Ponto3D& p2 = pontos3D[1];
+    const Ponto3D& p1 = pontos[0];
+    const Ponto3D& p2 = pontos[1];
     double midX = (p1.x() + p2.x()) / 2.0;
     double midY = (p1.y() + p2.y()) / 2.0;
     double midZ = (p1.z() + p2.z()) / 2.0;
