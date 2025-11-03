@@ -75,17 +75,18 @@ void MainWindow :: setDisplayFile(DisplayFile *displayFile){
     ui->comboBox_Re->addItem("z");
 }
 
-Ponto MainWindow::refPonto(Objeto *obj){
+Ponto3D MainWindow::refPonto(Objeto *obj){
     if (obj == nullptr) {
-        return Ponto(0,0); // Segurança
+        return Ponto3D(0,0,0); // Segurança
     }
     // Graças ao polimorfismo, a versão correta de getPontoReferencia()
     // será chamada automaticamente, seja para um Círculo, Linha ou Complexo.
     return obj->getPontoReferencia();
 }
+
 void MainWindow::defaultSpinBox(){
     if(!ui->comboBox->currentObjeto()) return;
-    Ponto p=refPonto(ui->comboBox->currentObjeto());
+    Ponto3D p=refPonto(ui->comboBox->currentObjeto());
 
     ui->doubleSpinBox_R->setValue(0);
     ui->doubleSpinBox_Rx->setValue(p[0][0]);
@@ -112,30 +113,27 @@ void MainWindow::onComboBoxChanged(){
 }
 
 void MainWindow::onBtEsquerdoPress(QPointF p){
-    // Conversão do clique (viewport -> normalizado)
     Viewport vp(0, 0, ui->frame->width(), ui->frame->height());
-    Ponto pNorm = vp.desmapear(p.toPoint());
+    Ponto3D pNorm = vp.desmapear(p.toPoint()); // ✅ Correto
 
-    // Pega a janela de clipping (objeto window)
     ObjWindow* window = dynamic_cast<ObjWindow*>(df->getObjeto("janela"));
     if (!window) return;
 
-    // Conversão do ponto normalizado -> coordenadas do mundo (window)
-    Ponto pWindow = window->desnormalizar(pNorm);
+    Ponto3D pWindow = window->desnormalizar(pNorm); // ✅ Correto
 
-    // Agora sim você usa o ponto real:
     ui->doubleSpinBox_Rx->setValue(pWindow[0][0]);
     ui->doubleSpinBox_Ry->setValue(pWindow[1][0]);
-    ui->doubleSpinBox_Rz->setValue(pWindow[2][0]);
+    ui->doubleSpinBox_Rz->setValue(pWindow[2][0]); // ✅ Agora usa coordenada Z
 
+    // ⚠️ Código comentado - se for usar, atualize para Ponto3D:
     if (!ui->comboBox->currentObjeto()) return;
 
     /*
-    //Código que cálcula distância para translação do objeto ao clicar na tela
-    Ponto pAux = refPonto(ui->comboBox->currentObjeto());
+    Ponto3D pAux = refPonto(ui->comboBox->currentObjeto()); // ✅ Agora é Ponto3D
 
     ui->doubleSpinBox_Tx->setValue(pWindow[0][0] - pAux[0][0]);
     ui->doubleSpinBox_Ty->setValue(pWindow[1][0] - pAux[1][0]);
+    ui->doubleSpinBox_Tz->setValue(pWindow[2][0] - pAux[2][0]); // ✅ Adicione Z
     */
 }
 
@@ -164,7 +162,7 @@ void MainWindow::onAplicarTransformacao(){
         return;
     }
 
-    Ponto p=refPonto(obj);
+    Ponto3D p=refPonto(obj);
     const char *r=(ui->comboBox_Re->currentText()).toUtf8().constData();
     //Matriz da Translação
     Matriz T = Matriz::translacao(ui->doubleSpinBox_Tx->value(),

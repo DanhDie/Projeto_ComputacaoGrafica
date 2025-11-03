@@ -1,24 +1,26 @@
 #ifndef OBJCIRCULO_H
 #define OBJCIRCULO_H
 
-#include "Objeto.h"
+#include "objeto.h"
+#include "ponto3d.h"
+#include <QPoint>
+#include <QVector>
+
 
 class ObjCirculo : public Objeto
 {
 public:
-    ObjCirculo(QString nome, int cenX, int cenY, int raio, TipoObjeto tipo = Circulo);
-    void desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const override;
-    void transformar(const Matriz& transformacao) override;
-    Ponto getPontoReferencia() const override;
+    ObjCirculo(QString nome, const Ponto3D& centro, double raio, TipoObjeto tipo = TipoObjeto::Poligono);
 
-    // Métodos adicionais para círculo
-    QPoint getCentro() const;
-    int getRaio() const;
-    void setCentro(const QPoint& centro);
-    void setRaio(int raio);
+    void desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window) const override;
+    Ponto3D getPontoReferencia() const override;
 
 protected:
-    QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const override;
+    QVector<QPoint> ajustarPontos(const Viewport &vp, const ObjWindow &window, bool &desenhar) const;
+
+private:
+    Ponto3D centro;
+    double raio;
 };
 
 #endif // OBJCIRCULO_H

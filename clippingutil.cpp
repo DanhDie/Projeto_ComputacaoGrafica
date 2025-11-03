@@ -1,9 +1,10 @@
 #include "clippingutil.h"
 #include <QWidget>
 #include <cmath>
+#include "ponto3d.h"
 
 
-void Clipping::calcularRC(const Ponto& p, int RC[4]) {
+void Clipping::calcularRC(const Ponto3D& p, int RC[4]) {
     const double Xmin = 0.0, Xmax = 1.0;
     const double Ymin = 0.0, Ymax = 1.0;
     RC[0] = RC[1] = RC[2] = RC[3] = 0;
@@ -14,7 +15,7 @@ void Clipping::calcularRC(const Ponto& p, int RC[4]) {
     if (p.x() < Xmin) RC[3] = 1; // Esquerda
 }
 
-void Clipping::calcularClipping(Ponto &p, double m, int RC[4]) {
+void Clipping::calcularClipping(Ponto3D &p, double m, int RC[4]) {
     const double Xmin = 0.0, Xmax = 1.0;
     const double Ymin = 0.0, Ymax = 1.0;
     double x = p.x();
@@ -29,7 +30,7 @@ void Clipping::calcularClipping(Ponto &p, double m, int RC[4]) {
     p.setY(y);
 }
 
-bool Clipping::cohenSutherland(Ponto& p1, Ponto& p2) {
+bool Clipping::cohenSutherland(Ponto3D& p1, Ponto3D& p2) {
     int RC1[4] = {0}, RC2[4] = {0};
     calcularRC(p1, RC1);
     calcularRC(p2, RC2);
@@ -52,13 +53,13 @@ bool Clipping::cohenSutherland(Ponto& p1, Ponto& p2) {
     return true;
 }
 
-bool Clipping::clipPoligono(const QVector<Ponto>& poligonoEntrada, QVector<Ponto>& poligonoSaida) {
+bool Clipping::clipPoligono(const QVector<Ponto3D>& poligonoEntrada, QVector<Ponto3D>& poligonoSaida) {
     if (poligonoEntrada.size() < 3) {
         return false;
     }
 
-    QVector<Ponto> listaAtual = poligonoEntrada;
-    QVector<Ponto> listaProxima;
+    QVector<Ponto3D> listaAtual = poligonoEntrada;
+    QVector<Ponto3D> listaProxima;
 
     // MUDANÇA AQUI: Use 0.0 e 1.0 em vez de -1.0 e 1.0
     // Borda esquerda (x = 0.0)
@@ -89,11 +90,11 @@ bool Clipping::clipPoligono(const QVector<Ponto>& poligonoEntrada, QVector<Ponto
     return poligonoSaida.size() >= 3;
 }
 
-void Clipping::PolygonClip::clipAgainstEdge(const QVector<Ponto>& entrada, QVector<Ponto>& saida,
+void Clipping::PolygonClip::clipAgainstEdge(const QVector<Ponto3D>& entrada, QVector<Ponto3D>& saida,
                                             int edge, double clipValue, bool isVertical) {
     if (entrada.empty()) return;
 
-    Ponto pontoAnterior = entrada.last();
+    Ponto3D pontoAnterior = entrada.last();
     bool anteriorDentro = false;
 
     if (isVertical)
@@ -101,7 +102,7 @@ void Clipping::PolygonClip::clipAgainstEdge(const QVector<Ponto>& entrada, QVect
     else
         anteriorDentro = (edge == 4) ? (pontoAnterior.y() >= clipValue) : (pontoAnterior.y() <= clipValue);
 
-    for (const Ponto& pontoAtual : entrada) {
+    for (const Ponto3D& pontoAtual : entrada) {
         bool atualDentro = false;
 
         if (isVertical)
@@ -111,12 +112,12 @@ void Clipping::PolygonClip::clipAgainstEdge(const QVector<Ponto>& entrada, QVect
 
         if (atualDentro) {
             if (!anteriorDentro) {
-                Ponto interseccao = calcularInterseccao(pontoAnterior, pontoAtual, edge, clipValue, isVertical);
+                Ponto3D interseccao = calcularInterseccao(pontoAnterior, pontoAtual, edge, clipValue, isVertical);
                 saida.append(interseccao);
             }
             saida.append(pontoAtual);
         } else if (anteriorDentro) {
-            Ponto interseccao = calcularInterseccao(pontoAnterior, pontoAtual, edge, clipValue, isVertical);
+            Ponto3D interseccao = calcularInterseccao(pontoAnterior, pontoAtual, edge, clipValue, isVertical);
             saida.append(interseccao);
         }
 
@@ -125,9 +126,9 @@ void Clipping::PolygonClip::clipAgainstEdge(const QVector<Ponto>& entrada, QVect
     }
 }
 
-Ponto Clipping::PolygonClip::calcularInterseccao(const Ponto& p1, const Ponto& p2,
-                                                 int edge, double clipValue, bool isVertical) {
-    double x, y;
+Ponto3D Clipping::PolygonClip::calcularInterseccao(const Ponto3D& p1, const Ponto3D& p2,
+                                                     int edge, double clipValue, bool isVertical) {
+    double x, y, z = (p1.z() + p2.z()) / 2.0; // mantém profundidade
 
     if (isVertical) {
         x = clipValue;
@@ -139,7 +140,7 @@ Ponto Clipping::PolygonClip::calcularInterseccao(const Ponto& p1, const Ponto& p
         x = p1.x() + t * (p2.x() - p1.x());
     }
 
-    return Ponto(x, y);
+    return Ponto3D(x, y, z);
 }
 
 int Clipping::PolygonClip::calcularCodigoRegiao(double x, double y) {
@@ -155,23 +156,23 @@ int Clipping::PolygonClip::calcularCodigoRegiao(double x, double y) {
 }
 
 // Aproxima o círculo como um polígono regular
-static QVector<Ponto> gerarAproximacaoCirculo(const Ponto& centro, double raio, int segmentos = 128) {
-    QVector<Ponto> resultado;
+static QVector<Ponto3D> gerarAproximacaoCirculo(const Ponto3D& centro, double raio, int segmentos = 128) {
+    QVector<Ponto3D> resultado;
     resultado.reserve(segmentos);
     const double TWO_PI = 2.0 * M_PI;
     for (int i = 0; i < segmentos; ++i) {
         double theta = (TWO_PI * i) / segmentos;
         double x = centro.x() + raio * std::cos(theta);
         double y = centro.y() + raio * std::sin(theta)*1.3;
-        resultado.append(Ponto(x, y));
+        resultado.append(Ponto3D(x, y, centro.z()));
     }
     return resultado;
 }
 
 // Usa Sutherland-Hodgman sobre a aproximação
-bool Clipping::clipCirculo(const Ponto& centro, double raio, QVector<Ponto>& poligonoSaida, int segmentos) {
-    QVector<Ponto> aproximacao = gerarAproximacaoCirculo(centro, raio, segmentos);
-    QVector<Ponto> resultado;
+bool Clipping::clipCirculo(const Ponto3D& centro, double raio, QVector<Ponto3D>& poligonoSaida, int segmentos) {
+    QVector<Ponto3D> aproximacao = gerarAproximacaoCirculo(centro, raio, segmentos);
+    QVector<Ponto3D> resultado;
     bool visivel = clipPoligono(aproximacao, resultado);
     poligonoSaida = resultado;
     return visivel;

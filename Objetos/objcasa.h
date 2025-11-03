@@ -2,28 +2,31 @@
 #define OBJCASA_H
 
 #include <QVector>
-#include<QPainter>
+#include <QPainter>
 
-#include "displayfile.h"
-#include "objlinha.h"
-#include "objcirculo.h"
+#include "objeto.h"
 #include "objtriangulo.h"
 #include "objpoligono.h"
+#include "objcirculo.h"
+#include "ponto3d.h"
+#include "viewport.h"
+#include "objwindow.h"
+#include "matriz.h"
 
 class ObjCasa : public Objeto
 {
 public:
-    ObjCasa(QString nome, int x, int y, TipoObjeto tipo = Complexo);
-    ObjCasa(QString nome);
+    ObjCasa(QString nome, double x = 0, double y = 0, TipoObjeto tipo = TipoObjeto::Complexo);
     ~ObjCasa();
 
     const QVector<Objeto*> getObjetos() const;
-    void desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const override;
+
+    void desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window) const override;
     void transformar(const Matriz& transformacao) override;
-    Ponto getPontoReferencia() const override;
+    Ponto3D getPontoReferencia() const override;
 
 protected:
-    QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const override;
+    QVector<QPoint> ajustarPontos(const Viewport &vp, const ObjWindow &window, bool &desenhar) const;
 
 private:
     QVector<Objeto*> objPrimitivos;

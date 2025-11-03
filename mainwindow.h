@@ -19,7 +19,7 @@ public:
     ~MainWindow();
 
     void setDisplayFile(DisplayFile *displayFile);
-    Ponto refPonto(Objeto* obj);
+    Ponto3D refPonto(Objeto* obj);
     void defaultSpinBox();
 
 private slots:

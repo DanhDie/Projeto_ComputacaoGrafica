@@ -1,7 +1,7 @@
 #ifndef VIEWPORT_H
 #define VIEWPORT_H
 
-#include "ponto.h"
+#include "ponto3d.h"
 
 class Viewport {
 private:
@@ -10,13 +10,13 @@ private:
 public:
     Viewport(double vxmin = 0, double vymin = 0, double vxmax = 800, double vymax = 600);
 
-    // Converte ponto normalizado [0,1] para coordenada de tela
-    Ponto mapear(const Ponto& pNormalizado) const;
-    Ponto desmapear(QPoint p);
-    double getVxmax()const;
-    double getVxmin()const;
-    double getVymax()const;
-    double getVymin()const;
+    Ponto3D mapear(const Ponto3D& pNormalizado) const;
+    Ponto3D desmapear(const QPoint& p) const;
+
+    double getVxmax() const;
+    double getVxmin() const;
+    double getVymax() const;
+    double getVymin() const;
 };
 
 #endif // VIEWPORT_H

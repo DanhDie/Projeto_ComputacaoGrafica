@@ -1,89 +1,84 @@
 #include "objtriangulo.h"
-#include "ponto.h"
+#include "ponto3d.h"
 #include <QPainter>
 #include <limits>
 #include "Objetos/objwindow.h"
 #include "clippingutil.h"
 
-ObjTriangulo::ObjTriangulo(QString nome, int priX, int priY, int segX, int segY, int terX, int terY, TipoObjeto tipo)
-    : Objeto (nome, tipo){
-    adicionarPonto(Ponto(priX,priY));
-    adicionarPonto(Ponto(segX,segY));
-    adicionarPonto(Ponto(terX,terY));
+// Construtor: recebe 3 pontos 3D
+ObjTriangulo::ObjTriangulo(QString nome,
+                           const Ponto3D& p1, const Ponto3D& p2, const Ponto3D& p3,
+                           TipoObjeto tipo)
+    : Objeto(nome, tipo)
+{
+    adicionarPonto(p1);
+    adicionarPonto(p2);
+    adicionarPonto(p3);
 }
 
-void ObjTriangulo::desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const{
-    const QVector<Ponto> pts = this->getPontos();
+// Desenha o triângulo (projetando 3D -> 2D)
+void ObjTriangulo::desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window) const {
+    const QVector<Ponto3D> pts = this->getPontos();
 
-    if (pts.size() < 3) {
-        return;
+    if (pts.size() < 3) return;
+
+    // Normaliza pontos
+    QVector<Ponto3D> pontosNormalizados;
+    for (const Ponto3D& p : pts) {
+        pontosNormalizados.append(window.normalizar(p));
     }
 
-    // Normaliza todos os pontos
-    QVector<Ponto> pontosNormalizados;
-    for (const Ponto& pOriginal : pts) {
-        Ponto pNorm = window.normalizar(pOriginal);
-        pontosNormalizados.append(pNorm);
-    }
-
-    // Aplica clipping no triângulo
-    QVector<Ponto> pontosClipped;
+    // Clipping 3D
+    QVector<Ponto3D> pontosClipped;
     bool deveDesenhar = Clipping::clipPoligono(pontosNormalizados, pontosClipped);
+    if (!deveDesenhar || pontosClipped.size() < 3) return;
 
-    if (!deveDesenhar || pontosClipped.size() < 3) {
-        return;
-    }
-
-    // Mapeia para a viewport e desenha
+    // Projeta para a tela
     QVector<QPoint> pontosTela;
-    for (const Ponto& pNorm : pontosClipped) {
-        Ponto pTela = vp.mapear(pNorm);
-        pontosTela.append(pTela.toQPoint());
+    for (const Ponto3D& p : pontosClipped) {
+        Ponto3D pTela = vp.mapear(p);
+        pontosTela.append(QPoint(pTela.x(), pTela.y()));
     }
 
     painter->drawPolygon(pontosTela);
 }
 
-// Mantenha ajustarPontos vazia ou básica para compatibilidade
-QVector<QPoint> ObjTriangulo::ajustarPontos(const Viewport &vp, const ObjWindow &window, bool desenhar) const {
+// Ajusta pontos para a viewport (projeção 3D -> 2D)
+QVector<QPoint> ObjTriangulo::ajustarPontos(const Viewport &vp, const ObjWindow &window, bool &desenhar) const {
     QVector<QPoint> pontosTela;
-    // Implementação básica ou vazia, já que não é mais usada
-    const QVector<Ponto> pts = this->getPontos();
+    const QVector<Ponto3D> pts = this->getPontos();
 
-    for (const Ponto& pOriginal : pts) {
-        Ponto pNorm = window.normalizar(pOriginal);
-        Ponto pTela = vp.mapear(pNorm);
-        pontosTela.append(pTela.toQPoint());
+    for (const Ponto3D& p : pts) {
+        Ponto3D pNorm = window.normalizar(p);
+        Ponto3D pTela = vp.mapear(pNorm);
+        pontosTela.append(QPoint(pTela.x(), pTela.y()));
     }
 
     return pontosTela;
 }
 
-Ponto ObjTriangulo::getPontoReferencia() const {
-    const QVector<Ponto>& vertices = this->getPontos();
+// Retorna ponto de referência (centro da caixa delimitadora 3D)
+Ponto3D ObjTriangulo::getPontoReferencia() const {
+    const QVector<Ponto3D>& vertices = this->getPontos();
+    if (vertices.isEmpty()) return Ponto3D(0, 0, 0);
 
-    if (vertices.isEmpty()) {
-        return Ponto(0, 0);
-    }
+    double minX = vertices[0].x(), maxX = vertices[0].x();
+    double minY = vertices[0].y(), maxY = vertices[0].y();
+    double minZ = vertices[0].z(), maxZ = vertices[0].z();
 
-    // Inicializa com os valores do primeiro ponto
-    double minX = vertices[0].x();
-    double maxX = vertices[0].x();
-    double minY = vertices[0].y();
-    double maxY = vertices[0].y();
-
-    // Itera a partir do segundo ponto para encontrar os extremos
     for (int i = 1; i < vertices.size(); ++i) {
-        const Ponto& p = vertices[i];
+        const Ponto3D& p = vertices[i];
         if (p.x() < minX) minX = p.x();
         if (p.x() > maxX) maxX = p.x();
         if (p.y() < minY) minY = p.y();
         if (p.y() > maxY) maxY = p.y();
+        if (p.z() < minZ) minZ = p.z();
+        if (p.z() > maxZ) maxZ = p.z();
     }
 
-    // Calcula o centro da caixa delimitadora
-    double centroX = minX + (maxX - minX) / 2.0;
-    double centroY = minY + (maxY - minY) / 2.0;
+    double cx = minX + (maxX - minX) / 2.0;
+    double cy = minY + (maxY - minY) / 2.0;
+    double cz = minZ + (maxZ - minZ) / 2.0;
 
-    return Ponto(centroX, centroY);
+    return Ponto3D(cx, cy, cz);
 }
