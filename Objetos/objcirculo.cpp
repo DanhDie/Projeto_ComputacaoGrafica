@@ -5,26 +5,23 @@
 #include <QPainter>
 #include <cmath>
 
-ObjCirculo::ObjCirculo(QString nome, int cenX, int cenY, int raio, TipoObjeto tipo)
+ObjCirculo::ObjCirculo(QString nome, Ponto3D centro, int raio, TipoObjeto tipo)
     : Objeto(nome, tipo) {
-    adicionarPonto(Ponto(cenX, cenY)); // Ponto central
-    adicionarPonto(Ponto(raio, 0));    // Raio do círculo
+    adicionarPonto(centro); // Ponto central
+    adicionarPonto(Ponto3D(raio, 0));    // Raio do círculo
 }
 
 void ObjCirculo::desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window) const {
     // --- 1️⃣ Obtem centro e raio do círculo ---
-    Ponto centroMundo = pontos[0];
+    Ponto3D centroMundo = pontos[0];
     double raioMundo = pontos[1].x();
 
     // --- 2️⃣ Normaliza em relação à window ---
-    double xn = (centroMundo.x() - window.getXmin()) / (window.getXmax() - window.getXmin());
-    double yn = (centroMundo.y() - window.getYmin()) / (window.getYmax() - window.getYmin());
-    Ponto centroNorm(xn, yn);
-
-    double raioNorm = raioMundo / (window.getXmax() - window.getXmin());
+    Ponto3D centroNorm=window.normalizar(centroMundo);
+    double raioNorm = raioMundo * (2.0 / (window.getXmax() - window.getXmin()));
 
     // --- 3️⃣ Aplica o clipping de círculo ---
-    QVector<Ponto> pontosClip;
+    QVector<Ponto3D> pontosClip;
     bool visivel = Clipping::clipCirculo(centroNorm, raioNorm, pontosClip, 48);
 
     if (!visivel)
@@ -32,8 +29,8 @@ void ObjCirculo::desenhar(QPainter *painter, const Viewport &vp, const ObjWindow
 
     // --- 4️⃣ Mapeia os pontos recortados para a viewport ---
     QVector<QPoint> pontosTela;
-    for (const Ponto& p : pontosClip) {
-        Ponto pTela = vp.mapear(p);
+    for (const Ponto3D& p : pontosClip) {
+        Ponto3D pTela = vp.mapear(p);
         pontosTela.append(pTela.toQPoint());
     }
 
@@ -41,16 +38,16 @@ void ObjCirculo::desenhar(QPainter *painter, const Viewport &vp, const ObjWindow
     painter->drawPolygon(pontosTela);
 }
 
-QVector<QPoint> ObjCirculo::ajustarPontos(const Viewport &vp, const ObjWindow &window, bool desenhar) const {
+QVector<QPoint> ObjCirculo::ajustarPontos(const Viewport &vp, const ObjWindow &window, bool& desenhar) const {
     // Essa função não precisa mais calcular clipping manualmente,
     // mas podemos mantê-la caso outros usos a chamem.
     QVector<QPoint> pontosTela;
-    const QVector<Ponto> pts = this->getPontos();
+    const QVector<Ponto3D> pts = this->getPontos();
 
-    for (const Ponto& pOriginal : pts) {
-        Ponto p = pOriginal;
-        Ponto pNorm = window.normalizar(p);
-        Ponto pTela = vp.mapear(pNorm);
+    for (const Ponto3D& pOriginal : pts) {
+        Ponto3D p = pOriginal;
+        Ponto3D pNorm = window.normalizar(p);
+        Ponto3D pTela = vp.mapear(pNorm);
         pontosTela.append(pTela.toQPoint());
     }
 
@@ -63,7 +60,7 @@ void ObjCirculo::transformar(const Matriz& transformacao) {
     double escalaY = std::sqrt(transformacao[0][1] * transformacao[0][1] + transformacao[1][1] * transformacao[1][1]);
 
     // 2️⃣ Transforma o centro
-    Ponto centroAntigo = pontos[0];
+    Ponto3D centroAntigo = pontos[0];
     Matriz centroNovoMatriz = transformacao * centroAntigo;
     pontos[0].setX(centroNovoMatriz[0][0]);
     pontos[0].setY(centroNovoMatriz[1][0]);
@@ -77,7 +74,7 @@ void ObjCirculo::transformar(const Matriz& transformacao) {
     setRaio(static_cast<int>(std::round(novoRaio)));
 }
 
-Ponto ObjCirculo::getPontoReferencia() const {
+Ponto3D ObjCirculo::getPontoReferencia() const {
     return pontos[0]; // Centro
 }
 
