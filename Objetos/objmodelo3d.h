@@ -12,6 +12,7 @@
 #include <Objetos/ponto.h>
 
 class ObjModelo3D : public Objeto {
+    int modoP = 0; // 0 = ortogonal, 1 = perspectiva
 public:
     ObjModelo3D(QString nome, const QString& caminhoOBJ, TipoObjeto tipo = Modelo3D);
 

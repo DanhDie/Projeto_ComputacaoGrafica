@@ -32,14 +32,23 @@ int main(int argc, char *argv[])
     * Tome nota do novo padrão de instanciamento de objetos . . .
     * Dava para fazer em duas linhas separadas, claro, mas deu preguiça
     */
-    ObjWindow* window = new ObjWindow("janela", 0, 0, 0, 400, 300, 1);
+    ObjWindow* window = new ObjWindow("janela", -400, -500, 0, 400, 100, 1);
     df.adicionarObjeto(window);
 
 
     ObjModelo3D* pokemon1 = new ObjModelo3D("charizard",":/Modelos/Modelos/Charizard.obj");
     df.adicionarObjeto(pokemon1);
+    ObjModelo3D* pokemon2 = new ObjModelo3D("umbreon",":/Modelos/Modelos/UmbreonLowPoly.obj");
+    Matriz escala = Matriz::escala(2.5, 2.5, 3);
 
-    df.adicionarObjeto(new ObjModelo3D("umbreon",":/Modelos/Modelos/UmbreonLowPoly.obj"));
+    // 2️⃣ Translação — move o Umbreon para a direita e para baixo
+    Matriz translacao = Matriz::translacao(250, -50, 0);
+
+    // 3️⃣ Aplica as transformações
+    pokemon2->transformar(escala);
+    pokemon2->transformar(translacao);
+
+    df.adicionarObjeto(pokemon2);
 
 
     // Eu vou apagar você ObjTriangulo, seu cancer de merda
@@ -50,6 +59,7 @@ int main(int argc, char *argv[])
     df.adicionarObjeto(new ObjCasa("casa"));
 
     df.adicionarObjeto(new Sol("sol"));
+
 
     MainWindow w; //Pelo que eu entendi, MainWindow é a tela que vai aparecer no computador
     w.setDisplayFile(&df); //Chama setDisplayFile para fazer a arrumação das coisas na tela
