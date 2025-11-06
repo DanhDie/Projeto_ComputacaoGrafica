@@ -39,12 +39,10 @@ int main(int argc, char *argv[])
     ObjModelo3D* pokemon1 = new ObjModelo3D("charizard",":/Modelos/Modelos/Charizard.obj");
     df.adicionarObjeto(pokemon1);
     ObjModelo3D* pokemon2 = new ObjModelo3D("umbreon",":/Modelos/Modelos/UmbreonLowPoly.obj");
-    Matriz escala = Matriz::escala(2.5, 2.5, 3);
+    //pra eles nao ficarem se pegando
+    Matriz escala = Matriz::escala(2.5, 2.5, 2.5);
+    Matriz translacao = Matriz::translacao(250, -50, 10);
 
-    // 2️⃣ Translação — move o Umbreon para a direita e para baixo
-    Matriz translacao = Matriz::translacao(250, -50, 0);
-
-    // 3️⃣ Aplica as transformações
     pokemon2->transformar(escala);
     pokemon2->transformar(translacao);
 
