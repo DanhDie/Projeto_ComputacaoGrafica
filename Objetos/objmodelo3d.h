@@ -10,6 +10,7 @@
 #include <QPainter>
 #include <QString>
 #include <Objetos/ponto.h>
+#include <QPolygon>
 
 class ObjModelo3D : public Objeto {
     int modoP = 0; // 0 = ortogonal, 1 = perspectiva
@@ -27,10 +28,9 @@ private:
     QVector<LeitorOBJ::Face> faces;
     LeitorOBJ leitor;
 
-    // implementação obrigatória (classe base tem =0)
+    // Infelizmente, devido à implementação de objetos 3D, a ajustarPontos retorna um valor incompatível
     QVector<QPoint> ajustarPontos(const Viewport &vp, const ObjWindow &window, bool& desenhar) const;
-
-    QVector<QPoint> projetarVertices2D(const Viewport& vp, const ObjWindow& window) const;
+    QVector<QPolygon> processarPontos(const Viewport &vp, const ObjWindow &window, bool& desenhar) const;
 };
 
 #endif // OBJMODELO3D_H

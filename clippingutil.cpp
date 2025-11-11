@@ -66,7 +66,6 @@ bool Clipping::clipPoligono(const QVector<Ponto3D>& poligonoEntrada, QVector<Pon
     QVector<Ponto3D> listaAtual = poligonoEntrada;
     QVector<Ponto3D> listaProxima;
 
-    // MUDANÇA AQUI: Use 0.0 e 1.0 em vez de -1.0 e 1.0
     // Borda esquerda (x = 0.0)
     PolygonClip::clipAgainstEdge(listaAtual, listaProxima, 1, -1.0, true);
     listaAtual = listaProxima;
