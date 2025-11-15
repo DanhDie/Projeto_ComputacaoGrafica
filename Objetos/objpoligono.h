@@ -10,7 +10,7 @@ class ObjPoligono : public Objeto {
 public:
     ObjPoligono(QString nome, const Ponto3D* pontos, int quantidade, TipoObjeto tipo = TipoObjeto::Poligono);
 
-    void desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window) const override;
+    void desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window, int modoP) const override;
     Ponto3D getPontoReferencia() const override;
 
 protected:

@@ -10,7 +10,7 @@ ObjPoligono::ObjPoligono(QString nome, const Ponto3D* pontos, int quantidade, Ti
     }
 }
 
-void ObjPoligono::desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window) const {
+void ObjPoligono::desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window, int /*modoP*/) const {
     bool desenhar = true;
     QVector<QPoint> pontosTela = ajustarPontos(vp, window, desenhar);
     if (!desenhar || pontosTela.size() < 3) return;

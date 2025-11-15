@@ -17,7 +17,7 @@ ObjTriangulo::ObjTriangulo(QString nome,
 }
 
 // Desenha o triângulo (projetando 3D -> 2D)
-void ObjTriangulo::desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window) const {
+void ObjTriangulo::desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window, int /*modoP*/) const {
     const QVector<Ponto3D> pts = this->getPontos();
 
     if (pts.size() < 3) return;

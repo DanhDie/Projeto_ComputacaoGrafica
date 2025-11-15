@@ -17,7 +17,7 @@ class ObjModelo3D : public Objeto {
 public:
     ObjModelo3D(QString nome, const QString& caminhoOBJ, TipoObjeto tipo = Modelo3D);
 
-    void desenhar(QPainter* painter, const Viewport& vp, const ObjWindow& window) const override;
+    void desenhar(QPainter* painter, const Viewport& vp, const ObjWindow& window, int modoP) const override;
     void transformar(const Matriz& transformacao) override;
     Ponto3D getPontoReferencia() const override;
 
@@ -30,7 +30,7 @@ private:
 
     // Infelizmente, devido à implementação de objetos 3D, a ajustarPontos retorna um valor incompatível
     QVector<QPoint> ajustarPontos(const Viewport &vp, const ObjWindow &window, bool& desenhar) const;
-    QVector<QPolygon> processarPontos(const Viewport &vp, const ObjWindow &window, bool& desenhar) const;
+    QVector<QPolygon> processarPontos(const Viewport &vp, const ObjWindow &window, bool& desenhar, int modoP) const;
 };
 
 #endif // OBJMODELO3D_H

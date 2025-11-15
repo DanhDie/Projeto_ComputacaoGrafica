@@ -28,7 +28,7 @@ public:
     void setRotacao(double angulo); // graus
     double getRotacao() const;
 
-    void desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const override;
+    void desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window, int modoP) const override;
 
 protected:
     QVector<QPoint> ajustarPontos(const Viewport &vp,const ObjWindow &window,bool& desenhar) const override;

@@ -17,6 +17,25 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    //---------------------Modo de projeção---------------------
+    // Ortogonal
+    connect(ui->radioOrtogonal, &QRadioButton::toggled, this, [=](bool checked){
+        if (checked){
+            //modoP = 0;
+            ui->frame->setModoP(0);
+            ui->frame->update();
+        }
+    });
+
+    // Perspectiva
+    connect(ui->radioPerspectiva, &QRadioButton::toggled, this, [=](bool checked){
+        if (checked){
+            //modoP = 1;
+            ui->frame->setModoP(1);
+            ui->frame->update();
+        }
+    });
+
     //-----------AQUI PARA BAIXO TEM SLOTS!!!!!!!!!-----------
     //Esse aqui conecta o currentIndexChanged do QComboBox, para quando o usuário trocar a transformação
     QObject::connect(ui->comboBox, &MyComboBox::currentIndexChanged,this,&MainWindow::onComboBoxChanged);

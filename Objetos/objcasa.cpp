@@ -51,9 +51,9 @@ const QVector<Objeto*> ObjCasa::getObjetos() const {
 }
 
 // Desenha toda a casa
-void ObjCasa::desenhar(QPainter* painter, const Viewport &vp, const ObjWindow &window) const {
+void ObjCasa::desenhar(QPainter* painter, const Viewport &vp, const ObjWindow &window, int modoP) const {
     for (const Objeto* obj : objPrimitivos) {
-        obj->desenhar(painter, vp, window);
+        obj->desenhar(painter, vp, window, modoP);
     }
 }
 

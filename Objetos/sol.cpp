@@ -54,10 +54,10 @@ const QVector<Objeto*> Sol::getObjetos() const
     return objPrimitivos;
 }
 
-void Sol::desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window) const
+void Sol::desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window, int modoP) const
 {
     for (Objeto* obj : objPrimitivos) {
-        obj->desenhar(painter, vp, window);
+        obj->desenhar(painter, vp, window, modoP);
     }
 }
 

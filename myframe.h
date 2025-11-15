@@ -15,6 +15,9 @@ public:
     void adicionarObjeto(Objeto* obj);
     void setDisplayFile(DisplayFile* df);
 
+    void setModoP(int m) { modoP = m; }
+    int getModoP() const { return modoP; }
+
 signals:
     void BtEsquerdoPress(QPointF p);
 
@@ -24,6 +27,7 @@ protected:
 
 private:
     DisplayFile* displayFile;  // referência ao display file
+    int modoP = 1; // 1 = perspectiva (padrão) | 0 = ortogonal
 };
 
 #endif // MYFRAME_H

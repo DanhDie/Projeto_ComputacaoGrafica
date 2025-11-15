@@ -42,12 +42,14 @@ Ponto3D ObjModelo3D::getPontoReferencia() const {
     return Ponto3D(somaX / n, somaY / n, somaZ / n);
 }
 
-QVector<QPolygon>ObjModelo3D::processarPontos(const Viewport &vp, const ObjWindow &window, bool& desenhar) const{
+QVector<QPolygon>ObjModelo3D::processarPontos(const Viewport &vp, const ObjWindow &window, bool& desenhar, int modoP) const{
+
+
     QVector<QPolygon> poligonosDeTela;
 
     // Configuração de projeção
     // 🔹 0 = ortogonal | 1 = perspectiva
-    int modoP = 1;      // O certo pelo certo isso aqui tem que vir da interface
+    //int modoP = 1;      // O certo pelo certo isso aqui tem que vir da interface
     double d = 700.0;   // distância focal - Quanto maior menos efeito de perspectiva (se for muito pequeno da pra ver nada)
 
     Matriz Mpersp = Matriz::identidade();   // Matriz de projeção perspectiva
@@ -144,11 +146,11 @@ QVector<QPoint> ObjModelo3D::ajustarPontos(const Viewport& vp, const ObjWindow& 
     // Eu vou chorar de ter que deixar isso aqui vazio, mas acontece.
 }
 
-void ObjModelo3D::desenhar(QPainter* painter, const Viewport& vp, const ObjWindow& window) const {
+void ObjModelo3D::desenhar(QPainter* painter, const Viewport& vp, const ObjWindow& window, int modoP) const {
     if (vertices.isEmpty() || faces.isEmpty()) return;
 
     bool desenhar=true;
-    QVector<QPolygon> poligonosTela = processarPontos(vp, window, desenhar);
+    QVector<QPolygon> poligonosTela = processarPontos(vp, window, desenhar, modoP);
 
     if (!desenhar) return; // Se não há polígonos, não faz nada
 

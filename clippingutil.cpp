@@ -9,8 +9,9 @@ void Clipping::calcularRC(const Ponto3D& p, int RC[4]) {
     const double Ymin = -1.0, Ymax = 1.0;
     RC[0] = RC[1] = RC[2] = RC[3] = 0;
 
-    if (p.y() < Ymin) RC[0] = 1; // Borda superior
-    if (p.y() > Ymax) RC[1] = 1; // Borda inferior
+
+    if (p.y() > Ymax) RC[0] = 1; // Borda superior
+    if (p.y() < Ymin) RC[1] = 1; // Borda inferior
     if (p.x() > Xmax) RC[2] = 1; // Direita
     if (p.x() < Xmin) RC[3] = 1; // Esquerda
 }
@@ -36,27 +37,76 @@ void Clipping::calcularClipping(Ponto3D &p, double m, int RC[4]) {
     p.setY(y);
 }
 
-bool Clipping::cohenSutherland(Ponto3D& p1, Ponto3D& p2) {
-    int RC1[4] = {0}, RC2[4] = {0};
-    calcularRC(p1, RC1);
-    calcularRC(p2, RC2);
 
-    bool p1Dentro = !(RC1[0] || RC1[1] || RC1[2] || RC1[3]);
-    bool p2Dentro = !(RC2[0] || RC2[1] || RC2[2] || RC2[3]);
+bool Clipping::cohenSutherland(Ponto3D& p1, Ponto3D& p2)
+{
+    const double Xmin = -1.0, Xmax = 1.0;
+    const double Ymin = -1.0, Ymax = 1.0;
 
-    if (p1Dentro && p2Dentro) return true;
+    double x0 = p1.x(), y0 = p1.y();
+    double x1 = p2.x(), y1 = p2.y();
 
-    for (int i = 0; i < 4; ++i) {
-        if ((RC1[i] && RC2[i])) {return false;}
+    while (true)
+    {
+        int rc0[4], rc1[4];
+        calcularRC(Ponto3D(x0,y0,0), rc0);
+        calcularRC(Ponto3D(x1,y1,0), rc1);
+
+        // Aceita
+        if ((rc0[0] | rc0[1] | rc0[2] | rc0[3] |
+             rc1[0] | rc1[1] | rc1[2] | rc1[3]) == 0)
+        {
+            p1.setX(x0); p1.setY(y0);
+            p2.setX(x1); p2.setY(y1);
+            return true;
+        }
+
+        // Rejeição trivial
+        if ((rc0[0] & rc1[0]) || (rc0[1] & rc1[1]) ||
+            (rc0[2] & rc1[2]) || (rc0[3] & rc1[3]))
+        {
+            return false;
+        }
+
+        // Escolhe ponto fora
+        int *rcOut;
+        double x, y;
+
+        if (rc0[0] || rc0[1] || rc0[2] || rc0[3])
+            rcOut = rc0;
+        else
+            rcOut = rc1;
+
+        if (rcOut[0]) { // TOP
+            x = x0 + (x1 - x0) * (Ymax - y0) / (y1 - y0);
+            y = Ymax;
+        }
+        else if (rcOut[1]) { // BOTTOM
+            x = x0 + (x1 - x0) * (Ymin - y0) / (y1 - y0);
+            y = Ymin;
+        }
+        else if (rcOut[2]) { // RIGHT
+            y = y0 + (y1 - y0) * (Xmax - x0) / (x1 - x0);
+            x = Xmax;
+        }
+        else if (rcOut[3]) { // LEFT
+            y = y0 + (y1 - y0) * (Xmin - x0) / (x1 - x0);
+            x = Xmin;
+        }
+
+        // Atualiza o ponto cortado
+        if (rcOut == rc0) {
+            x0 = x; y0 = y;
+        } else {
+            x1 = x; y1 = y;
+        }
     }
-
-    double m = (p2.y() - p1.y()) / (p2.x() - p1.x());
-
-    calcularClipping(p1, m, RC1);
-    calcularClipping(p2, m, RC2);
-
-    return true;
 }
+
+
+
+
+
 
 bool Clipping::clipPoligono(const QVector<Ponto3D>& poligonoEntrada, QVector<Ponto3D>& poligonoSaida) {
     if (poligonoEntrada.size() < 3) {

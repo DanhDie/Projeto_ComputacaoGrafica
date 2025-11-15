@@ -36,7 +36,7 @@ public:
     virtual Ponto3D getPontoReferencia() const;
     virtual const QVector<Objeto*> getObjetos() const;
 
-    virtual void desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window) const =0;
+    virtual void desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window, int modoP) const =0;
     virtual void transformar(const Matriz& transformacao);
 
 

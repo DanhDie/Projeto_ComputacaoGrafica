@@ -4208,7 +4208,7 @@ selection-background-color: rgb(255, 170, 255);</string>
     <property name="geometry">
      <rect>
       <x>750</x>
-      <y>440</y>
+      <y>490</y>
       <width>211</width>
       <height>41</height>
      </rect>
@@ -18533,6 +18533,32 @@ selection-background-color: rgb(255, 170, 255);</string>
      </rect>
     </property>
    </widget>
+   <widget class="QRadioButton" name="radioOrtogonal">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>440</y>
+      <width>110</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ortogonal</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioPerspectiva">
+    <property name="geometry">
+     <rect>
+      <x>870</x>
+      <y>440</y>
+      <width>110</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Perspectiva</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -18540,7 +18566,7 @@ selection-background-color: rgb(255, 170, 255);</string>
      <x>0</x>
      <y>0</y>
      <width>994</width>
-     <height>25</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

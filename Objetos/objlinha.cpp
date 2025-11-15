@@ -13,7 +13,7 @@ ObjLinha::ObjLinha(QString nome, const Ponto3D& p1, const Ponto3D& p2)
     adicionarPonto(p2);
 }
 
-void ObjLinha::desenhar(QPainter* painter, const Viewport &vp, const ObjWindow &window) const {
+void ObjLinha::desenhar(QPainter* painter, const Viewport &vp, const ObjWindow &window, int /*modoP*/) const {
     bool desenhar = true;
     QVector<QPoint> pontosTela = ajustarPontos(vp, window, desenhar);
 

@@ -44,9 +44,9 @@ const QVector<Objeto*> ObjNathGhostKiller::getObjetos() const {
     return objPrimitivos;
 }
 
-void ObjNathGhostKiller::desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window) const {
+void ObjNathGhostKiller::desenhar(QPainter *painter, const Viewport &vp, const ObjWindow &window, int modoP) const {
     for (const Objeto* obj : getObjetos()) {
-        obj->desenhar(painter, vp, window);
+        obj->desenhar(painter, vp, window, modoP);
     }
 }
 
