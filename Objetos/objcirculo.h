@@ -6,10 +6,10 @@
 class ObjCirculo : public Objeto
 {
 public:
-    ObjCirculo(QString nome, int cenX, int cenY, int raio, TipoObjeto tipo = Circulo);
-    void desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const override;
+    ObjCirculo(QString nome, Ponto3D centro, int raio, TipoObjeto tipo = Circulo);
+    void desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window, int modoP) const override;
     void transformar(const Matriz& transformacao) override;
-    Ponto getPontoReferencia() const override;
+    Ponto3D getPontoReferencia() const override;
 
     // Métodos adicionais para círculo
     QPoint getCentro() const;
@@ -18,7 +18,7 @@ public:
     void setRaio(int raio);
 
 protected:
-    QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const override;
+    QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window,bool &desenhar) const override;
 };
 
 #endif // OBJCIRCULO_H

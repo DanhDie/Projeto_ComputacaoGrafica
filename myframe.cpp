@@ -60,7 +60,7 @@ void MyFrame::paintEvent(QPaintEvent *event) {
     for (Objeto* obj : displayFile->getObjetos()) {
         //Você não vão sentir diferença nenhuma, mas o SANGUE e SUOR que levou para só duas linhas de código serem necessárias
         //para desenhar, é inacredítavel.
-        obj->desenhar(&painter,vp,*window);
+        obj->desenhar(&painter, vp, *window, modoP);
     }
 }
 

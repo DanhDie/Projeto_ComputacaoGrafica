@@ -1,11 +1,11 @@
 #include "Objeto.h"
-#include "ponto.h"
+#include "ponto3d.h"
 #include "Objetos/objwindow.h"
 
 Objeto::Objeto(QString nome, TipoObjeto tipo)
     : nome(nome), tipo(tipo) {}
 
-void Objeto::adicionarPonto(const Ponto& p) {
+void Objeto::adicionarPonto(const Ponto3D& p) {
     pontos.append(p);
 }
 
@@ -18,30 +18,55 @@ TipoObjeto Objeto::getTipo() const {
 }
 
 //Retorna QVector<Pontos>
-QVector<Ponto> Objeto::getPontos() const {
+QVector<Ponto3D> Objeto::getPontos() const {
     return pontos;
 }
 
 void Objeto::transformar(const Matriz& transformacao) {
-    for (Ponto& ponto : pontos) {
-        // Multiplica cada ponto pela matriz de transformação
-        Matriz pontoTransformado = transformacao * ponto;
-        ponto.setX(pontoTransformado[0][0]);
-        ponto.setY(pontoTransformado[1][0]);
+    for (Ponto3D& ponto : pontos) {
+        // Representa o ponto como vetor coluna homogêneo [x, y, z, 1]^T
+        Matriz pontoMatriz(4, 1);
+        pontoMatriz[0][0] = ponto.x();
+        pontoMatriz[1][0] = ponto.y();
+        pontoMatriz[2][0] = ponto.z();
+        pontoMatriz[3][0] = 1.0;
+
+        // Multiplica pela matriz de transformação 4x4
+        Matriz resultado = transformacao * pontoMatriz;
+
+        // Recupera coordenadas transformadas
+        double x = resultado[0][0];
+        double y = resultado[1][0];
+        double z = resultado[2][0];
+        double w = resultado[3][0]; // componente homogênea
+
+        // Converte para coordenadas cartesianas
+        if (w != 0.0) {
+            x /= w;
+            y /= w;
+            z /= w;
+        }
+
+        // Atualiza o ponto
+        ponto.setX(x);
+        ponto.setY(y);
+        ponto.setZ(z);
     }
 }
 
-Ponto Objeto::getPontoReferencia() const {
+
+Ponto3D Objeto::getPontoReferencia() const {
     // Implementação padrão: calcula o centroide (lógica da sua função original)
     if (pontos.isEmpty()) {
-        return Ponto(0, 0);
+        return Ponto3D(0, 0, 0);
     }
-    double somaX = 0.0, somaY = 0.0;
-    for (const Ponto &p : pontos) {
+    double somaX = 0.0, somaY = 0.0, somaZ = 0.0;
+    for (const Ponto3D &p : pontos) {
         somaX += p.x(); // Usando .x() e .y() para mais clareza
         somaY += p.y();
+        somaZ += p.z();
     }
-    return Ponto(somaX / pontos.size(), somaY / pontos.size());
+    return Ponto3D(somaX / pontos.size(), somaY / pontos.size(), somaZ / pontos.size());
 }
 
 const QVector<Objeto*> Objeto::getObjetos() const{

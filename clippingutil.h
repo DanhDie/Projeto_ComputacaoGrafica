@@ -2,28 +2,28 @@
 #define CLIPPINGUTIL_H
 
 #include <QVector>
-#include "ponto.h"
+#include "ponto3d.h"
 
 class Clipping {
 public:
-    // --- Cálculo de códigos de região e clipping de linhas ---
-    static void calcularRC(const Ponto& p, int RC[4]);
-    static void calcularClipping(Ponto &p, double m, int RC[4]);
-    static bool cohenSutherland(Ponto& p1, Ponto& p2);
+    // --- Cálculo de códigos de região e clipping de linhas (2D com Z preservado) ---
+    static void calcularRC(const Ponto3D& p, int RC[4]);
+    static bool validarCoord(double v);
+    static void calcularClipping(Ponto3D &p, double m, int RC[4]);
+    static bool cohenSutherland(Ponto3D& p1, Ponto3D& p2);
 
     // --- Clipping de polígonos (Sutherland-Hodgman) ---
-    static bool clipPoligono(const QVector<Ponto>& poligonoEntrada, QVector<Ponto>& poligonoSaida);
+    static bool clipPoligono(const QVector<Ponto3D>& poligonoEntrada, QVector<Ponto3D>& poligonoSaida);
 
-    // --- Clipping de círculos (adição nova) ---
-    static bool clipCirculo(const Ponto& centro, double raio, QVector<Ponto>& poligonoSaida, int segmentos = 48);
+    // --- Clipping de círculos (aproximados como polígono) ---
+    static bool clipCirculo(const Ponto3D& centro, double raio, QVector<Ponto3D>& poligonoSaida, int segmentos = 48);
 
 private:
-    // Estrutura interna usada no clipping de polígonos
     struct PolygonClip {
-        static void clipAgainstEdge(const QVector<Ponto>& entrada, QVector<Ponto>& saida,
+        static void clipAgainstEdge(const QVector<Ponto3D>& entrada, QVector<Ponto3D>& saida,
                                     int edge, double clipValue, bool isVertical);
-        static Ponto calcularInterseccao(const Ponto& p1, const Ponto& p2, int edge,
-                                         double clipValue, bool isVertical);
+        static Ponto3D calcularInterseccao(const Ponto3D& p1, const Ponto3D& p2,
+                                           int edge, double clipValue, bool isVertical);
         static int calcularCodigoRegiao(double x, double y);
     };
 };

@@ -2,38 +2,39 @@
 #define OBJWINDOW_H
 
 #include "objeto.h"
+#include "ponto3d.h"
 
 class ObjWindow : public Objeto {
 public:
-    ObjWindow(QString nome, double xmin, double ymin, double xmax, double ymax);
+    ObjWindow(QString nome, double xmin, double ymin, double zmin,
+              double xmax, double ymax, double zmax);
 
-    // Atualiza os limites (caso a janela seja transformada)
-    void atualizarLimites(double xmin, double ymin, double xmax, double ymax);
+    void atualizarLimites(double xmin, double ymin, double zmin,
+                          double xmax, double ymax, double zmax);
 
-    Ponto normalizar(const Ponto& p) const;
-    Ponto desnormalizar(const Ponto& p);
+    Ponto3D normalizar(const Ponto3D& p) const;
+    Ponto3D desnormalizar(const Ponto3D& p);
 
-    // Retorna limites da Window
+    // Getters
     double getXmin() const;
     double getYmin() const;
+    double getZmin() const;
     double getXmax() const;
     double getYmax() const;
+    double getZmax() const;
 
-
-    void pan(double dx, double dy);
+    void pan(double dx, double dy, double dz = 0.0);
     void zoom(double fator);
-
-    // Para funcionar a rotação da janela (window) - suporte
-    void setRotacao(double angulo); //graus
+    void setRotacao(double angulo); // graus
     double getRotacao() const;
 
-    void desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const override; //Cumprindo contrato
+    void desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window, int modoP) const override;
 
 protected:
-    QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const override;
+    QVector<QPoint> ajustarPontos(const Viewport &vp,const ObjWindow &window,bool& desenhar) const override;
 
 private:
-    double anguloRotacao = 0.0; //graus
+    double anguloRotacao = 0.0; // graus
 };
 
 #endif // OBJWINDOW_H

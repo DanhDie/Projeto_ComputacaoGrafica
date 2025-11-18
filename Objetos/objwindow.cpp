@@ -1,118 +1,108 @@
 #include "objwindow.h"
 #include <QDebug>
+#include <cmath>
 
-ObjWindow::ObjWindow(QString nome, double xmin, double ymin, double xmax, double ymax)
+ObjWindow::ObjWindow(QString nome, double xmin, double ymin, double zmin,
+                     double xmax, double ymax, double zmax)
     : Objeto(nome, Poligono)
 {
-    // Retângulo representando a window
-    pontos.append(Ponto(xmin, ymin));
-    pontos.append(Ponto(xmax, ymin));
-    pontos.append(Ponto(xmax, ymax));
-    pontos.append(Ponto(xmin, ymax));
+    pontos.append(Ponto3D(xmin, ymin, zmin));
+    pontos.append(Ponto3D(xmax, ymin, zmin));
+    pontos.append(Ponto3D(xmax, ymax, zmax));
+    pontos.append(Ponto3D(xmin, ymax, zmax));
 }
 
-void ObjWindow::atualizarLimites(double xmin, double ymin, double xmax, double ymax) {
-    pontos[0] = Ponto(xmin, ymin);
-    pontos[1] = Ponto(xmax, ymin);
-    pontos[2] = Ponto(xmax, ymax);
-    pontos[3] = Ponto(xmin, ymax);
+void ObjWindow::atualizarLimites(double xmin, double ymin, double zmin,
+                                 double xmax, double ymax, double zmax) {
+    pontos[0] = Ponto3D(xmin, ymin, zmin);
+    pontos[1] = Ponto3D(xmax, ymin, zmin);
+    pontos[2] = Ponto3D(xmax, ymax, zmax);
+    pontos[3] = Ponto3D(xmin, ymax, zmax);
 }
 
-Ponto ObjWindow::normalizar(const Ponto& p) const {
-    // Aplicando rotação inversa à janela (simular o espaço local da window)
-    double anguloRad = -this->getRotacao() * M_PI / 180.0;  // negativo = inversa
-
-    // Centro da this
-    double cx = (this->getXmin() + this->getXmax()) / 2.0;
-    double cy = (this->getYmin() + this->getYmax()) / 2.0;
-
-    // Transladar ponto para a origem da rotação
-    double x = p.x() - cx;
-    double y = p.y() - cy;
-
-    // Aplicando rotação inversa
-    double xr = x * cos(anguloRad) - y * sin(anguloRad);
-    double yr = x * sin(anguloRad) + y * cos(anguloRad);
-
-    // Transladar de volta para o centro da this
-    xr += cx;
-    yr += cy;
-
-    // Normalizar
-    double xn = (xr - this->getXmin()) / (this->getXmax() - this->getXmin());
-    double yn = (yr - this->getYmin()) / (this->getYmax() - this->getYmin());
-
-    return Ponto(xn, yn);
-}
-
-
-Ponto ObjWindow::desnormalizar(const Ponto& p) {
-    // Desnormaliza as coordenadas
-    double x = p.x() * (getXmax() - getXmin()) + getXmin();
-    double y = p.y() * (getYmax() - getYmin()) + getYmin();
-
-    // Centro da window
+Ponto3D ObjWindow::normalizar(const Ponto3D& p) const {
+    // Aplica rotação inversa apenas no plano XY
+    double anguloRad = -this->getRotacao() * M_PI / 180.0;
     double cx = (getXmin() + getXmax()) / 2.0;
     double cy = (getYmin() + getYmax()) / 2.0;
+    double cz = (getZmin() + getZmax()) / 2.0;
 
-    // Translada para origem
-    double xt = x - cx;
-    double yt = y - cy;
+    double x = p.x() - cx;
+    double y = p.y() - cy;
+    double z = p.z() - cz;
 
-    // Aplica rotação da window - ângulo positivo
-    double anguloRad = anguloRotacao * M_PI / 180.0;
+    double xr = x * cos(anguloRad) - y * sin(anguloRad);
+    double yr = x * sin(anguloRad) + y * cos(anguloRad);
+    double zr = z;
 
-    double xr = xt * cos(anguloRad) - yt * sin(anguloRad);
-    double yr = xt * sin(anguloRad) + yt * cos(anguloRad);
-
-    // Translada de volta
     xr += cx;
     yr += cy;
+    zr += cz;
 
-    return Ponto(xr, yr);
+    // Normaliza de [xmin,xmax] para [-1,1]
+    double xn = (xr - getXmin()) / (getXmax() - getXmin()) * 2.0 - 1.0;
+    double yn = (yr - getYmin()) / (getYmax() - getYmin()) * 2.0 - 1.0;
+    double zn = (zr - getZmin()) / (getZmax() - getZmin()) * 2.0 - 1.0;
+
+    return Ponto3D(xn, yn, zn);
+}
+
+Ponto3D ObjWindow::desnormalizar(const Ponto3D& p) {
+    double x = (p.x() + 1.0) / 2.0 * (getXmax() - getXmin()) + getXmin();
+    double y = (p.y() + 1.0) / 2.0 * (getYmax() - getYmin()) + getYmin();
+    double z = (p.z() + 1.0) / 2.0 * (getZmax() - getZmin()) + getZmin();
+
+    double cx = (getXmin() + getXmax()) / 2.0;
+    double cy = (getYmin() + getYmax()) / 2.0;
+    double cz = (getZmin() + getZmax()) / 2.0;
+
+    double xt = x - cx;
+    double yt = y - cy;
+    double zt = z - cz;
+
+    double anguloRad = anguloRotacao * M_PI / 180.0;
+    double xr = xt * cos(anguloRad) - yt * sin(anguloRad);
+    double yr = xt * sin(anguloRad) + yt * cos(anguloRad);
+    double zr = zt;
+
+    xr += cx;
+    yr += cy;
+    zr += cz;
+
+    return Ponto3D(xr, yr, zr);
 }
 
 double ObjWindow::getXmin() const { return pontos[0].x(); }
 double ObjWindow::getYmin() const { return pontos[0].y(); }
+double ObjWindow::getZmin() const { return pontos[0].z(); }
 double ObjWindow::getXmax() const { return pontos[2].x(); }
 double ObjWindow::getYmax() const { return pontos[2].y(); }
+double ObjWindow::getZmax() const { return pontos[2].z(); }
 
-// pan - deslogar os pontos da window
-void ObjWindow::pan(double dx, double dy){
-    for(int i = 0; i < pontos.size(); i++){
-        pontos[i] = Ponto(pontos[i].x() + dx, pontos[i].y() + dy);
+void ObjWindow::pan(double dx, double dy, double dz) {
+    for (auto& p : pontos) {
+        p = Ponto3D(p.x() + dx, p.y() + dy, p.z() + dz);
     }
 }
 
-// zoom na window
-void ObjWindow::zoom(double fator){
-    // Descobrir o centro atual
+void ObjWindow::zoom(double fator) {
     double cx = (getXmin() + getXmax()) / 2.0;
     double cy = (getYmin() + getYmax()) / 2.0;
+    double cz = (getZmin() + getZmax()) / 2.0;
 
-
-    // Descobrir largura e altura atuais
     double largura = (getXmax() - getXmin()) * fator;
     double altura = (getYmax() - getYmin()) * fator;
+    double profundidade = (getZmax() - getZmin()) * fator;
 
-    // Calcular os novos limites
-    double xmin = cx - largura / 2.0;
-    double xmax = cx + largura / 2.0;
-    double ymin = cy - altura / 2.0;
-    double ymax = cy + altura / 2.0;
-
-    // Atualizar a janela
-    atualizarLimites(xmin, ymin, xmax, ymax);
+    atualizarLimites(cx - largura/2.0, cy - altura/2.0, cz - profundidade/2.0,
+                     cx + largura/2.0, cy + altura/2.0, cz + profundidade/2.0);
 }
 
-void ObjWindow::setRotacao(double angulo) {
-    anguloRotacao = angulo;
-}
+void ObjWindow::setRotacao(double angulo) { anguloRotacao = angulo; }
+double ObjWindow::getRotacao() const { return anguloRotacao; }
 
-double ObjWindow::getRotacao() const {
-    return anguloRotacao;
-}
+void ObjWindow::desenhar(QPainter*, const Viewport&, const ObjWindow&, int modoP) const {}
+QVector<QPoint> ObjWindow::ajustarPontos(const Viewport&, const ObjWindow&, bool&) const { return {}; }
 
-void ObjWindow::desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window) const{}
-QVector<QPoint>ObjWindow::ajustarPontos(const Viewport &vp,const ObjWindow &window,bool desenhar) const{}
+
 
