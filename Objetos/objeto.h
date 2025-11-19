@@ -51,6 +51,7 @@ private:
 protected:
     TipoObjeto tipo;
     QVector<Ponto3D> pontos;  // para círculos: pontos[0] = centro, pontos[1].x() = raio
+    QVector<Ponto3D> pontosCopia; // Eu vou me matar
 
     virtual QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window,bool &desenhar) const = 0;
 };

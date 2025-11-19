@@ -29,6 +29,7 @@ public:
     static Matriz rotacaoZ(double anguloGraus);
     static Matriz rotacaoX(double anguloGraus);
     static Matriz rotacaoY(double anguloGraus);
+    Matriz inversa() const;
 
     // Escalonamento em torno de um ponto
     static Matriz escalaPonto(double sx, double sy, double sz, double px, double py, double pz);

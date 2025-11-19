@@ -20,7 +20,7 @@ void ObjPoligono::desenhar(QPainter *painter, const Viewport &vp, const ObjWindo
 
 QVector<QPoint> ObjPoligono::ajustarPontos(const Viewport &vp, const ObjWindow &window, bool &desenhar) const {
     QVector<QPoint> pontosTela;
-    const QVector<Ponto3D>& pts = this->getPontos();
+    const QVector<Ponto3D> pts = this->getPontos();
 
     QVector<Ponto3D> pontosNorm;
     for (const Ponto3D& p : pts) {

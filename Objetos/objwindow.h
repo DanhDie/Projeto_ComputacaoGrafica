@@ -3,6 +3,7 @@
 
 #include "objeto.h"
 #include "ponto3d.h"
+#include "matriz.h"
 
 class ObjWindow : public Objeto {
 public:
@@ -30,11 +31,14 @@ public:
 
     void desenhar(QPainter *painter,const Viewport &vp, const ObjWindow &window, int modoP) const override;
 
+    void transformar(const Matriz& transformacao);
+
 protected:
     QVector<QPoint> ajustarPontos(const Viewport &vp,const ObjWindow &window,bool& desenhar) const override;
 
 private:
     double anguloRotacao = 0.0; // graus
+    Matriz visualizacao = Matriz::identidade();
 };
 
 #endif // OBJWINDOW_H

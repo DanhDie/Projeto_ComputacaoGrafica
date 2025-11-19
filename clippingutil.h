@@ -14,9 +14,7 @@ public:
 
     // --- Clipping de polígonos (Sutherland-Hodgman) ---
     static bool clipPoligono(const QVector<Ponto3D>& poligonoEntrada, QVector<Ponto3D>& poligonoSaida);
-
-    // --- Clipping de círculos (aproximados como polígono) ---
-    static bool clipCirculo(const Ponto3D& centro, double raio, QVector<Ponto3D>& poligonoSaida, int segmentos = 48);
+    static QVector<Ponto3D> gerarAproximacaoCirculo(const Ponto3D& centro, double raio, int segmentos = 128);
 
 private:
     struct PolygonClip {

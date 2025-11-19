@@ -19,6 +19,9 @@ public:
 
 protected:
     QVector<QPoint>ajustarPontos(const Viewport &vp,const ObjWindow &window,bool &desenhar) const override;
+
+private:
+    QVector<Ponto3D>circuloTransformado;
 };
 
 #endif // OBJCIRCULO_H

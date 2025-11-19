@@ -21,55 +21,39 @@ void ObjWindow::atualizarLimites(double xmin, double ymin, double zmin,
 }
 
 Ponto3D ObjWindow::normalizar(const Ponto3D& p) const {
-    // Aplica rotação inversa apenas no plano XY
-    double anguloRad = -this->getRotacao() * M_PI / 180.0;
-    double cx = (getXmin() + getXmax()) / 2.0;
-    double cy = (getYmin() + getYmax()) / 2.0;
-    double cz = (getZmin() + getZmax()) / 2.0;
+    // transforma pelo view
+    Matriz P(4,1);
+    P[0][0] = p.x();
+    P[1][0] = p.y();
+    P[2][0] = p.z();
+    P[3][0] = 1;
 
-    double x = p.x() - cx;
-    double y = p.y() - cy;
-    double z = p.z() - cz;
+    Matriz Pv = visualizacao * P;
 
-    double xr = x * cos(anguloRad) - y * sin(anguloRad);
-    double yr = x * sin(anguloRad) + y * cos(anguloRad);
-    double zr = z;
+    double x = Pv[0][0];
+    double y = Pv[1][0];
+    double z = Pv[2][0];
 
-    xr += cx;
-    yr += cy;
-    zr += cz;
-
-    // Normaliza de [xmin,xmax] para [-1,1]
-    double xn = (xr - getXmin()) / (getXmax() - getXmin()) * 2.0 - 1.0;
-    double yn = (yr - getYmin()) / (getYmax() - getYmin()) * 2.0 - 1.0;
-    double zn = (zr - getZmin()) / (getZmax() - getZmin()) * 2.0 - 1.0;
+    // normalização linear para [-1,1]
+    double xn = (x - getXmin()) / (getXmax() - getXmin()) * 2 - 1;
+    double yn = (y - getYmin()) / (getYmax() - getYmin()) * 2 - 1;
+    double zn = (z - getZmin()) / (getZmax() - getZmin()) * 2 - 1;
 
     return Ponto3D(xn, yn, zn);
 }
 
 Ponto3D ObjWindow::desnormalizar(const Ponto3D& p) {
-    double x = (p.x() + 1.0) / 2.0 * (getXmax() - getXmin()) + getXmin();
-    double y = (p.y() + 1.0) / 2.0 * (getYmax() - getYmin()) + getYmin();
-    double z = (p.z() + 1.0) / 2.0 * (getZmax() - getZmin()) + getZmin();
+    double x = (p.x()+1)/2 * (getXmax()-getXmin()) + getXmin();
+    double y = (p.y()+1)/2 * (getYmax()-getYmin()) + getYmin();
+    double z = (p.z()+1)/2 * (getZmax()-getZmin()) + getZmin();
 
-    double cx = (getXmin() + getXmax()) / 2.0;
-    double cy = (getYmin() + getYmax()) / 2.0;
-    double cz = (getZmin() + getZmax()) / 2.0;
+    Matriz P(4,1);
+    P[0][0]=x; P[1][0]=y; P[2][0]=z; P[3][0]=1;
 
-    double xt = x - cx;
-    double yt = y - cy;
-    double zt = z - cz;
+      Matriz Vinv = visualizacao.inversa();
+    Matriz Pw = Vinv * P;
 
-    double anguloRad = anguloRotacao * M_PI / 180.0;
-    double xr = xt * cos(anguloRad) - yt * sin(anguloRad);
-    double yr = xt * sin(anguloRad) + yt * cos(anguloRad);
-    double zr = zt;
-
-    xr += cx;
-    yr += cy;
-    zr += cz;
-
-    return Ponto3D(xr, yr, zr);
+    return Ponto3D(Pw[0][0], Pw[1][0], Pw[2][0]);
 }
 
 double ObjWindow::getXmin() const { return pontos[0].x(); }
@@ -79,30 +63,26 @@ double ObjWindow::getXmax() const { return pontos[2].x(); }
 double ObjWindow::getYmax() const { return pontos[2].y(); }
 double ObjWindow::getZmax() const { return pontos[2].z(); }
 
+void ObjWindow::transformar(const Matriz& transformacao){
+    visualizacao=visualizacao*transformacao;
+}
+
+
 void ObjWindow::pan(double dx, double dy, double dz) {
-    for (auto& p : pontos) {
-        p = Ponto3D(p.x() + dx, p.y() + dy, p.z() + dz);
-    }
+    visualizacao = Matriz::translacao(-dx, -dy, -dz) * visualizacao;
 }
 
 void ObjWindow::zoom(double fator) {
-    double cx = (getXmin() + getXmax()) / 2.0;
-    double cy = (getYmin() + getYmax()) / 2.0;
-    double cz = (getZmin() + getZmax()) / 2.0;
-
-    double largura = (getXmax() - getXmin()) * fator;
-    double altura = (getYmax() - getYmin()) * fator;
-    double profundidade = (getZmax() - getZmin()) * fator;
-
-    atualizarLimites(cx - largura/2.0, cy - altura/2.0, cz - profundidade/2.0,
-                     cx + largura/2.0, cy + altura/2.0, cz + profundidade/2.0);
+    visualizacao = Matriz::escala(1.0/fator, 1.0/fator, 1.0/fator) * visualizacao;
 }
 
-void ObjWindow::setRotacao(double angulo) { anguloRotacao = angulo; }
+void ObjWindow::setRotacao(double angulo) {
+    double delta = angulo - anguloRotacao;
+    anguloRotacao = angulo;
+
+    visualizacao = Matriz::rotacaoY(-delta) * visualizacao;
+}
 double ObjWindow::getRotacao() const { return anguloRotacao; }
 
 void ObjWindow::desenhar(QPainter*, const Viewport&, const ObjWindow&, int modoP) const {}
 QVector<QPoint> ObjWindow::ajustarPontos(const Viewport&, const ObjWindow&, bool&) const { return {}; }
-
-
-

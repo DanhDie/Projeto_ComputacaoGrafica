@@ -34,23 +34,10 @@ void Objeto::transformar(const Matriz& transformacao) {
         // Multiplica pela matriz de transformação 4x4
         Matriz resultado = transformacao * pontoMatriz;
 
-        // Recupera coordenadas transformadas
-        double x = resultado[0][0];
-        double y = resultado[1][0];
-        double z = resultado[2][0];
-        double w = resultado[3][0]; // componente homogênea
-
-        // Converte para coordenadas cartesianas
-        if (w != 0.0) {
-            x /= w;
-            y /= w;
-            z /= w;
-        }
-
-        // Atualiza o ponto
-        ponto.setX(x);
-        ponto.setY(y);
-        ponto.setZ(z);
+        //vetor de pontos temp
+        ponto.setX(resultado[0][0]);
+        ponto.setY(resultado[1][0]);
+        ponto.setZ(resultado[2][0]);
     }
 }
 

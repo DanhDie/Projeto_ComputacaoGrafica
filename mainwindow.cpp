@@ -161,26 +161,6 @@ void MainWindow::onAplicarTransformacao(){
     Objeto *obj=ui->comboBox->currentObjeto();
     if(!obj) return; //Nenhum objeto selecionado
 
-    // Se for a janela, só atualiza a rotação e retorna
-    if (obj->getNome() == "janela") {
-        ObjWindow* window = dynamic_cast<ObjWindow*>(obj);
-        if (window) {
-            double angulo = window->getRotacao()+ui->doubleSpinBox_R->value();
-            window->setRotacao(angulo);
-
-            window->pan(ui->doubleSpinBox_Tx->value(),
-                        ui->doubleSpinBox_Ty->value());
-
-            window->zoom(sqrt(ui->doubleSpinBox_El->value()*ui->doubleSpinBox_Ea->value()));
-
-            //Atualização dos frames
-            ui->frame->update();
-            defaultSpinBox();
-        }
-
-        return;
-    }
-
     Ponto3D p=refPonto(obj);
     const char *r=(ui->comboBox_Re->currentText()).toUtf8().constData();
     //Matriz da Translação
@@ -221,16 +201,16 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
     switch (event->key()){
         // com as setas do teclado
     case Qt::Key_Left:
-        window->pan(-10, 0); //move para a esquerda 10 unidades
+        window->pan(-30, 0); //move para a esquerda 10 unidades
         break;
     case Qt::Key_Right:
-        window->pan(10, 0); //move para a direita 10 unidades
+        window->pan(30, 0); //move para a direita 10 unidades
         break;
     case Qt::Key_Up:
-        window->pan(0, -10); //move para cima 10 unidades
+        window->pan(0, -30); //move para cima 10 unidades
         break;
     case Qt::Key_Down:
-        window->pan(0, 10); //move para baixo 10 unidades
+        window->pan(0, 30); //move para baixo 10 unidades
         break;
 
         // zoom com + e -

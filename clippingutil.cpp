@@ -210,24 +210,15 @@ int Clipping::PolygonClip::calcularCodigoRegiao(double x, double y) {
 }
 
 // Aproxima o círculo como um polígono regular
-static QVector<Ponto3D> gerarAproximacaoCirculo(const Ponto3D& centro, double raio, int segmentos = 128) {
+QVector<Ponto3D>Clipping::gerarAproximacaoCirculo(const Ponto3D& centro, double raio, int segmentos) {
     QVector<Ponto3D> resultado;
     resultado.reserve(segmentos);
     const double TWO_PI = 2.0 * M_PI;
     for (int i = 0; i < segmentos; ++i) {
         double theta = (TWO_PI * i) / segmentos;
         double x = centro.x() + raio * std::cos(theta);
-        double y = centro.y() + raio * std::sin(theta)*1.3;
+        double y = centro.y() + raio * std::sin(theta);
         resultado.append(Ponto3D(x, y, centro.z()));
     }
     return resultado;
-}
-
-// Usa Sutherland-Hodgman sobre a aproximação
-bool Clipping::clipCirculo(const Ponto3D& centro, double raio, QVector<Ponto3D>& poligonoSaida, int segmentos) {
-    QVector<Ponto3D> aproximacao = gerarAproximacaoCirculo(centro, raio, segmentos);
-    QVector<Ponto3D> resultado;
-    bool visivel = clipPoligono(aproximacao, resultado);
-    poligonoSaida = resultado;
-    return visivel;
 }

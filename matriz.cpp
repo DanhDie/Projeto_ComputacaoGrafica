@@ -82,6 +82,74 @@ Matriz Matriz::rotacaoY(double anguloGraus){         // Rotacao em torno de Y
     R[2][0] = -sin(rad);  R[2][2] = cos(rad);
     return R;
 }
+Matriz Matriz::inversa() const{
+    if (getLinhas() != getColunas()) {
+        throw std::invalid_argument("Inversa só definida para matrizes quadradas");
+    }
+
+    int n = getLinhas();
+    // cria matriz aumentada n x 2n
+    std::vector<std::vector<double>> a(n, std::vector<double>(2 * n, 0.0));
+
+    // copia a matriz original para a parte esquerda e identidade na direita
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            a[i][j] = dados[i][j];
+        }
+        a[i][n + i] = 1.0;
+    }
+
+    const double EPS = 1e-12;
+
+    // Gauss-Jordan
+    for (int col = 0; col < n; ++col) {
+        // encontra pivot (linha com maior valor absoluto na coluna 'col')
+        int pivotRow = col;
+        double maxVal = std::fabs(a[col][col]);
+        for (int r = col + 1; r < n; ++r) {
+            double v = std::fabs(a[r][col]);
+            if (v > maxVal) {
+                maxVal = v;
+                pivotRow = r;
+            }
+        }
+
+        if (maxVal < EPS) {
+            throw std::runtime_error("Matriz singular ou quase singular (não possui inversa)");
+        }
+
+        // troca a linha atual com a pivotRow, se necessário
+        if (pivotRow != col) {
+            std::swap(a[pivotRow], a[col]);
+        }
+
+        // normaliza a linha do pivot (faz pivot = 1)
+        double pivot = a[col][col];
+        for (int j = 0; j < 2 * n; ++j) {
+            a[col][j] /= pivot;
+        }
+
+        // elimina outras linhas na coluna 'col'
+        for (int r = 0; r < n; ++r) {
+            if (r == col) continue;
+            double factor = a[r][col];
+            if (std::fabs(factor) < EPS) continue;
+            for (int j = 0; j < 2 * n; ++j) {
+                a[r][j] -= factor * a[col][j];
+            }
+        }
+    }
+
+    // extrai a parte direita (inversa)
+    Matriz inv(n, n);
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            inv[i][j] = a[i][n + j];
+        }
+    }
+
+    return inv;
+}
 
 Matriz Matriz::escalaPonto(double sx, double sy, double sz, double px, double py, double pz) {
     // Corrigindo a ordem das operações (multiplicação de matrizes)
