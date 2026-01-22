@@ -1,7 +1,7 @@
 # Motor Gráfico
 
 #### *Bem-vindo!*
-O programa está sendo desenvolvido na plataforma Qt Creator.
+O programa foi FINALIZADO, desenvolvido integralmente na plataforma Qt Creator.
 
 #### Features implementadas:
 - Display File, área de desenho, primitivas e funções de desenho;
@@ -10,8 +10,6 @@ O programa está sendo desenvolvido na plataforma Qt Creator.
 - Mecanismo de transformação no objeto e navegação de câmera;
 - Recebimento de input do usuário via botões na tela, mouse e setas do teclado;
 - Clipping (em pontos, linhas e polígonos) utilizando o algoritmo de Cohen-Sutherland.
-
-#### Features planejadas:
 - Leitura de arquivos do tipo OBJ;
 - Atualização de funções de transformação para 3D;
 - Projeção ortogonal;
